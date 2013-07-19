@@ -35,8 +35,8 @@ class SoundData {
 private:
 	std::vector<char> sourceData; //!< 生データ
 	stb_vorbis *stream; //!< Oggストリーム
-	int fileType;	    //!< ファイルタイプ
-	int sampleRate;	    //!< サンプリングレート
+	int fileType;       //!< ファイルタイプ
+	int sampleRate;     //!< サンプリングレート
 	int channels;       //!< チャンネル数
 	
 public:
