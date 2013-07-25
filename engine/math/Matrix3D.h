@@ -1,13 +1,30 @@
-//
-//  Matrix3D.h
-//  GCube
-//
-//  Created by Takashi Tsuchiya on 2013/07/19.
-//  Copyright (c) 2013年 GClue, Inc. All rights reserved.
-//
+/*
+ * The MIT License (MIT)
+ * Copyright (c) 2013 GClue, inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 
 #ifndef __GCube__Matrix3D__
 #define __GCube__Matrix3D__
+
+#include <stddef.h>
+#include "Vector3D.h"
 
 namespace GCube {
 
@@ -67,17 +84,17 @@ public:
 	 * @param[in] x x座標
 	 * @param[in] y y座標
 	 * @param[in] z z座標
-	 * @param[in] apply trueで左辺に乗算します.
+	 * @param[in] apply falseで右辺に乗算します.
 	 */
-	void translate(float x, float y, float z, bool apply=false);
+	void translate(float x, float y, float z, bool apply=true);
 	
 	/**
 	 * 指定された軸を向きに回転を行います.
 	 * @param[in] deg 回転(0〜360)
 	 * @param[in] dir 回転軸
-	 * @param[in] apply trueで左辺に乗算します.
+	 * @param[in] apply falseで右辺に乗算します.
 	 */
-	void rotate(float deg, RotateDir dir, bool apply=false);
+	void rotate(float deg, RotateDir dir, bool apply=true);
 	
 	/**
 	 * 指定された軸を向きに回転を行います.
@@ -85,18 +102,18 @@ public:
 	 * @param[in] x 回転軸
 	 * @param[in] y 回転軸
 	 * @param[in] z 回転軸
-	 * @param[in] apply trueで左辺に乗算します.
+	 * @param[in] apply falseで右辺に乗算します.
 	 */
-	void rotate(float angle, float x, float y, float z, bool apply=false);
+	void rotate(float angle, float x, float y, float z, bool apply=true);
 	
 	/**
 	 * 拡大/縮小を行います.
 	 * @param[in] x x軸への拡大
 	 * @param[in] y y軸への拡大
 	 * @param[in] z z軸への拡大
-	 * @param[in] apply trueで左辺に乗算します.
+	 * @param[in] apply falseで右辺に乗算します.
 	 */
-	void scale(float x, float y, float z, bool apply=false);
+	void scale(float x, float y, float z, bool apply=true);
 	
 	/**
 	 * 法線ベクトルのマトリクスを取得します.
@@ -104,20 +121,20 @@ public:
 	 */
 	void normalMatrix(float *mtxout);
 	
-//	/**
-//	 * 変換行列を適用したVector3Dを返します.
-//	 * @param[out] outVec 座標を格納するVector3D
-//	 * @param[in] inVec 座標を格納するVector3D
-//	 */
-//	void transformVector3D(Vector3D *outVec, const Vector3D *inVec=NULL);
-//	
-//	/**
-//	 * 指定の場所(eye)から指定の位置(at)を向かせる変換行列を設定します.
-//	 * @param[in] eye 視点位置
-//	 * @param[in] at 注視点位置
-//	 * @param[in] up カメラの上方向（デフォルトはYUP）
-//	 */
-//	void lookAt(Vector3D* eye, Vector3D* at, Vector3D* up=NULL);
+	/**
+	 * 変換行列を適用したVector3Dを返します.
+	 * @param[out] outVec 座標を格納するVector3D
+	 * @param[in] inVec 座標を格納するVector3D
+	 */
+	void transformVector3D(Vector3D *outVec, const Vector3D *inVec=NULL);
+	
+	/**
+	 * 指定の場所(eye)から指定の位置(at)を向かせる変換行列を設定します.
+	 * @param[in] eye 視点位置
+	 * @param[in] at 注視点位置
+	 * @param[in] up カメラの上方向（デフォルトはYUP）
+	 */
+	void lookAt(Vector3D* eye, Vector3D* at, Vector3D* up=NULL);
 	
 	/**
 	 * Xを返します.
