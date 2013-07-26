@@ -92,6 +92,8 @@ GCStorageType;
 // クラス
 namespace GCube {
 	class Main;
+	class Scene;
+	class SceneTransition;
 }
 
 

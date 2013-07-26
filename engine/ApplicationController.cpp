@@ -24,7 +24,7 @@
 #include "GCube.h"
 #include "Main.h"
 
-namespace GCube {
+using namespace GCube;
 
 static ApplicationController *_instance = NULL;
 
@@ -44,7 +44,7 @@ void ApplicationController::DestroyInstance() {
 	_instance = NULL;
 }
 
-ApplicationController::ApplicationController(void) {
+ApplicationController::ApplicationController(void) : activeScene(NULL) {
 	LOGD("ApplicationController::ApplicationController()");
 	main = new Main();
 }
@@ -57,6 +57,12 @@ ApplicationController::~ApplicationController(void) {
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark - Public method
+
+// シーン切り替え
+void ApplicationController::changeScene(Scene *nextScene, SceneTransition *transition) {
+	// TODO: トランジションサポート
+	activeScene = nextScene;
+}
 
 // 言語取得
 std::string ApplicationController::getLanguage() {
@@ -154,6 +160,4 @@ int ApplicationController::onUserEvent(int type, int param1, long long param2, f
 void ApplicationController::onDebugCommand(const char *command, int param) {
 	//LOGD("onDebugCommand(%s, %d)", command, param);
 	main->onDebugCommand(command, param);
-}
-
 }

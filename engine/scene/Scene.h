@@ -20,26 +20,26 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#ifndef __GCube__Scene__
+#define __GCube__Scene__
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
+#include "Node.h"
 
-#endif
+namespace GCube {
+
+class Scene {
+public:
+	Scene(const char* name = NULL);
+	virtual ~Scene();
+	
+public:
+	Node *rootNode;
+	
+private:
+	const char *name;
+	
+};
+
+}
+
+#endif /* defined(__GCube__Scene__) */

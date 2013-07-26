@@ -21,9 +21,6 @@
  */
 
 #include "Node.h"
-//#include "../GCDefines.h"
-//#include "Coords.h"
-//#include "Camera.h"
 #include "Drawable.h"
 
 using namespace GCube;
