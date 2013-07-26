@@ -20,35 +20,23 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Node__
-#define __GCube__Node__
-
-#include <vector>
-#include "Coords.h"
+#ifndef __GCube__Drawable__
+#define __GCube__Drawable__
 
 namespace GCube {
 	
-class Node : public Coords {
+class Drawable {
 public:
-	Node(Node* parent = NULL, const char* name = NULL);
-	virtual ~Node();
+	Drawable() {isVisible=true;};
+	virtual ~Drawable() {};
 	
-	virtual void updateProcess(float dt);
-	virtual void drawProcess();
-	
-	Node* getParentNode() const;
-	void setParentNode(Node* newParent);
-	
-	void addChildNode(Node* childNode);
-	void removeChildNode(Node* childNode);
+	virtual void draw() = 0;
+public:
+	bool isVisible;
 	
 private:
-	Node *parent;
-	const char *name;
-	std::vector<Node*> children;
 	
 };
-	
 }
 
-#endif /* defined(__GCube__Node__) */
+#endif /* defined(__GCube__Drawable__) */

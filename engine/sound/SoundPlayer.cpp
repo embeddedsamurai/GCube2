@@ -34,7 +34,7 @@ void* thread_func(void *arg) {
 	return NULL;
 }
 
-namespace GCube {
+using namespace GCube;
 
 // staticメンバ変数の実体
 SoundPlayer* SoundPlayer::instance = NULL;
@@ -285,6 +285,4 @@ bool SoundPlayer::isPlaying(int source) {
 	if (source == 0) return false;
 	alGetSourcei(source, AL_SOURCE_STATE, &state);
 	return state == AL_PLAYING;
-}
-	
 }

@@ -20,35 +20,27 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Node__
-#define __GCube__Node__
+#ifndef __GCube__Camera__
+#define __GCube__Camera__
 
-#include <vector>
-#include "Coords.h"
+#include "Node.h"
+#include "../math/Matrix3D.h"
 
 namespace GCube {
-	
-class Node : public Coords {
+
+class Camera : public Node {
 public:
-	Node(Node* parent = NULL, const char* name = NULL);
-	virtual ~Node();
+	Camera(Node* parent = NULL, const char* name = NULL);
+	virtual ~Camera();
+	virtual void updateProjectionMatrix() = 0;
+	virtual void updateViewMatrix();
 	
-	virtual void updateProcess(float dt);
-	virtual void drawProcess();
-	
-	Node* getParentNode() const;
-	void setParentNode(Node* newParent);
-	
-	void addChildNode(Node* childNode);
-	void removeChildNode(Node* childNode);
-	
-private:
-	Node *parent;
-	const char *name;
-	std::vector<Node*> children;
+public:
+	Matrix3D projectionMatrix;
+	Matrix3D viewMatrix;
 	
 };
 	
 }
 
-#endif /* defined(__GCube__Node__) */
+#endif /* defined(__GCube__Camera__) */

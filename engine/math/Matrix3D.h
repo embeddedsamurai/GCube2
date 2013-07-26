@@ -60,6 +60,11 @@ public:
 	~Matrix3D();
 	
 	/**
+	 * 行列を設定.
+	 */
+	void setElements(const float *inElements);
+	
+	/**
 	 * マトリクスの初期化を行います.
 	 */
 	void loadIdentity();
@@ -79,6 +84,11 @@ public:
 	 */
 	void multiply(Matrix3D *mtx);
 
+	/**
+	 * 逆行列に変換します.
+	 */
+	void invert();
+	
 	/**
 	 * 指定された座標に移動します.
 	 * @param[in] x x座標

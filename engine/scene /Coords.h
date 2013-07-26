@@ -20,35 +20,28 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Node__
-#define __GCube__Node__
+#ifndef __GCube__Coords__
+#define __GCube__Coords__
 
-#include <vector>
-#include "Coords.h"
+#include "../math/Matrix3D.h"
 
 namespace GCube {
-	
-class Node : public Coords {
+
+class Coords {
 public:
-	Node(Node* parent = NULL, const char* name = NULL);
-	virtual ~Node();
+	Coords();
+	virtual ~Coords();
 	
-	virtual void updateProcess(float dt);
-	virtual void drawProcess();
+	void drawAxis();
 	
-	Node* getParentNode() const;
-	void setParentNode(Node* newParent);
-	
-	void addChildNode(Node* childNode);
-	void removeChildNode(Node* childNode);
+public:
+	Matrix3D transform;
+	bool visibleAxis;
+	float axisSize;
 	
 private:
-	Node *parent;
-	const char *name;
-	std::vector<Node*> children;
 	
 };
-	
 }
 
-#endif /* defined(__GCube__Node__) */
+#endif /* defined(__GCube__Coords__) */

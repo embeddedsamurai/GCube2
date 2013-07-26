@@ -21,14 +21,19 @@
  */
 
 #include "glsample.h"
+#include "Matrix3D.h"
+#include "Camera.h"
+#include "Node.h"
+#include "StandardCamera.h"
 
 const char gVertexShader[] =
+"uniform mat4 u_mvpMatrix;\n"
 "attribute vec4 vPosition;\n"
 "attribute vec2 a_texcoord;\n"
 "varying vec2 v_texcoord;\n"
 "void main() {\n"
 "  v_texcoord = a_texcoord;\n"
-"  gl_Position = vPosition;\n"
+"  gl_Position = u_mvpMatrix * vPosition;\n"
 "}\n";
 
 
@@ -70,6 +75,9 @@ GLuint createProgram(const char* pVertexSource, const char* pFragmentSource) {
 }
 
 static GLuint gProgram;
+static int mvpname;
+static GCube::Node *node;
+static GCube::StandardCamera *camera;
 
 void initProgram(std::vector<char> &buf) {
 	gProgram = createProgram(gVertexShader, gFragmentShader);
@@ -96,7 +104,18 @@ void initProgram(std::vector<char> &buf) {
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	glGenerateMipmap(GL_TEXTURE_2D);
+	
+	mvpname = glGetUniformLocation(gProgram, "u_mvpMatrix");
+	
+	node = new GCube::Node(NULL, "name");
+	camera = new GCube::StandardCamera(node, "camera");
+//	camera->fieldOfView = 90;
+	camera->updateProjectionMatrix();
+	node->addChildNode(dynamic_cast<GCube::Node*>(camera));
+
 }
+
+static float xxx = 0;
 
 void draw() {
 	GLuint gvPositionHandle = glGetAttribLocation(gProgram, "vPosition");
@@ -116,6 +135,35 @@ void draw() {
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glUseProgram(gProgram);
+	
+	node->updateProcess(0.0166);
+	xxx += 0.1;
+	
+	// projectionMatrix
+	GCube::Matrix3D mtx;
+	mtx.multiply(&camera->projectionMatrix);
+	
+	// viewMatrix
+	camera->transform.loadIdentity();
+	camera->transform.translate(0, 0, 10);
+//	camera->transform.rotate(10, GCube::RotateDirX);
+//	camera->transform.rotate(xxx, GCube::RotateDirY);
+	camera->transform.rotate(45, GCube::RotateDirZ);
+	camera->updateViewMatrix();
+	mtx.multiply(&camera->viewMatrix);
+
+	// modelMatrix
+	GCube::Matrix3D mtx3;
+	mtx3.translate(1, 0, 0);
+//	mtx3.rotate(xxx, GCube::RotateDirX);
+//	mtx3.rotate(xxx, GCube::RotateDirY);
+	mtx3.rotate(xxx, GCube::RotateDirZ);
+	mtx.multiply(&mtx3);
+	
+	
+	glUniformMatrix4fv(mvpname, 1, GL_FALSE, mtx.matrix);
+
+	
 	glVertexAttribPointer(gvPositionHandle, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 	glEnableVertexAttribArray(gvPositionHandle);
 	glVertexAttribPointer(gvTexHandle, 2, GL_FLOAT, GL_FALSE, 0, texs);

@@ -20,35 +20,20 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Node__
-#define __GCube__Node__
+#include "Camera.h"
 
-#include <vector>
-#include "Coords.h"
+using namespace GCube;
 
-namespace GCube {
-	
-class Node : public Coords {
-public:
-	Node(Node* parent = NULL, const char* name = NULL);
-	virtual ~Node();
-	
-	virtual void updateProcess(float dt);
-	virtual void drawProcess();
-	
-	Node* getParentNode() const;
-	void setParentNode(Node* newParent);
-	
-	void addChildNode(Node* childNode);
-	void removeChildNode(Node* childNode);
-	
-private:
-	Node *parent;
-	const char *name;
-	std::vector<Node*> children;
-	
-};
-	
+// コンストラクタ
+Camera::Camera(Node *parent, const char *name) : Node(parent, name) {
 }
 
-#endif /* defined(__GCube__Node__) */
+// デストラクタ
+Camera::~Camera() {
+}
+
+// ViewMatrixを更新
+void Camera::updateViewMatrix() {
+	viewMatrix.setElements(transform.matrix);
+	viewMatrix.invert();
+}

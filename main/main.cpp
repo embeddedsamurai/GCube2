@@ -23,7 +23,7 @@
 #include "Main.h"
 #include "glsample.h"
 
-namespace GCube {
+using namespace GCube;
 
 // 初期化
 void Main::onInit() {
@@ -77,7 +77,7 @@ void Main::onContextChanged() {
 void Main::onDraw() {
 	draw();
 }
-	
+
 // タッチイベント
 void Main::onTouch(GCTouchAction action, float x, float y, long id, long time) {
 	if (action==GCTouchActionUp) {
@@ -99,6 +99,4 @@ void Main::onDebugCommand(const char *command, int param) {
 	if (strcmp(command, "test")==0) {
 		LOGD("***TestCommand (%d)", param);
 	}
-}
-
 }

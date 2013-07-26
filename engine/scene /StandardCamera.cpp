@@ -20,35 +20,24 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Node__
-#define __GCube__Node__
+#include "StandardCamera.h"
+#include "../external/math/matrixUtil.h"
 
-#include <vector>
-#include "Coords.h"
+using namespace GCube;
 
-namespace GCube {
-	
-class Node : public Coords {
-public:
-	Node(Node* parent = NULL, const char* name = NULL);
-	virtual ~Node();
-	
-	virtual void updateProcess(float dt);
-	virtual void drawProcess();
-	
-	Node* getParentNode() const;
-	void setParentNode(Node* newParent);
-	
-	void addChildNode(Node* childNode);
-	void removeChildNode(Node* childNode);
-	
-private:
-	Node *parent;
-	const char *name;
-	std::vector<Node*> children;
-	
-};
-	
+// コンストラクタ
+StandardCamera::StandardCamera(Node *parent, const char *name) : Camera(parent, name) {
+	zNear = 0.1;
+	zFar = 1000.0;
+	fieldOfView = 50.0;
+	aspect = 0.67; // 320x480
 }
 
-#endif /* defined(__GCube__Node__) */
+// デストラクタ
+StandardCamera::~StandardCamera() {
+}
+
+// ProjectionMatrix更新
+void StandardCamera::updateProjectionMatrix() {
+	mtxLoadPerspective(projectionMatrix.matrix, fieldOfView, aspect, zNear, zFar);
+}

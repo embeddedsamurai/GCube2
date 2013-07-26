@@ -25,7 +25,7 @@
 
 #define BUFFER_SIZE (4096)
 
-namespace GCube {
+using namespace GCube;
 
 // Oggファイル読み込み（ストリーム）
 bool SoundData::openOggFileStream(const char *fileName) {
@@ -103,5 +103,3 @@ bool SoundData::loadOggFileStatic(const char *fileName, ALuint buffer) {
 
 	return size>0;
 };
-
-}

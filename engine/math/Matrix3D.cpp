@@ -126,10 +126,15 @@ Matrix3D::Matrix3D() {
 }
 
 Matrix3D::Matrix3D(const float *inElements) {
-    memcpy(matrix, inElements, sizeof(float) * 16);
+	setElements(inElements);
 }
 
 Matrix3D::~Matrix3D() {
+}
+
+// 配列を設定
+void Matrix3D::setElements(const float *inElements) {
+    memcpy(matrix, inElements, sizeof(float) * 16);
 }
 
 // 単位行列を設定
@@ -149,6 +154,14 @@ bool Matrix3D::equals(Matrix3D *mtx) {
 void Matrix3D::multiply(Matrix3D *mtx) {
 	float ret[16];
 	mtxMultiply(ret, matrix, mtx->matrix);
+	memcpy(matrix, ret, sizeof(float)*16);
+}
+
+// 逆行列
+void Matrix3D::invert() {
+	float ret[16];
+	mtxInvert(ret, matrix);
+	mtxTranspose(ret, ret);
 	memcpy(matrix, ret, sizeof(float)*16);
 }
 
