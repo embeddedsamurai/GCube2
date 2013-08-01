@@ -25,13 +25,14 @@
 
 #include "GCDefines.h"
 #include "IApplicationEventListener.h"
+#include "scene/Scene.h"
 
 namespace GCube {
 
 class ApplicationController : public IApplicationEventListener {
 private:
 	Main *main;
-	Scene *activeScene;
+	std::shared_ptr<Scene> activeScene;
 	
 private:
 	ApplicationController();
@@ -43,7 +44,7 @@ public:
 	static void DestroyInstance();
 	
 	//
-	virtual void changeScene(Scene *nextScene, SceneTransition *transition=NULL);
+	virtual void changeScene(const Scene_ptr &nextScene, SceneTransition *transition=NULL);
 	
 	
 	// Utils //

@@ -59,7 +59,7 @@ ApplicationController::~ApplicationController(void) {
 #pragma mark - Public method
 
 // シーン切り替え
-void ApplicationController::changeScene(Scene *nextScene, SceneTransition *transition) {
+void ApplicationController::changeScene(const Scene_ptr &nextScene, SceneTransition *transition) {
 	// TODO: トランジションサポート
 	activeScene = nextScene;
 }
@@ -130,12 +130,22 @@ void ApplicationController::onLowMemory(void) {
 
 void ApplicationController::onUpdate(float dt) {
 //	LOGD("ApplicationController::onUpdate(%f)", dt);
+	// mainに通知
 	main->onUpdate(dt);
+	// アクティブシーンに通知
+	if (activeScene) {
+		activeScene->onUpdate(dt);
+	}
 }
 
 void ApplicationController::onDraw() {
 //	LOGD("ApplicationController::onDraw()");
+	// mainに通知
 	main->onDraw();
+	// アクティブシーンに通知
+	if (activeScene) {
+		activeScene->onDraw();
+	}
 }
 	
 // タッチイベント

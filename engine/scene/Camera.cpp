@@ -25,7 +25,7 @@
 using namespace GCube;
 
 // コンストラクタ
-Camera::Camera(Node *parent, const char *name) : Node(parent, name) {
+Camera::Camera(const char *name) : Node(name) {
 }
 
 // デストラクタ

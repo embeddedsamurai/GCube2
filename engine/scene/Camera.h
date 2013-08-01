@@ -30,7 +30,7 @@ namespace GCube {
 
 class Camera : public Node {
 public:
-	Camera(Node* parent = NULL, const char* name = NULL);
+	Camera(const char* name = NULL);
 	virtual ~Camera();
 	virtual void updateProjectionMatrix() = 0;
 	virtual void updateViewMatrix();
@@ -40,7 +40,9 @@ public:
 	Matrix3D viewMatrix;
 	
 };
-	
+
+typedef std::shared_ptr<Camera> Camera_ptr;
+
 }
 
 #endif /* defined(__GCube__Camera__) */

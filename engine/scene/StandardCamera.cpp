@@ -26,7 +26,7 @@
 using namespace GCube;
 
 // コンストラクタ
-StandardCamera::StandardCamera(Node *parent, const char *name) : Camera(parent, name) {
+StandardCamera::StandardCamera(const char *name) : Camera(name) {
 	zNear = 0.1;
 	zFar = 1000.0;
 	fieldOfView = 50.0;

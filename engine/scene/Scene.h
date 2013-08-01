@@ -24,6 +24,8 @@
 #define __GCube__Scene__
 
 #include "Node.h"
+#include "Camera.h"
+#include "SceneTransition.h"
 
 namespace GCube {
 
@@ -32,13 +34,21 @@ public:
 	Scene(const char* name = NULL);
 	virtual ~Scene();
 	
+	virtual void onUpdate(float dt);
+	virtual void onDraw();
+	
+	virtual void changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition=NULL);
+
 public:
-	Node *rootNode;
+	Node rootNode;
 	
 private:
+	Camera_ptr activeCamera;
 	const char *name;
 	
 };
+
+typedef std::shared_ptr<Scene> Scene_ptr;
 
 }
 

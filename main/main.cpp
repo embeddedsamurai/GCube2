@@ -52,6 +52,14 @@ void Main::onInit() {
 	player->play(bgmid);
 	sid = SoundPlayer::loadSE("sound/se_yay.ogg");
 	
+	// シーン作成
+	Scene_ptr sceneMain(new Scene("SceneMain"));
+	StandardCamera_ptr cameraMain(new StandardCamera("CameraMain"));
+	sceneMain->rootNode.addChildNode(cameraMain);
+	cameraMain->updateProjectionMatrix();
+	sceneMain->changeCamera(cameraMain);
+	ctr->changeScene(sceneMain);
+
 	//
 	this->onContextChanged();
 }

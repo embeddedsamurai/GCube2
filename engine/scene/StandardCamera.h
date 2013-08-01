@@ -29,7 +29,7 @@ namespace GCube {
 
 class StandardCamera : public Camera {
 public:
-	StandardCamera(Node* parent = NULL, const char* name = NULL);
+	StandardCamera(const char* name = NULL);
 	virtual ~StandardCamera();
 	virtual void updateProjectionMatrix();
 
@@ -42,6 +42,9 @@ public:
 private:
 	
 };
+
+typedef std::shared_ptr<StandardCamera> StandardCamera_ptr;
+
 }
 
 #endif /* defined(__GCube__StandardCamera__) */

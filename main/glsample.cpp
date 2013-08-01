@@ -76,8 +76,8 @@ GLuint createProgram(const char* pVertexSource, const char* pFragmentSource) {
 
 static GLuint gProgram;
 static int mvpname;
-static GCube::Node *node;
-static GCube::StandardCamera *camera;
+static GCube::Node_ptr node(new GCube::Node("name"));
+static GCube::StandardCamera_ptr camera(new GCube::StandardCamera("camera"));
 
 void initProgram(std::vector<char> &buf) {
 	gProgram = createProgram(gVertexShader, gFragmentShader);
@@ -107,11 +107,8 @@ void initProgram(std::vector<char> &buf) {
 	
 	mvpname = glGetUniformLocation(gProgram, "u_mvpMatrix");
 	
-	node = new GCube::Node(NULL, "name");
-	camera = new GCube::StandardCamera(node, "camera");
-//	camera->fieldOfView = 90;
+	node->addChildNode(camera);
 	camera->updateProjectionMatrix();
-	node->addChildNode(dynamic_cast<GCube::Node*>(camera));
 
 }
 

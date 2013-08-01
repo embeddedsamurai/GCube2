@@ -26,8 +26,7 @@
 using namespace GCube;
 
 // コンストラクタ
-Node::Node(Node *parent, const char *name) : name(name) {
-	this->parent = parent;
+Node::Node(const char *name) : name(name), parent(NULL) {
 }
 
 // デストラクタ
@@ -68,20 +67,21 @@ void Node::drawProcess() {
 }
 
 // 親取得
-Node* Node::getParentNode() const {
+Node *Node::getParentNode() const {
 	return(parent);
 }
 
 // 親設定
-void Node::setParentNode(Node* newParent) {
+void Node::setParentNode(Node *newParent) {
 	if(NULL != parent) {
-		parent->removeChildNode(this);
+		std::shared_ptr<Node> node(this);
+		parent->removeChildNode(node);
 	}
 	parent = newParent;
 }
 
 // 子追加
-void Node::addChildNode(Node *childNode) {
+void Node::addChildNode(const Node_ptr &childNode) {
 	if(NULL != childNode) {
 		childNode->setParentNode(this);
 		children.push_back(childNode);
@@ -89,10 +89,10 @@ void Node::addChildNode(Node *childNode) {
 }
 
 // 子削除
-void Node::removeChildNode(Node *childNode) {
+void Node::removeChildNode(const Node_ptr &childNode) {
 	if(NULL != childNode && !children.empty()) {
 		for(size_t i = 0; i < children.size(); ++i) {
-			if(children[i] == childNode) {
+			if(children[i].get() == childNode.get()) {
 				children.erase(children.begin() + i);
 				break;
 			}

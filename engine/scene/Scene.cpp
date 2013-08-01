@@ -32,3 +32,19 @@ Scene::Scene(const char *name) : name(name) {
 // デストラクタ
 Scene::~Scene() {
 }
+
+// 更新処理
+void Scene::onUpdate(float dt) {
+	rootNode.updateProcess(dt);
+}
+
+// 描画
+void Scene::onDraw() {
+	rootNode.drawProcess();
+}
+
+void Scene::changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition) {
+	// TODO: トランジションサポート
+	activeCamera = nextCamera;
+}
+

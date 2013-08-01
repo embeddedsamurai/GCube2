@@ -27,28 +27,31 @@
 #include "Coords.h"
 
 namespace GCube {
+
+class Node;
+typedef std::shared_ptr<Node> Node_ptr;
 	
 class Node : public Coords {
 public:
-	Node(Node* parent = NULL, const char* name = NULL);
+	Node(const char* name = NULL);
 	virtual ~Node();
 	
 	virtual void updateProcess(float dt);
 	virtual void drawProcess();
 	
-	Node* getParentNode() const;
-	void setParentNode(Node* newParent);
+	Node *getParentNode() const;
 	
-	void addChildNode(Node* childNode);
-	void removeChildNode(Node* childNode);
+	void addChildNode(const Node_ptr &childNode);
+	void removeChildNode(const Node_ptr &childNode);
 	
 private:
+	void setParentNode(Node *newParent);
 	Node *parent;
 	const char *name;
-	std::vector<Node*> children;
-	
+	std::vector<Node_ptr> children;
 };
-	
+
+
 }
 
 #endif /* defined(__GCube__Node__) */
