@@ -25,6 +25,7 @@
 
 #include <vector>
 #include "Coords.h"
+#include <memory>
 
 namespace GCube {
 
@@ -48,7 +49,7 @@ private:
 	void setParentNode(Node *newParent);
 	Node *parent;
 	const char *name;
-	std::vector<Node_ptr> children;
+	std::vector<std::shared_ptr<Node>> children;
 };
 
 

@@ -51,6 +51,7 @@
 #include "vectorUtil.h"
 #include <math.h>
 #include <memory.h>
+#include <string.h>
 
 void mtxMultiply(float* ret, const float* lhs, const float* rhs)
 {

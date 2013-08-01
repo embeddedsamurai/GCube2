@@ -24,6 +24,7 @@
 								<option id="gnu.both.asm.option.include.paths.1188809463" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GCube/engine}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GCube/main}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ANDROID_NDK_HOME}/sources/cxx-stl/gnu-libstdc++/4.7/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ANDROID_NDK_HOME}/platforms/android-9/arch-arm/usr/include&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.216078413" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
@@ -33,10 +34,12 @@
 								<option id="gnu.cpp.compiler.option.include.paths.1591807457" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GCube/engine}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GCube/main}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ANDROID_NDK_HOME}/sources/cxx-stl/gnu-libstdc++/4.7/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ANDROID_NDK_HOME}/platforms/android-9/arch-arm/usr/include&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.885857062" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__GCube_Android__"/>
+									<listOptionValue builtIn="false" value="__GXX_EXPERIMENTAL_CXX0X__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1510011978" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -45,9 +48,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GCube/engine}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GCube/main}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ANDROID_NDK_HOME}/platforms/android-9/arch-arm/usr/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ANDROID_NDK_HOME}/sources/cxx-stl/gnu-libstdc++/4.7/include&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1279228583" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__GCube_Android__"/>
+									<listOptionValue builtIn="false" value="__GXX_EXPERIMENTAL_CXX0X__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1196335422" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>

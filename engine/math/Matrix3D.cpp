@@ -22,6 +22,7 @@
 
 #include "Matrix3D.h"
 #include <memory.h>
+#include <string.h>
 #include <math.h>
 #include "../external/math/matrixUtil.h"
 #include "../util/Log.h"
