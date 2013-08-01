@@ -44,7 +44,7 @@ void ApplicationController::DestroyInstance() {
 	_instance = NULL;
 }
 
-ApplicationController::ApplicationController(void) : activeScene(NULL) {
+ApplicationController::ApplicationController() {
 	LOGD("ApplicationController::ApplicationController()");
 	main = new Main();
 }

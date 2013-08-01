@@ -32,7 +32,7 @@ namespace GCube {
 class ApplicationController : public IApplicationEventListener {
 private:
 	Main *main;
-	std::shared_ptr<Scene> activeScene;
+	Scene_ptr activeScene;
 	
 private:
 	ApplicationController();

@@ -20,42 +20,28 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__SoundData_h
-#define __GCube__SoundData_h
+#ifndef __GCube__Coords__
+#define __GCube__Coords__
 
-#include "GCDefines.h"
-#include "../external/stb/stb_vorbis.h"
+#include "../math/Matrix3D.h"
 
 namespace GCube {
+
+class Coords {
+public:
+	Coords();
+	virtual ~Coords();
 	
-/**
- * サウンドデータクラス.
- */
-class SoundData {
-private:
-	std::vector<char> sourceData; //!< 生データ
-	stb_vorbis *stream; //!< Oggストリーム
-	int fileType;       //!< ファイルタイプ
-	int sampleRate;     //!< サンプリングレート
-	int channels;       //!< チャンネル数
+	void drawAxis();
 	
 public:
-	std::string fileName; //!< ファイル名
-	ALuint sourceID;      //!< OpenALのソースID
+	Matrix3D transform;
+	bool visibleAxis;
+	float axisSize;
 	
-	SoundData() {};
-	virtual ~SoundData() {};
+private:
 	
-	// Oggファイル読み込み（静的）
-	bool loadOggFileStatic(const char *fileName, ALuint buffer);
-	// Oggファイル読み込み（ストリーム）
-	bool openOggFileStream(const char *fileName);
-	// ストリームから一定量のバッファを読み込み
-	bool readStreamBuffer(ALuint buffer);
-	// ストリームを閉じる
-	void closeStream();
 };
-
 }
 
-#endif
+#endif /* defined(__GCube__Coords__) */

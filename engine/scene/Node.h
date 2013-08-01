@@ -23,15 +23,14 @@
 #ifndef __GCube__Node__
 #define __GCube__Node__
 
-#include <vector>
+#include "GCDefines.h"
 #include "Coords.h"
-#include <memory>
 
 namespace GCube {
 
 class Node;
-typedef std::shared_ptr<Node> Node_ptr;
-	
+DEF_SHARED_PTR(Node);
+
 class Node : public Coords {
 public:
 	Node(const char* name = NULL);
@@ -49,9 +48,8 @@ private:
 	void setParentNode(Node *newParent);
 	Node *parent;
 	const char *name;
-	std::vector<std::shared_ptr<Node>> children;
+	std::vector<Node_ptr> children;
 };
-
 
 }
 

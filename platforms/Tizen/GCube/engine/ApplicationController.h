@@ -25,12 +25,14 @@
 
 #include "GCDefines.h"
 #include "IApplicationEventListener.h"
+#include "scene/Scene.h"
 
 namespace GCube {
 
 class ApplicationController : public IApplicationEventListener {
 private:
-	GCube::Main *main;
+	Main *main;
+	Scene_ptr activeScene;
 	
 private:
 	ApplicationController();
@@ -41,6 +43,11 @@ public:
 	static ApplicationController* SharedInstance();
 	static void DestroyInstance();
 	
+	//
+	virtual void changeScene(const Scene_ptr &nextScene, SceneTransition *transition=NULL);
+	
+	
+	// Utils //
 	virtual std::string getLanguage();
 	virtual void getResource(const char *fileName, std::vector<char>& outData);
 	virtual std::string getStoragePath(GCStorageType type);

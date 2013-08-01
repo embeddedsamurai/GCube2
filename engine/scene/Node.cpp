@@ -26,7 +26,7 @@
 using namespace GCube;
 
 // コンストラクタ
-Node::Node(const char *name) : name(name), parent(NULL) {
+Node::Node(const char *name) : parent(NULL), name(name) {
 }
 
 // デストラクタ
@@ -74,7 +74,7 @@ Node *Node::getParentNode() const {
 // 親設定
 void Node::setParentNode(Node *newParent) {
 	if(NULL != parent) {
-		std::shared_ptr<Node> node(this);
+		Node_ptr node(this);
 		parent->removeChildNode(node);
 	}
 	parent = newParent;

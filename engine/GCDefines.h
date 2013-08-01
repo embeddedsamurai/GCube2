@@ -29,6 +29,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 // Android
 #ifdef __GCube_Android__
@@ -36,6 +37,7 @@
 # include <GLES2/gl2ext.h>
 # include <AL/al.h>
 # include <AL/alc.h>
+#define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr
 #endif
 
 // iOS
@@ -44,6 +46,7 @@
 # include <OpenGLES/ES2/glext.h>
 # include <OpenAL/al.h>
 # include <OpenAL/alc.h>
+#define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr
 #endif
 
 // Tizen
@@ -52,6 +55,8 @@
 # include <gl2ext.h>
 # include <AL/al.h>
 # include <AL/alc.h>
+#include <boost/shared_ptr.hpp>
+#define DEF_SHARED_PTR(name) typedef boost::shared_ptr<name> name##_ptr
 #endif
 
 

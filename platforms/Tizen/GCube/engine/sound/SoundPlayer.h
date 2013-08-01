@@ -55,7 +55,12 @@ private:
 	
 	
 public:
+	
+	/**
+	 * 監視スレッド用メソッド.
+	 */
 	void playLoop();
+	
 	/**
 	 * インスタンスを取得します.
 	 * @return SoundPlayerオブジェクト
@@ -67,7 +72,14 @@ public:
 	 */
 	static void Dispose();
 	
+	/**
+	 * 監視スレッドを開始します.
+	 */
 	static void Start();
+	
+	/**
+	 * 監視スレッドを停止します.
+	 */
 	static void Pause();
 
 	/**

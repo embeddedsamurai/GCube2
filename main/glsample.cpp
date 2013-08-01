@@ -21,10 +21,6 @@
  */
 
 #include "glsample.h"
-#include "Matrix3D.h"
-#include "Camera.h"
-#include "Node.h"
-#include "StandardCamera.h"
 
 const char gVertexShader[] =
 "uniform mat4 u_mvpMatrix;\n"

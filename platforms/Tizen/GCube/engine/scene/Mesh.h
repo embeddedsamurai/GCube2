@@ -20,42 +20,9 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__SoundData_h
-#define __GCube__SoundData_h
+#ifndef __GCube__Mesh__
+#define __GCube__Mesh__
 
-#include "GCDefines.h"
-#include "../external/stb/stb_vorbis.h"
+#include <iostream>
 
-namespace GCube {
-	
-/**
- * サウンドデータクラス.
- */
-class SoundData {
-private:
-	std::vector<char> sourceData; //!< 生データ
-	stb_vorbis *stream; //!< Oggストリーム
-	int fileType;       //!< ファイルタイプ
-	int sampleRate;     //!< サンプリングレート
-	int channels;       //!< チャンネル数
-	
-public:
-	std::string fileName; //!< ファイル名
-	ALuint sourceID;      //!< OpenALのソースID
-	
-	SoundData() {};
-	virtual ~SoundData() {};
-	
-	// Oggファイル読み込み（静的）
-	bool loadOggFileStatic(const char *fileName, ALuint buffer);
-	// Oggファイル読み込み（ストリーム）
-	bool openOggFileStream(const char *fileName);
-	// ストリームから一定量のバッファを読み込み
-	bool readStreamBuffer(ALuint buffer);
-	// ストリームを閉じる
-	void closeStream();
-};
-
-}
-
-#endif
+#endif /* defined(__GCube__Mesh__) */

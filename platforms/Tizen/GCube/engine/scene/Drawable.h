@@ -20,42 +20,23 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__SoundData_h
-#define __GCube__SoundData_h
-
-#include "GCDefines.h"
-#include "../external/stb/stb_vorbis.h"
+#ifndef __GCube__Drawable__
+#define __GCube__Drawable__
 
 namespace GCube {
 	
-/**
- * サウンドデータクラス.
- */
-class SoundData {
-private:
-	std::vector<char> sourceData; //!< 生データ
-	stb_vorbis *stream; //!< Oggストリーム
-	int fileType;       //!< ファイルタイプ
-	int sampleRate;     //!< サンプリングレート
-	int channels;       //!< チャンネル数
-	
+class Drawable {
 public:
-	std::string fileName; //!< ファイル名
-	ALuint sourceID;      //!< OpenALのソースID
+	Drawable() {isVisible=true;};
+	virtual ~Drawable() {};
 	
-	SoundData() {};
-	virtual ~SoundData() {};
+	virtual void draw() = 0;
+public:
+	bool isVisible;
 	
-	// Oggファイル読み込み（静的）
-	bool loadOggFileStatic(const char *fileName, ALuint buffer);
-	// Oggファイル読み込み（ストリーム）
-	bool openOggFileStream(const char *fileName);
-	// ストリームから一定量のバッファを読み込み
-	bool readStreamBuffer(ALuint buffer);
-	// ストリームを閉じる
-	void closeStream();
+private:
+	
 };
-
 }
 
-#endif
+#endif /* defined(__GCube__Drawable__) */

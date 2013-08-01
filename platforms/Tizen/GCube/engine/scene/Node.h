@@ -20,42 +20,38 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__SoundData_h
-#define __GCube__SoundData_h
+#ifndef __GCube__Node__
+#define __GCube__Node__
 
 #include "GCDefines.h"
-#include "../external/stb/stb_vorbis.h"
+#include "Coords.h"
 
 namespace GCube {
-	
-/**
- * サウンドデータクラス.
- */
-class SoundData {
-private:
-	std::vector<char> sourceData; //!< 生データ
-	stb_vorbis *stream; //!< Oggストリーム
-	int fileType;       //!< ファイルタイプ
-	int sampleRate;     //!< サンプリングレート
-	int channels;       //!< チャンネル数
-	
+
+class Node;
+DEF_SHARED_PTR(Node);
+
+class Node : public Coords {
 public:
-	std::string fileName; //!< ファイル名
-	ALuint sourceID;      //!< OpenALのソースID
+	Node(const char* name = NULL);
+	virtual ~Node();
 	
-	SoundData() {};
-	virtual ~SoundData() {};
+	virtual void updateProcess(float dt);
+	virtual void drawProcess();
 	
-	// Oggファイル読み込み（静的）
-	bool loadOggFileStatic(const char *fileName, ALuint buffer);
-	// Oggファイル読み込み（ストリーム）
-	bool openOggFileStream(const char *fileName);
-	// ストリームから一定量のバッファを読み込み
-	bool readStreamBuffer(ALuint buffer);
-	// ストリームを閉じる
-	void closeStream();
+	Node *getParentNode() const;
+	
+	void addChildNode(const Node_ptr &childNode);
+	void removeChildNode(const Node_ptr &childNode);
+	
+private:
+	void setParentNode(Node *newParent);
+	Node *parent;
+	const char *name;
+	std::vector<Node_ptr> children;
 };
+
 
 }
 
-#endif
+#endif /* defined(__GCube__Node__) */

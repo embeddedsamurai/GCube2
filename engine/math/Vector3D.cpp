@@ -21,7 +21,7 @@
  */
 
 #include "Vector3D.h"
-#include "Log.h"
+#include "../util/Log.h"
 #include <math.h>
 
 using namespace GCube;
