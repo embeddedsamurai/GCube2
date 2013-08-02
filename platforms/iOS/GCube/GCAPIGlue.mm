@@ -39,13 +39,13 @@ void GCGetResourceData(const char *fileName, std::vector<char>& outData) {
 }
 
 // ストレージパスを取得
-std::string GCGetStoragePath(GCStorageType type) {
+std::string GCGetStoragePath(GCube::StorageType type) {
 	NSSearchPathDirectory dir;
 	switch (type) {
-		case GCStorageTypeDocument:
+		case GCube::StorageTypeDocument:
 			dir = NSDocumentDirectory;
 			break;
-		case GCStorageTypeCache:
+		case GCube::StorageTypeCache:
 			dir = NSCachesDirectory;
 			break;
 	}

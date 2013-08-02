@@ -36,10 +36,10 @@ public:
 	virtual~Main() {};
 	
 	virtual void onInit();
-	virtual void onSizeChanged(float width, float height, GCDeviceOrientation orientation);
+	virtual void onSizeChanged(float width, float height, DeviceOrientation orientation);
 	virtual void onContextChanged();
 	virtual void onDraw();
-	virtual void onTouch(GCTouchAction action, float x, float y, long id, long time);
+	virtual void onTouch(TouchAction action, float x, float y, long id, long time);
 	virtual int onUserEvent(int type, int param1=0, long long param2=0, float param3=0, double param4=0, const char *param5=NULL);
 	virtual void onDebugCommand(const char *command, int param);
 };

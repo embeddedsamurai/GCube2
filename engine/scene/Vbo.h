@@ -20,30 +20,43 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#ifndef __GCube__Vbo__
+#define __GCube__Vbo__
 
 #include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Figure.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Vbo.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "shader/Shader.h"
-#include "shader/SimpleShader.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
 
-#endif
+namespace GCube {
+
+// vbo index
+enum {
+	VBO_INTERLEAVE,
+	VBO_ELEMENT,
+	NUM_VBO
+};
+
+
+class Vbo {
+public:
+	Vbo();
+	virtual ~Vbo();
+	
+	virtual void addElement(const std::vector<float> &data, int element);
+	virtual void setIndex(const std::vector<short> &index);
+	
+	virtual void build();
+	virtual void bind();
+
+private:
+	GLuint buildVBO(void *data, int size, GLenum buffer);
+	
+	int maxSize;
+	GLuint vboNames[NUM_VBO];                   //!< VBOの名前リスト.
+	std::vector<std::vector<float>> dataArray;  //!< データ.
+	std::vector<short> indexesArray;            //!< インデックスデータ.
+	std::vector<int> elementsArray;             //!< 要素数データ.
+	
+};
+DEF_SHARED_PTR(Vbo);
+}
+
+#endif /* defined(__GCube__Vbo__) */

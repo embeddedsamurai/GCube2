@@ -46,6 +46,7 @@ void ApplicationController::DestroyInstance() {
 
 ApplicationController::ApplicationController() {
 	LOGD("ApplicationController::ApplicationController()");
+//	viewArray.push_back(View_ptr(new View()));
 	main = new Main();
 }
 
@@ -75,7 +76,7 @@ void ApplicationController::getResource(const char *fileName, std::vector<char>&
 }
 
 // ストレージパスを取得
-std::string ApplicationController::getStoragePath(GCStorageType type) {
+std::string ApplicationController::getStoragePath(StorageType type) {
 	return GCGetStoragePath(type);
 }
 
@@ -118,8 +119,11 @@ void ApplicationController::onContextChanged(void) {
 	main->onContextChanged();
 }
 
-void ApplicationController::onSizeChanged(float width, float height, GCDeviceOrientation orientation) {
+void ApplicationController::onSizeChanged(float width, float height, DeviceOrientation orientation) {
 	LOGD("ApplicationController::onSizeChanged(%f, %f, %d)", width, height, orientation);
+	screenSize.width = width;
+	screenSize.height = height;
+	aspect = width / height;
 	main->onSizeChanged(width, height, orientation);
 }
 
@@ -144,12 +148,17 @@ void ApplicationController::onDraw() {
 	main->onDraw();
 	// アクティブシーンに通知
 	if (activeScene) {
-		activeScene->onDraw();
+		std::vector<View_ptr>::iterator it = viewArray.begin();
+		while (it != viewArray.end()) {
+			View_ptr v = (View_ptr) *it;
+			activeScene->onDraw(*v.get());
+			it++;
+		}
 	}
 }
 	
 // タッチイベント
-void ApplicationController::onTouch(GCTouchAction action, float x, float y, long id, long time) {
+void ApplicationController::onTouch(TouchAction action, float x, float y, long id, long time) {
 	LOGD("***********onTouch[%d](%f,%f)[%d] %u", action, x, y, id, time);
 	main->onTouch(action, x, y, id, time);
 }

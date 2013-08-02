@@ -36,7 +36,7 @@ void Main::onInit() {
 	LOGD("send user event:%d", ctr->sendUserEvent(1, 2, 3, 4, 5, "a"));
 	
 	// ファイル書き込み
-	std::string filePath = ctr->getStoragePath(GCStorageTypeDocument);
+	std::string filePath = ctr->getStoragePath(StorageTypeDocument);
 	filePath += "hello.txt";
 	LOGD("file:%s", filePath.c_str());
 	FILE* file = fopen(filePath.c_str(), "w+");
@@ -58,6 +58,37 @@ void Main::onInit() {
 	sceneMain->rootNode.addChildNode(cameraMain);
 	cameraMain->updateProjectionMatrix();
 	sceneMain->changeCamera(cameraMain);
+	
+	cameraMain->transform.loadIdentity();
+	cameraMain->transform.translate(0, 0, 40);
+//	cameraMain->transform.rotate(45, GCube::RotateDirZ);
+	
+	View_ptr view(new View());
+	view->camera = cameraMain;
+	ctr->viewArray.push_back(view);
+
+	const float vertices[] = {
+		 1, 1, 1,
+		-1, 1, 1,
+		 1,-1, 1,
+		-1,-1, 1,
+	};
+	const unsigned short indices[] = {
+		0, 1, 2,
+		0, 2, 3
+	};
+	Mesh_ptr mesh(new Mesh());
+	MeshData_ptr mdata(new MeshData());
+	std::vector<float> tmp(vertices, vertices+12);
+	mdata->vertices.insert(mdata->vertices.end(), tmp.begin(), tmp.end());
+	std::vector<unsigned short> tmp2(indices, indices+6);
+	mdata->vertexIndexes.insert(mdata->vertexIndexes.end(), tmp2.begin(), tmp2.end());
+	mesh->build(mdata);
+
+	Figure_ptr fig(new Figure("Fig"));
+	fig->shader = SimpleShader_ptr(new SimpleShader());
+	fig->mesh = mesh;
+	sceneMain->rootNode.addChildNode(fig);
 	ctr->changeScene(sceneMain);
 
 	//
@@ -65,7 +96,7 @@ void Main::onInit() {
 }
 
 // サイズ変更
-void Main::onSizeChanged(float width, float height, GCDeviceOrientation orientation) {
+void Main::onSizeChanged(float width, float height, DeviceOrientation orientation) {
 	LOGD("Main::onSizeChanged(%f, %f, %d)", width, height, orientation);
 	glViewport(0, 0, width, height);
 }
@@ -78,17 +109,22 @@ void Main::onContextChanged() {
 	ctr->getResource("texture/gclue_logo.png", buf);
 	
 	// サンプル初期化
-	initProgram(buf);
+//	initProgram(buf);
 }
 
 // 描画
 void Main::onDraw() {
-	draw();
+	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+//	glViewport(0, 0, 600, 600);
+//	draw();
+//	glViewport(100, 100, 400, 400);
+//	draw();
 }
 
 // タッチイベント
-void Main::onTouch(GCTouchAction action, float x, float y, long id, long time) {
-	if (action==GCTouchActionUp) {
+void Main::onTouch(TouchAction action, float x, float y, long id, long time) {
+	if (action==TouchActionDown) {
 		// 音再生
 		SoundPlayer *player = SoundPlayer::SharedInstance();
 		player->play(sid);

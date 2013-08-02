@@ -76,7 +76,7 @@ using namespace GCube;
 	
 	float scale = [UIScreen mainScreen].scale;
 	gcube->onInit();
-	gcube->onSizeChanged(view.bounds.size.width*scale, view.bounds.size.height*scale, (GCDeviceOrientation)self.interfaceOrientation);
+	gcube->onSizeChanged(view.bounds.size.width*scale, view.bounds.size.height*scale, (DeviceOrientation)self.interfaceOrientation);
 	
 	if (_settings->useOrientationSensor) {
 		// 傾きセンサー開始
@@ -194,7 +194,7 @@ using namespace GCube;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	float scale = [UIScreen mainScreen].scale;
-	gcube->onSizeChanged(self.view.bounds.size.width*scale, self.view.bounds.size.height*scale, (GCDeviceOrientation)self.interfaceOrientation);
+	gcube->onSizeChanged(self.view.bounds.size.width*scale, self.view.bounds.size.height*scale, (DeviceOrientation)self.interfaceOrientation);
 }
 
 
@@ -213,7 +213,7 @@ using namespace GCube;
 }
 
 // タッチイベント
-- (void)toucheEvent:(NSSet *)touches withEvent:(UIEvent *)event withType:(GCTouchAction)type {
+- (void)toucheEvent:(NSSet *)touches withEvent:(UIEvent *)event withType:(TouchAction)type {
 	float scale = [UIScreen mainScreen].scale;
 	for (UITouch *touch in touches) {
 		// 何番目のタッチかを探す
@@ -224,7 +224,7 @@ using namespace GCube;
 			touchArray[idx] = touch;
 		} else {
 			// タッチアップのタイミングで空欄にする
-			if (type == GCTouchActionUp || type == GCTouchActionCancel) {
+			if (type == TouchActionUp || type == TouchActionCancel) {
 				touchArray[idx] = nil;
 			}
 		}
@@ -236,22 +236,22 @@ using namespace GCube;
 
 // タッチ開始イベント
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self toucheEvent:touches withEvent:event withType:GCTouchActionDown];
+	[self toucheEvent:touches withEvent:event withType:TouchActionDown];
 }
 
 // タッチ移動イベント
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self toucheEvent:touches withEvent:event withType:GCTouchActionMove];
+	[self toucheEvent:touches withEvent:event withType:TouchActionMove];
 }
 
 // タッチ終了イベント
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self toucheEvent:touches withEvent:event withType:GCTouchActionUp];
+	[self toucheEvent:touches withEvent:event withType:TouchActionUp];
 }
 
 // タッチキャンセルイベント
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self toucheEvent:touches withEvent:event withType:GCTouchActionCancel];
+	[self toucheEvent:touches withEvent:event withType:TouchActionCancel];
 }
 
 

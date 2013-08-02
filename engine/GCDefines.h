@@ -63,42 +63,73 @@
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
-// デバイスの向き
-typedef enum GCDeviceOrientation
-{
-	GCDeviceOrientationUnknown,
-	GCDeviceOrientationPortrait,            // Device oriented vertically, home button on the bottom
-	GCDeviceOrientationPortraitUpsideDown,  // Device oriented vertically, home button on the top
-	GCDeviceOrientationLandscapeLeft,       // Device oriented horizontally, home button on the right
-	GCDeviceOrientationLandscapeRight,      // Device oriented horizontally, home button on the left
-	GCDeviceOrientationFaceUp,              // Device oriented flat, face up
-	GCDeviceOrientationFaceDown             // Device oriented flat, face down
-}
-GCDeviceOrientation;
-
-// タッチイベント
-typedef enum GCTouchAction
-{
-	GCTouchActionDown,
-	GCTouchActionUp,
-	GCTouchActionMove,
-	GCTouchActionCancel,
-}
-GCTouchAction;
-
-// ストレージタイプ
-typedef enum GCStorageType
-{
-	GCStorageTypeDocument,
-	GCStorageTypeCache,
-}
-GCStorageType;
+namespace GCube {
 
 // クラス
-namespace GCube {
-	class Main;
-	class Scene;
-	class SceneTransition;
+class Main;
+class Scene;
+class SceneTransition;
+
+// デバイスの向き
+typedef enum DeviceOrientation
+{
+	DeviceOrientationUnknown,
+	DeviceOrientationPortrait,            // Device oriented vertically, home button on the bottom
+	DeviceOrientationPortraitUpsideDown,  // Device oriented vertically, home button on the top
+	DeviceOrientationLandscapeLeft,       // Device oriented horizontally, home button on the right
+	DeviceOrientationLandscapeRight,      // Device oriented horizontally, home button on the left
+	DeviceOrientationFaceUp,              // Device oriented flat, face up
+	DeviceOrientationFaceDown             // Device oriented flat, face down
+}
+DeviceOrientation;
+
+// タッチイベント
+typedef enum TouchAction
+{
+	TouchActionDown,
+	TouchActionUp,
+	TouchActionMove,
+	TouchActionCancel,
+}
+TouchAction;
+
+// ストレージタイプ
+typedef enum StorageType
+{
+	StorageTypeDocument,
+	StorageTypeCache,
+}
+StorageType;
+
+
+typedef struct Pointf {
+	float x;
+	float y;
+} Pointf;
+
+typedef struct Sizef {
+	float width;
+	float height;
+} Sizef;
+
+typedef struct Point3f {
+	float x;
+	float y;
+	float z;
+} Point3f;
+
+typedef struct Colorf {
+	float r;
+	float g;
+	float b;
+	float a;
+} Colorf;
+
+typedef struct Rectf {
+	Pointf location;
+	Sizef size;
+} Rectf;
+
 }
 
 
@@ -110,7 +141,7 @@ std::string GCGetLanguage();
 // リソースを取得
 void GCGetResourceData(const char *fileName, std::vector<char>& outData);
 // ストレージパスを取得
-std::string GCGetStoragePath(GCStorageType type);
+std::string GCGetStoragePath(GCube::StorageType type);
 
 // ユーザーイベントを送信
 int GCSendUserEvent(int type, int param1, long long param2, float param3, double param4, const char *param5);

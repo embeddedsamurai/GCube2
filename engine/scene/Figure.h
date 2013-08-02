@@ -20,30 +20,31 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#ifndef __GCube__Figure__
+#define __GCube__Figure__
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Figure.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Vbo.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "shader/Shader.h"
-#include "shader/SimpleShader.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
+#include "Node.h"
+#include "Drawable.h"
+#include "Mesh.h"
+#include "../shader/Shader.h"
 
-#endif
+namespace GCube {
+
+class Figure : public Node, public Drawable {
+public:
+	Figure(const char* name = NULL);
+	virtual ~Figure();
+	
+	virtual void draw(View &view);
+	
+public:
+	Shader_ptr shader;
+	Mesh_ptr mesh;
+	
+private:
+	
+};
+DEF_SHARED_PTR(Figure);
+}
+
+#endif /* defined(__GCube__Figure__) */

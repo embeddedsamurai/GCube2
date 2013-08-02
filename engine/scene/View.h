@@ -20,30 +20,26 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#ifndef __GCube__View__
+#define __GCube__View__
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Figure.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Vbo.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "shader/Shader.h"
-#include "shader/SimpleShader.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
+#include "../GCDefines.h"
+#include "Camera.h"
 
-#endif
+namespace GCube {
+
+class View {
+public:
+	View() {};
+	virtual ~View() {};
+	
+public:
+	Camera_ptr camera;
+	Rectf frame;
+};
+
+DEF_SHARED_PTR(View);
+
+}
+
+#endif /* defined(__GCube__View__) */

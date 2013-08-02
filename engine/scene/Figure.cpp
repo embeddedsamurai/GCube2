@@ -20,30 +20,26 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#include "Figure.h"
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Figure.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Vbo.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "shader/Shader.h"
-#include "shader/SimpleShader.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
+using namespace GCube;
 
-#endif
+// コンストラクタ
+Figure::Figure(const char *name) : Node(name) {
+	shader = NULL;
+	mesh = NULL;
+}
+
+// デストラクタ
+Figure::~Figure() {
+}
+
+// 描画
+void Figure::draw(View &view) {
+	if (isVisible && shader && mesh) {
+		shader->useProgram();
+		mesh->bind();
+		shader->setInfo(this, view.camera.get(), NULL);
+		glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_SHORT, NULL);
+	}
+}
