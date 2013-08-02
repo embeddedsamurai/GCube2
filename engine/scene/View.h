@@ -30,12 +30,14 @@ namespace GCube {
 
 class View {
 public:
-	View() {};
+	View() : isFullScreen(false) {};
 	virtual ~View() {};
 	
 public:
 	Camera_ptr camera;
 	Rectf frame;
+	bool isFullScreen;
+	Colorf bgColor;
 };
 
 DEF_SHARED_PTR(View);

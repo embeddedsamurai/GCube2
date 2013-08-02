@@ -46,7 +46,13 @@ void ApplicationController::DestroyInstance() {
 
 ApplicationController::ApplicationController() {
 	LOGD("ApplicationController::ApplicationController()");
-//	viewArray.push_back(View_ptr(new View()));
+	// デフォルトビュー作成
+	View_ptr v(new View());
+	v->isFullScreen = true;
+	v->camera = StandardCamera_ptr(new StandardCamera("DefaultCamera"));
+	v->camera->transform.translate(0, 0, 50);
+	viewArray.push_back(v);
+	// メイン作成
 	main = new Main();
 }
 
@@ -144,14 +150,41 @@ void ApplicationController::onUpdate(float dt) {
 
 void ApplicationController::onDraw() {
 //	LOGD("ApplicationController::onDraw()");
+	// 全体の背景色
+	glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glEnable(GL_SCISSOR_TEST);
 	// mainに通知
 	main->onDraw();
-	// アクティブシーンに通知
 	if (activeScene) {
+		// 各ビューを描画
 		std::vector<View_ptr>::iterator it = viewArray.begin();
 		while (it != viewArray.end()) {
 			View_ptr v = (View_ptr) *it;
-			activeScene->onDraw(*v.get());
+			// ビューの背景色
+			glClearColor(v->bgColor.r, v->bgColor.g, v->bgColor.b, v->bgColor.a);
+			// ビューの座標系を変換
+			Rectf rect;
+			if (v->isFullScreen) {
+				rect = Rectf(0, 0, screenSize.width, screenSize.height);
+				v->frame = Rectf(0, 0, 2, 2);
+			} else {
+				float w = v->frame.size.width / 2.0 * screenSize.width;
+				float h = v->frame.size.height / 2.0 * screenSize.height;
+				float x = (v->frame.location.x + 1.0) / 2.0 * screenSize.width - w / 2.0;
+				float y = (v->frame.location.y + 1.0) / 2.0 * screenSize.height - h / 2.0;
+				rect = Rectf(x, y, w, h);
+			}
+			// クリップ
+			glScissor(rect.location.x, rect.location.y, rect.size.width, rect.size.height);
+			glViewport(rect.location.x, rect.location.y, rect.size.width, rect.size.height);
+			glClear(GL_COLOR_BUFFER_BIT);
+			// 描画
+			if (v->camera) {
+				v->camera->aspect = v->frame.size.width / v->frame.size.height * aspect;
+				v->camera->updateProjectionMatrix();
+				activeScene->onDraw(*v.get());
+			}
 			it++;
 		}
 	}

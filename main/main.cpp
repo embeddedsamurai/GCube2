@@ -52,11 +52,11 @@ void Main::onInit() {
 	player->play(bgmid);
 	sid = SoundPlayer::loadSE("sound/se_yay.ogg");
 	
+	ctr->bgColor = Colorf(0.5, 0, 0.1);
 	// シーン作成
 	Scene_ptr sceneMain(new Scene("SceneMain"));
 	StandardCamera_ptr cameraMain(new StandardCamera("CameraMain"));
 	sceneMain->rootNode.addChildNode(cameraMain);
-	cameraMain->updateProjectionMatrix();
 	sceneMain->changeCamera(cameraMain);
 	
 	cameraMain->transform.loadIdentity();
@@ -65,6 +65,8 @@ void Main::onInit() {
 	
 	View_ptr view(new View());
 	view->camera = cameraMain;
+	view->frame = Rectf(0.7, 0.7, 0.5, 0.5);
+	view->bgColor = Colorf(1,0,0);
 	ctr->viewArray.push_back(view);
 
 	const float vertices[] = {
@@ -98,7 +100,7 @@ void Main::onInit() {
 // サイズ変更
 void Main::onSizeChanged(float width, float height, DeviceOrientation orientation) {
 	LOGD("Main::onSizeChanged(%f, %f, %d)", width, height, orientation);
-	glViewport(0, 0, width, height);
+//	glViewport(0, 0, width, height);
 }
 
 // コンテキスト切り替え
@@ -114,12 +116,22 @@ void Main::onContextChanged() {
 
 // 描画
 void Main::onDraw() {
-	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-//	glViewport(0, 0, 600, 600);
+//	glEnable(GL_SCISSOR_TEST);
+//	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+//	glScissor(250, 250, 100, 100);
+//	glViewport(250, 250, 100, 100);
+//	glClear(GL_COLOR_BUFFER_BIT);
 //	draw();
-//	glViewport(100, 100, 400, 400);
+//	glScissor(100, 100, 200, 200);
+//	glViewport(100, 100, 200, 200);
+//	glClear(GL_COLOR_BUFFER_BIT);
 //	draw();
+	
+	
+//	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glViewport(v->frame.location.x, v->frame.location.y, v->frame.size.width, v->frame.size.height);
+
 }
 
 // タッチイベント

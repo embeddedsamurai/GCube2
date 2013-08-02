@@ -39,6 +39,7 @@ public:
 public:
 	Matrix3D projectionMatrix;
 	Matrix3D viewMatrix;
+	float aspect;      //!< アスペクト比.
 	
 };
 

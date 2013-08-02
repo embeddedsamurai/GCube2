@@ -62,8 +62,6 @@
 		66F9183717A26CC7006C413D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182817A26CC7006C413D /* Camera.cpp */; };
 		66F9183817A26CC7006C413D /* Coords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182A17A26CC7006C413D /* Coords.cpp */; };
 		66F9183917A26CC7006C413D /* Coords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182A17A26CC7006C413D /* Coords.cpp */; };
-		66F9183A17A26CC7006C413D /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182C17A26CC7006C413D /* Drawable.cpp */; };
-		66F9183B17A26CC7006C413D /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182C17A26CC7006C413D /* Drawable.cpp */; };
 		66F9183C17A26CC7006C413D /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182E17A26CC7006C413D /* Mesh.cpp */; };
 		66F9183D17A26CC7006C413D /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182E17A26CC7006C413D /* Mesh.cpp */; };
 		66F9183E17A26CC7006C413D /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9183017A26CC7006C413D /* Node.cpp */; };
@@ -152,7 +150,6 @@
 		66F9182917A26CC7006C413D /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		66F9182A17A26CC7006C413D /* Coords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Coords.cpp; sourceTree = "<group>"; };
 		66F9182B17A26CC7006C413D /* Coords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coords.h; sourceTree = "<group>"; };
-		66F9182C17A26CC7006C413D /* Drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
 		66F9182D17A26CC7006C413D /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
 		66F9182E17A26CC7006C413D /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		66F9182F17A26CC7006C413D /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
@@ -405,7 +402,6 @@
 				66F9183117A26CC7006C413D /* Node.h */,
 				66F9182A17A26CC7006C413D /* Coords.cpp */,
 				66F9182B17A26CC7006C413D /* Coords.h */,
-				66F9182C17A26CC7006C413D /* Drawable.cpp */,
 				66F9182D17A26CC7006C413D /* Drawable.h */,
 				66F9185717AA434A006C413D /* figure */,
 				66F9184817A2708F006C413D /* camera */,
@@ -641,7 +637,6 @@
 				666F36FE17A0C819009B91ED /* Vector3D.cpp in Sources */,
 				66F9183617A26CC7006C413D /* Camera.cpp in Sources */,
 				66F9183817A26CC7006C413D /* Coords.cpp in Sources */,
-				66F9183A17A26CC7006C413D /* Drawable.cpp in Sources */,
 				66F9183C17A26CC7006C413D /* Mesh.cpp in Sources */,
 				66F9183E17A26CC7006C413D /* Node.cpp in Sources */,
 				66F9184017A26CC7006C413D /* Scene.cpp in Sources */,
@@ -672,7 +667,6 @@
 				666F36FF17A0C819009B91ED /* Vector3D.cpp in Sources */,
 				66F9183717A26CC7006C413D /* Camera.cpp in Sources */,
 				66F9183917A26CC7006C413D /* Coords.cpp in Sources */,
-				66F9183B17A26CC7006C413D /* Drawable.cpp in Sources */,
 				66F9183D17A26CC7006C413D /* Mesh.cpp in Sources */,
 				66F9183F17A26CC7006C413D /* Node.cpp in Sources */,
 				66F9184117A26CC7006C413D /* Scene.cpp in Sources */,

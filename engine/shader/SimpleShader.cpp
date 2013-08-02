@@ -55,7 +55,8 @@ varying vec2 v_texcoord;
 
 void main()
 {
-	gl_FragColor = vec4(texture2D(u_diffuseTexture, v_texcoord.st)) * vec4(vec3(u_bright), u_alpha);
+	gl_FragColor = vec4(vec3(1), u_alpha);
+//	gl_FragColor = vec4(texture2D(u_diffuseTexture, v_texcoord.st)) * vec4(vec3(u_bright), u_alpha);
 }
 
 );
@@ -94,6 +95,7 @@ void SimpleShader::useProgram() {
 
 void SimpleShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
 	// projectionMatrix
+	if (!figure || !camera) return;
 	Matrix3D mtx;
 	mtx.multiply(&camera->projectionMatrix);
 	

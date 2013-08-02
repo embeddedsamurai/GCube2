@@ -105,17 +105,20 @@ StorageType;
 typedef struct Pointf {
 	float x;
 	float y;
+	Pointf(float x=0, float y=0) : x(x), y(y) {};
 } Pointf;
 
 typedef struct Sizef {
 	float width;
 	float height;
+	Sizef(float width=0, float height=0) : width(width), height(height) {};
 } Sizef;
 
 typedef struct Point3f {
 	float x;
 	float y;
 	float z;
+	Point3f(float x=0, float y=0, float z=0) : x(x), y(y), z(z) {};
 } Point3f;
 
 typedef struct Colorf {
@@ -123,11 +126,20 @@ typedef struct Colorf {
 	float g;
 	float b;
 	float a;
+	Colorf(float r=0, float g=0, float b=0, float a=1): r(r), g(g), b(b), a(a) {};
 } Colorf;
 
 typedef struct Rectf {
 	Pointf location;
 	Sizef size;
+	
+	Rectf(float x=0, float y=0, float width=0, float height=0) {
+		location.x = x;
+		location.y = y;
+		size.width = width;
+		size.height = height;
+	};
+	
 } Rectf;
 
 }

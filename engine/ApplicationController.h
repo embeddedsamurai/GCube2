@@ -37,7 +37,7 @@ private:
 	Sizef screenSize;
 	float aspect;
 public:
-	// TODO:
+	Colorf bgColor;
 	std::vector<View_ptr> viewArray;
 	
 private:
@@ -49,10 +49,8 @@ public:
 	static ApplicationController* SharedInstance();
 	static void DestroyInstance();
 	
-	// Scene/View //
+	// Scene //
 	virtual void changeScene(const Scene_ptr &nextScene, SceneTransition *transition=NULL);
-//	virtual void addView(const View_ptr &view);
-//	virtual View_ptr getView();
 	
 	
 	// Utils //
