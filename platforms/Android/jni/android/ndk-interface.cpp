@@ -88,12 +88,12 @@ void GCGetResourceData(const char *fileName, std::vector<char>& outData){
 /**
  * ストレージパスを取得.
  */
-std::string GCGetStoragePath(GCStorageType type) {
+std::string GCGetStoragePath(GCube::StorageType type) {
 	switch (type) {
-		case GCStorageTypeDocument:
+		case GCube::StorageTypeDocument:
 			return GCGetStringInfo("StoragePath", "Document");
 			break;
-		case GCStorageTypeCache:
+		case GCube::StorageTypeCache:
 			return GCGetStringInfo("StoragePath", "Cache");
 			break;
 	}
@@ -193,7 +193,7 @@ Java_com_gclue_gcube_NDKInterface_onSizeChanged(
 {
 	//LOGD("Java_com_gclue_gcube_JNDKInterface_onSizeChanged(%d, %d, %d)", width, height, orientation);
 	if (controller) {
-		controller->onSizeChanged(width, height, (GCDeviceOrientation)orientation);
+		controller->onSizeChanged(width, height, (GCube::DeviceOrientation)orientation);
 	}
 }
 
@@ -243,7 +243,7 @@ Java_com_gclue_gcube_NDKInterface_onTouchEvent(
 		JNIEnv * env, jobject obj, jint action, jfloat x, jfloat y, jint id, jlong time)
 {
 	if (controller) {
-		controller->onTouch((GCTouchAction)action, x, y, id, time);
+		controller->onTouch((GCube::TouchAction)action, x, y, id, time);
 	}
 }
 

@@ -34,8 +34,8 @@ Shader::~Shader() {
 }
 
 GLuint Shader::loadShader(const char* vertexShader, const char* fragmentShader, int user) {
-	GLuint vertShader = NULL;
-	GLuint fragShader = NULL;
+	GLuint vertShader = 0;
+	GLuint fragShader = 0;
 	
 	// 頂点(Vertex)シェーダ
 	vertShader = compileShader(GL_VERTEX_SHADER, vertexShader);
@@ -61,13 +61,12 @@ ERROR:	// エラー時の処理
 	if (fragShader) {
 		glDeleteShader(fragShader);
 	}
-	return NULL;
+	return 0;
 }
 
 GLuint Shader::loadShader(const char* name, int user) {
-	GLuint vertShader = NULL;
-	GLuint fragShader = NULL;
-	//	GLuint program = NULL;
+	GLuint vertShader = 0;
+	GLuint fragShader = 0;
 	
 	char fileName[512];
 	
@@ -96,7 +95,7 @@ ERROR:	// エラー時の処理
 	if (fragShader) {
 		glDeleteShader(fragShader);
 	}
-	return NULL;
+	return 0;
 }
 
 
@@ -107,7 +106,7 @@ ERROR:	// エラー時の処理
 ////////////////////////////////////////////////////////////////
 
 GLuint Shader::createProgram(GLuint vertShader, GLuint fragShader, const char* name, int user) {
-	GLuint program = NULL;
+	GLuint program = 0;
 	
 	// Create shader program
 	program = glCreateProgram();
@@ -150,7 +149,7 @@ ERROR:	// エラー時の処理
 	if (program) {
 		glDeleteProgram(program);
 	}
-	return NULL;
+	return 0;
 }
 
 GLuint Shader::compileShaderFromFile(GLenum shaderType, const char* fileName) {
@@ -158,7 +157,7 @@ GLuint Shader::compileShaderFromFile(GLenum shaderType, const char* fileName) {
 	std::vector<char> fdata;
 	GCGetResourceData(fileName, fdata);
 	if (fdata.size()==0) {
-		return NULL;
+		return 0;
 	}
 	fdata.push_back('\0');
 	const char *data = (const char *) &(fdata)[0];
@@ -171,7 +170,7 @@ GLuint Shader::compileShader(GLenum shaderType, const char* source) {
 	// シェーダのコンパイル処理
 	GLint status;
 	GLuint shader = glCreateShader(shaderType);
-	glShaderSource(shader, 1, &source, NULL);
+	glShaderSource(shader, 1, &source, 0);
 	glCompileShader(shader);
 	
 	// コンパイル結果を取得
@@ -186,7 +185,7 @@ GLuint Shader::compileShader(GLenum shaderType, const char* source) {
 		glDeleteShader(shader);
 		LOGE("compile error. [%s]", log);
 		free(log);
-		return NULL;
+		return 0;
 	}
 	return shader;
 }

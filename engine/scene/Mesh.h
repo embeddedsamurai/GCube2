@@ -101,7 +101,7 @@ public:
 
 private:
 	int indexCount;
-	Vbo_ptr vbo = Vbo_ptr(new Vbo());
+	Vbo_ptr vbo;
 	
 };
 DEF_SHARED_PTR(Mesh);

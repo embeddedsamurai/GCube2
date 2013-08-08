@@ -70,6 +70,7 @@ void MeshData::addJoints(const unsigned short *j1, const float *w1, const unsign
 
 // コンストラクタ
 Mesh::Mesh() : indexCount(0) {
+	vbo = Vbo_ptr(new Vbo());
 }
 
 // ビルド
