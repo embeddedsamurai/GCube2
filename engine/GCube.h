@@ -33,6 +33,7 @@
 #include "scene/Mesh.h"
 #include "scene/Node.h"
 #include "scene/Vbo.h"
+#include "scene/Window.h"
 #include "scene/Scene.h"
 #include "scene/SceneTransition.h"
 #include "scene/StandardCamera.h"

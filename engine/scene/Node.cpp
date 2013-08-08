@@ -48,19 +48,19 @@ void Node::updateProcess(float dt) {
 }
 
 // 描画
-void Node::drawProcess(View &view) {
+void Node::drawProcess(Window &window) {
 	// 軸表示
 	drawAxis();
 	// 描画
 	Drawable *drawable = dynamic_cast<Drawable*>(this);
 	if (drawable && drawable->isVisible) {
-		drawable->draw(view);
+		drawable->draw(window);
 	}
 	// 子
 	if(!children.empty()) {
 		for(size_t i = 0; i < children.size(); ++i) {
 			if(NULL != children[i]) {
-				children[i]->drawProcess(view);
+				children[i]->drawProcess(window);
 			}
 		}
 	}

@@ -39,8 +39,8 @@ void Scene::onUpdate(float dt) {
 }
 
 // 描画
-void Scene::onDraw(View &view) {
-	rootNode.drawProcess(view);
+void Scene::onDraw(Window &window) {
+	rootNode.drawProcess(window);
 }
 
 void Scene::changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition) {

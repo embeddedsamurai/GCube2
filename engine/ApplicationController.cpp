@@ -46,12 +46,12 @@ void ApplicationController::DestroyInstance() {
 
 ApplicationController::ApplicationController() {
 	LOGD("ApplicationController::ApplicationController()");
-	// デフォルトビュー作成
-	View_ptr v(new View());
-	v->isFullScreen = true;
-	v->camera = StandardCamera_ptr(new StandardCamera("DefaultCamera"));
-	v->camera->transform.translate(0, 0, 50);
-	viewArray.push_back(v);
+	// デフォルトウィンドウ作成
+	Window_ptr w(new Window());
+	w->isFullScreen = true;
+	w->camera = StandardCamera_ptr(new StandardCamera("DefaultCamera"));
+	w->camera->transform.translate(0, 0, 50);
+	windowArray.push_back(w);
 	// メイン作成
 	main = new Main();
 }
@@ -157,13 +157,13 @@ void ApplicationController::onDraw() {
 	// mainに通知
 	main->onDraw();
 	if (activeScene) {
-		// 各ビューを描画
-		std::vector<View_ptr>::iterator it = viewArray.begin();
-		while (it != viewArray.end()) {
-			View_ptr v = (View_ptr) *it;
-			// ビューの背景色
+		// 各ウィンドウを描画
+		std::vector<Window_ptr>::iterator it = windowArray.begin();
+		while (it != windowArray.end()) {
+			Window_ptr v = (Window_ptr) *it;
+			// ウィンドウの背景色
 			glClearColor(v->bgColor.r, v->bgColor.g, v->bgColor.b, v->bgColor.a);
-			// ビューの座標系を変換
+			// ウィンドウの座標系を変換
 			Rectf rect;
 			if (v->isFullScreen) {
 				rect = Rectf(0, 0, screenSize.width, screenSize.height);

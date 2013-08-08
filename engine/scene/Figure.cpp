@@ -35,11 +35,11 @@ Figure::~Figure() {
 }
 
 // 描画
-void Figure::draw(View &view) {
+void Figure::draw(Window &window) {
 	if (isVisible && shader && mesh) {
 		shader->useProgram();
 		mesh->bind();
-		shader->setInfo(this, view.camera.get(), NULL);
+		shader->setInfo(this, window.camera.get(), NULL);
 		glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_SHORT, NULL);
 	}
 }

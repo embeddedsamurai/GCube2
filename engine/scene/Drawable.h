@@ -23,7 +23,7 @@
 #ifndef __GCube__Drawable__
 #define __GCube__Drawable__
 
-#include "View.h"
+#include "Window.h"
 
 namespace GCube {
 
@@ -32,7 +32,7 @@ public:
 	Drawable() : isVisible(true) {};
 	virtual ~Drawable() {};
 	
-	virtual void draw(View &view) = 0;
+	virtual void draw(Window &window) = 0;
 public:
 	bool isVisible;
 	

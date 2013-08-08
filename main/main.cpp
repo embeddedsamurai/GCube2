@@ -63,11 +63,11 @@ void Main::onInit() {
 	cameraMain->transform.translate(0, 0, 40);
 //	cameraMain->transform.rotate(45, GCube::RotateDirZ);
 	
-	View_ptr view(new View());
-	view->camera = cameraMain;
-	view->frame = Rectf(0.7, 0.7, 0.5, 0.5);
-	view->bgColor = Colorf(1,0,0);
-	ctr->viewArray.push_back(view);
+	Window_ptr window(new Window());
+	window->camera = cameraMain;
+	window->frame = Rectf(0.7, 0.7, 0.5, 0.5);
+	window->bgColor = Colorf(1,0,0);
+	ctr->windowArray.push_back(window);
 
 	const float vertices[] = {
 		 1, 1, 1,

@@ -27,7 +27,7 @@
 #include "Node.h"
 #include "Camera.h"
 #include "SceneTransition.h"
-#include "View.h"
+#include "Window.h"
 
 namespace GCube {
 
@@ -37,7 +37,7 @@ public:
 	virtual ~Scene();
 	
 	virtual void onUpdate(float dt);
-	virtual void onDraw(View &view);
+	virtual void onDraw(Window &window);
 	
 	virtual void changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition=NULL);
 

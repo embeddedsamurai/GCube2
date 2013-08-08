@@ -35,7 +35,7 @@ public:
 	Figure(const char* name = NULL);
 	virtual ~Figure();
 	
-	virtual void draw(View &view);
+	virtual void draw(Window &window);
 	
 public:
 	Shader_ptr shader;

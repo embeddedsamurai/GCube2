@@ -20,18 +20,18 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__View__
-#define __GCube__View__
+#ifndef __GCube__Window__
+#define __GCube__Window__
 
 #include "../GCDefines.h"
 #include "Camera.h"
 
 namespace GCube {
 
-class View {
+class Window {
 public:
-	View() : isFullScreen(false) {};
-	virtual ~View() {};
+	Window() : isFullScreen(false) {};
+	virtual ~Window() {};
 	
 public:
 	Camera_ptr camera;
@@ -40,8 +40,7 @@ public:
 	Colorf bgColor;
 };
 
-DEF_SHARED_PTR(View);
-
+DEF_SHARED_PTR(Window);
 }
 
-#endif /* defined(__GCube__View__) */
+#endif /* defined(__GCube__Window__) */

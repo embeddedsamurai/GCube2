@@ -26,7 +26,7 @@
 #include "GCDefines.h"
 #include "IApplicationEventListener.h"
 #include "scene/Scene.h"
-#include "scene/View.h"
+#include "scene/Window.h"
 
 namespace GCube {
 
@@ -38,7 +38,7 @@ private:
 	float aspect;
 public:
 	Colorf bgColor;
-	std::vector<View_ptr> viewArray;
+	std::vector<Window_ptr> windowArray;
 	
 private:
 	ApplicationController();

@@ -28,7 +28,7 @@
 
 namespace GCube {
 
-class View;
+class Window;
 class Node;
 DEF_SHARED_PTR(Node);
 
@@ -38,7 +38,7 @@ public:
 	virtual ~Node();
 	
 	virtual void updateProcess(float dt);
-	virtual void drawProcess(View &view);
+	virtual void drawProcess(Window &window);
 	
 	Node *getParentNode() const;
 	

@@ -80,7 +80,7 @@
 		66F9185617AA3F94006C413D /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9185317AA3F93006C413D /* Figure.cpp */; };
 		66F9185A17AA4C49006C413D /* Vbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9185817AA4C48006C413D /* Vbo.cpp */; };
 		66F9185B17AA4C49006C413D /* Vbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9185817AA4C48006C413D /* Vbo.cpp */; };
-		66F9186017AB6808006C413D /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9185E17AB6805006C413D /* View.cpp */; };
+		66F9186317B327DC006C413D /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9186117B327DA006C413D /* Window.cpp */; };
 		66FC589B17585F07002D7A6F /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FC589417585F07002D7A6F /* Icon-72.png */; };
 		66FC589C17585F07002D7A6F /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FC589517585F07002D7A6F /* Icon-72@2x.png */; };
 		66FC589D17585F07002D7A6F /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FC589617585F07002D7A6F /* Icon-Small-50.png */; };
@@ -169,8 +169,8 @@
 		66F9185417AA3F94006C413D /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Figure.h; sourceTree = "<group>"; };
 		66F9185817AA4C48006C413D /* Vbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vbo.cpp; sourceTree = "<group>"; };
 		66F9185917AA4C48006C413D /* Vbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vbo.h; sourceTree = "<group>"; };
-		66F9185E17AB6805006C413D /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
-		66F9185F17AB6806006C413D /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		66F9186117B327DA006C413D /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		66F9186217B327DB006C413D /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		66FC588C17571446002D7A6F /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		66FC588E175717E4002D7A6F /* GCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCube.h; sourceTree = "<group>"; };
 		66FC589217571ABC002D7A6F /* GCubeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCubeConfig.h; sourceTree = "<group>"; };
@@ -424,8 +424,8 @@
 		66F9184917A2709F006C413D /* scene */ = {
 			isa = PBXGroup;
 			children = (
-				66F9185E17AB6805006C413D /* View.cpp */,
-				66F9185F17AB6806006C413D /* View.h */,
+				66F9186117B327DA006C413D /* Window.cpp */,
+				66F9186217B327DB006C413D /* Window.h */,
 				66F9183217A26CC7006C413D /* Scene.cpp */,
 				66F9183317A26CC7006C413D /* Scene.h */,
 				66F9184417A2706F006C413D /* SceneTransition.cpp */,
@@ -646,7 +646,7 @@
 				66F9185117AA363D006C413D /* SimpleShader.cpp in Sources */,
 				66F9185517AA3F94006C413D /* Figure.cpp in Sources */,
 				66F9185A17AA4C49006C413D /* Vbo.cpp in Sources */,
-				66F9186017AB6808006C413D /* View.cpp in Sources */,
+				66F9186317B327DC006C413D /* Window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
