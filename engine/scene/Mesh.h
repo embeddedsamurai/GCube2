@@ -47,6 +47,44 @@ struct MeshData {
 	std::vector<float> mltTextureCoords;//!< uvデータ（マルチテクスチャ用）.
 	std::vector<float> jointData;		//!< jointデータ.（内容はjoint1, weight1, joint2, weight2の順）
 	std::vector<short> vertexIndexes;	//!< 頂点インデックスデータ.
+	
+	/**
+	 * 頂点座標を追加します.
+	 * @param[in] v 追加する頂点
+	 * @param[in] len 追加する頂点の個数
+	 */
+	void addVertices(const float *v, int len);
+	
+	/**
+	 * 法線ベクトルを追加します.
+	 * @param[in] v 追加する法線ベクトル
+	 * @param[in] len 追加する法線ベクトルの個数
+	 */
+	void addNormal(const float *v, int len);
+	
+	/**
+	 * uvを追加します.
+	 * @param[in] v 追加するuv
+	 * @param[in] len 追加するuvの個数
+	 */
+	void addTextureCoords(const float *v, int len, bool mlt=false);
+	
+	/**
+	 * Jointを追加します.
+	 * @param[in] j1 １番目jointインデックス
+	 * @param[in] w1 １番目Weight
+	 * @param[in] j2 ２番目jointインデックス
+	 * @param[in] w2 ２番目Weight
+	 * @param[in] len Joint個数
+	 */
+	void addJoints(const unsigned short *j1, const float *w1, const unsigned short *j2, const float *w2, int len);
+	
+	/**
+	 * インデックスを追加します.
+	 * @param[in] v 追加するインデックス
+	 * @param[in] len 追加するインデックスの個数
+	 */
+	void addVertexIndexes(const unsigned short *v, int len);
 };
 DEF_SHARED_PTR(MeshData);
 

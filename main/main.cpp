@@ -21,7 +21,7 @@
  */
 
 #include "Main.h"
-#include "glsample.h"
+//#include "glsample.h"
 
 using namespace GCube;
 
@@ -52,46 +52,32 @@ void Main::onInit() {
 	player->play(bgmid);
 	sid = SoundPlayer::loadSE("sound/se_yay.ogg");
 	
-	ctr->bgColor = Colorf(0.5, 0, 0.1);
 	// シーン作成
 	Scene_ptr sceneMain(new Scene("SceneMain"));
-	StandardCamera_ptr cameraMain(new StandardCamera("CameraMain"));
-	sceneMain->rootNode.addChildNode(cameraMain);
-	sceneMain->changeCamera(cameraMain);
-	
-	cameraMain->transform.loadIdentity();
-	cameraMain->transform.translate(0, 0, 40);
-//	cameraMain->transform.rotate(45, GCube::RotateDirZ);
-	
-	Window_ptr window(new Window());
-	window->camera = cameraMain;
-	window->frame = Rectf(0.7, 0.7, 0.5, 0.5);
-	window->bgColor = Colorf(1,0,0);
-	ctr->windowArray.push_back(window);
-
-	const float vertices[] = {
-		 1, 1, 1,
-		-1, 1, 1,
-		 1,-1, 1,
-		-1,-1, 1,
-	};
-	const unsigned short indices[] = {
-		0, 1, 2,
-		0, 2, 3
-	};
-	Mesh_ptr mesh(new Mesh());
-	MeshData_ptr mdata(new MeshData());
-	std::vector<float> tmp(vertices, vertices+12);
-	mdata->vertices.insert(mdata->vertices.end(), tmp.begin(), tmp.end());
-	std::vector<unsigned short> tmp2(indices, indices+6);
-	mdata->vertexIndexes.insert(mdata->vertexIndexes.end(), tmp2.begin(), tmp2.end());
-	mesh->build(mdata);
-
+	// プレート追加
+	Mesh_ptr mesh = PrimitiveObject::createPlate(Sizef(5, 3));
 	Figure_ptr fig(new Figure("Fig"));
 	fig->shader = SimpleShader_ptr(new SimpleShader());
 	fig->mesh = mesh;
 	sceneMain->rootNode.addChildNode(fig);
 	ctr->changeScene(sceneMain);
+
+	// メインウィンドウの背景色変更
+	Window_ptr mainWindow = ctr->windowArray[0];
+	mainWindow->bgColor = Colorf(0,1,0);
+	
+	// サブウィンドウ作成
+	Window_ptr window(new Window());
+	window->frame = Rectf(0.7, 0.7, 0.5, 0.5);
+	window->bgColor = Colorf(1,0,0);
+	// サブウィンドウにカメラ設定
+	subCamera = StandardCamera_ptr(new StandardCamera("CameraMain"));
+	sceneMain->rootNode.addChildNode(subCamera);
+	subCamera->transform.loadIdentity();
+	subCamera->transform.translate(0, 0, 40);
+	subCamera->transform.rotate(45, GCube::RotateDirZ);
+	window->camera = subCamera;
+	ctr->windowArray.push_back(window);
 
 	//
 	this->onContextChanged();
@@ -100,7 +86,6 @@ void Main::onInit() {
 // サイズ変更
 void Main::onSizeChanged(float width, float height, DeviceOrientation orientation) {
 	LOGD("Main::onSizeChanged(%f, %f, %d)", width, height, orientation);
-//	glViewport(0, 0, width, height);
 }
 
 // コンテキスト切り替え
@@ -109,29 +94,16 @@ void Main::onContextChanged() {
 	ApplicationController *ctr = ApplicationController::SharedInstance();
 	std::vector<char> buf;
 	ctr->getResource("texture/gclue_logo.png", buf);
-	
-	// サンプル初期化
-//	initProgram(buf);
 }
 
-// 描画
-void Main::onDraw() {
-//	glEnable(GL_SCISSOR_TEST);
-//	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-//	glScissor(250, 250, 100, 100);
-//	glViewport(250, 250, 100, 100);
-//	glClear(GL_COLOR_BUFFER_BIT);
-//	draw();
-//	glScissor(100, 100, 200, 200);
-//	glViewport(100, 100, 200, 200);
-//	glClear(GL_COLOR_BUFFER_BIT);
-//	draw();
-	
-	
-//	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-//	glClear(GL_COLOR_BUFFER_BIT);
-//	glViewport(v->frame.location.x, v->frame.location.y, v->frame.size.width, v->frame.size.height);
-
+// 更新
+static float ang = 0;
+void Main::onUpdate(float dt) {
+	// サブウィンドウのカメラを回転
+	subCamera->transform.loadIdentity();
+	subCamera->transform.translate(0, 0, 40);
+	ang += 3;
+	subCamera->transform.rotate(ang, GCube::RotateDirZ);
 }
 
 // タッチイベント

@@ -47,6 +47,8 @@ using namespace GCube;
     if (self) {
 		GCAppDelegate *delegate = (GCAppDelegate*)([UIApplication sharedApplication].delegate);
 		_settings = delegate.settings;
+		// ステータスバー表示
+		[[UIApplication sharedApplication] setStatusBarHidden:!_settings->showStatusBar withAnimation:UIStatusBarAnimationNone];
     }
     return self;
 }
@@ -55,10 +57,6 @@ using namespace GCube;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	// ステータスバー表示
-	[[UIApplication sharedApplication] setStatusBarHidden:!_settings->showStatusBar withAnimation:UIStatusBarAnimationNone];
-	
 	
 	gcube = ApplicationController::SharedInstance();
 	

@@ -20,14 +20,31 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__glsample__
-#define __GCube__glsample__
+#ifndef __GCube__PrimitiveObject__
+#define __GCube__PrimitiveObject__
 
-#include "GCube.h"
+#include "GCDefines.h"
+#include "Mesh.h"
 
-GLuint loadShader(GLenum shaderType, const char* pSource);
-GLuint createProgram(const char* pVertexSource, const char* pFragmentSource);
-void initProgram(std::vector<char> &buf);
-void draw();
+namespace GCube {
 
-#endif /* defined(__GCube__glsample__) */
+/**
+ * プリミティブ形状作成クラス.
+ */
+class PrimitiveObject {
+private:
+	PrimitiveObject(){};
+	virtual ~PrimitiveObject(){};
+	
+public:
+	
+	/**
+	 * プレートのMeshクラスを作成します.
+	 * @param[in] size サイズ
+	 * @return Mesh
+	 */
+	static Mesh_ptr createPlate(Sizef size);
+};
+}
+
+#endif /* defined(__GCube__PrimitiveObject__) */

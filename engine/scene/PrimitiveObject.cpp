@@ -20,32 +20,49 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#include "PrimitiveObject.h"
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Figure.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Vbo.h"
-#include "scene/Window.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "scene/PrimitiveObject.h"
-#include "shader/Shader.h"
-#include "shader/SimpleShader.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
+#include "Mesh.h"
 
-#endif
+using namespace GCube;
+
+// プレートのMeshクラスを作成します.
+Mesh_ptr PrimitiveObject::createPlate(Sizef size) {
+	float x = size.width / 2.0;
+	float y = size.height / 2.0;
+	
+	const GLfloat posArray[] = {
+		-x, -y, 0.0f,
+		 x, -y, 0.0f,
+		 x,  y, 0.0f,
+		-x,  y, 0.0f
+	};
+	
+	const GLfloat texcoordArray[] = {
+		0.0f,  0.0f,
+		1.0f,  0.0f,
+		1.0f,  1.0f,
+		0.0f,  1.0f,
+	};
+	
+	const GLfloat normalArray[] = {
+		0.0f, 0.0f, 1.0,
+		0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f,
+	};
+	
+	const GLushort elementArray[] = {
+		0, 1, 2,
+		0, 2, 3
+	};
+	
+	Mesh_ptr mesh(new Mesh());
+	MeshData_ptr mdata(new MeshData());
+	mdata->addVertices(posArray, 12);
+	mdata->addNormal(normalArray, 12);
+	mdata->addTextureCoords(texcoordArray, 8);
+	mdata->addVertexIndexes(elementArray, 6);
+	mesh->build(mdata);
+	return mesh;
+}

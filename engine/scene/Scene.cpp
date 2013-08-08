@@ -43,8 +43,8 @@ void Scene::onDraw(Window &window) {
 	rootNode.drawProcess(window);
 }
 
-void Scene::changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition) {
-	// TODO: トランジションサポート
-	activeCamera = nextCamera;
-}
+//void Scene::changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition) {
+//	// TODO: トランジションサポート
+//	activeCamera = nextCamera;
+//}
 

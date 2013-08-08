@@ -39,13 +39,13 @@ public:
 	virtual void onUpdate(float dt);
 	virtual void onDraw(Window &window);
 	
-	virtual void changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition=NULL);
+//	virtual void changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition=NULL);
 
 public:
 	Node rootNode;
 	
 private:
-	Camera_ptr activeCamera;
+//	Camera_ptr activeCamera;
 	const char *name;
 	
 };

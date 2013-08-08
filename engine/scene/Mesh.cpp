@@ -24,6 +24,50 @@
 
 using namespace GCube;
 
+//////////////// MeshData
+
+// 頂点追加
+void MeshData::addVertices(const float *v, int len) {
+	std::vector<float> tmp(v, v+len);
+	vertices.insert(vertices.end(), tmp.begin(), tmp.end());
+}
+
+// 法線追加
+void MeshData::addNormal(const float *v, int len) {
+	std::vector<float> tmp(v, v+len);
+	normals.insert(normals.end(), tmp.begin(), tmp.end());
+}
+
+// uv追加
+void MeshData::addTextureCoords(const float *v, int len, bool mlt) {
+	std::vector<float> tmp(v, v+len);
+	if (mlt) {
+		mltTextureCoords.insert(mltTextureCoords.end(), tmp.begin(), tmp.end());
+	} else {
+		textureCoords.insert(textureCoords.end(), tmp.begin(), tmp.end());
+	}
+}
+
+// インデックス追加
+void MeshData::addVertexIndexes(const unsigned short *v, int len) {
+	std::vector<unsigned short> tmp(v, v+len);
+	vertexIndexes.insert(vertexIndexes.end(), tmp.begin(), tmp.end());
+}
+
+// ジョイント追加
+void MeshData::addJoints(const unsigned short *j1, const float *w1, const unsigned short *j2, const float *w2, int len) {
+	for (int i = 0; i < len; i++) {
+		float max = w1[i] + w2[i];
+		jointData.push_back(j1[i]);
+		jointData.push_back(w1[i]/max);
+		jointData.push_back(j2[i]);
+		jointData.push_back(w2[i]/max);
+	}
+}
+
+
+//////////////// Mesh
+
 // コンストラクタ
 Mesh::Mesh() : indexCount(0) {
 }
