@@ -26,6 +26,7 @@
 #include "Node.h"
 #include "Drawable.h"
 #include "Mesh.h"
+#include "Material.h"
 #include "../shader/Shader.h"
 
 namespace GCube {
@@ -40,6 +41,7 @@ public:
 public:
 	Shader_ptr shader;
 	Mesh_ptr mesh;
+	Material_ptr material;
 	
 private:
 	

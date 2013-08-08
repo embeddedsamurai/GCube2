@@ -39,6 +39,11 @@
 		66327500174DA31F001E839D /* GCViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 663274FF174DA31F001E839D /* GCViewController.mm */; };
 		66327514174DE743001E839D /* ApplicationController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66327511174DE743001E839D /* ApplicationController.cpp */; };
 		6645D37817B3342C00B18C1A /* PrimitiveObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D37617B3342C00B18C1A /* PrimitiveObject.cpp */; };
+		6645D37B17B3540800B18C1A /* ColorShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D37917B3540800B18C1A /* ColorShader.cpp */; };
+		6645D38017B35E1E00B18C1A /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9186117B327DA006C413D /* Window.cpp */; };
+		6645D38117B35E2600B18C1A /* PrimitiveObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D37617B3342C00B18C1A /* PrimitiveObject.cpp */; };
+		6645D38517B3634700B18C1A /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D38317B3634700B18C1A /* Texture.cpp */; };
+		6645D38617B3634E00B18C1A /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D38317B3634700B18C1A /* Texture.cpp */; };
 		666C092B1798D59300BD7777 /* vectorUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C76AE41797F8920001A284 /* vectorUtil.c */; };
 		666C092C1798D59A00BD7777 /* Matrix3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F585D21798D06F00AD1B6C /* Matrix3D.cpp */; };
 		666F36FA1798DF16009B91ED /* matrixUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 666F36F81798DF16009B91ED /* matrixUtil.c */; };
@@ -75,8 +80,6 @@
 		66F9184717A2706F006C413D /* SceneTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9184417A2706F006C413D /* SceneTransition.cpp */; };
 		66F9184F17AA363D006C413D /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9184B17AA363D006C413D /* Shader.cpp */; };
 		66F9185017AA363D006C413D /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9184B17AA363D006C413D /* Shader.cpp */; };
-		66F9185117AA363D006C413D /* SimpleShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9184D17AA363D006C413D /* SimpleShader.cpp */; };
-		66F9185217AA363D006C413D /* SimpleShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9184D17AA363D006C413D /* SimpleShader.cpp */; };
 		66F9185517AA3F94006C413D /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9185317AA3F93006C413D /* Figure.cpp */; };
 		66F9185617AA3F94006C413D /* Figure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9185317AA3F93006C413D /* Figure.cpp */; };
 		66F9185A17AA4C49006C413D /* Vbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9185817AA4C48006C413D /* Vbo.cpp */; };
@@ -121,6 +124,11 @@
 		66327512174DE743001E839D /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
 		6645D37617B3342C00B18C1A /* PrimitiveObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PrimitiveObject.cpp; sourceTree = "<group>"; };
 		6645D37717B3342C00B18C1A /* PrimitiveObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimitiveObject.h; sourceTree = "<group>"; };
+		6645D37917B3540800B18C1A /* ColorShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorShader.cpp; sourceTree = "<group>"; };
+		6645D37A17B3540800B18C1A /* ColorShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorShader.h; sourceTree = "<group>"; };
+		6645D37D17B35E0C00B18C1A /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		6645D38317B3634700B18C1A /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		6645D38417B3634700B18C1A /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		666F36F81798DF16009B91ED /* matrixUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrixUtil.c; sourceTree = "<group>"; };
 		666F36F91798DF16009B91ED /* matrixUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrixUtil.h; sourceTree = "<group>"; };
 		666F36FC17A0C819009B91ED /* Vector3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3D.cpp; sourceTree = "<group>"; };
@@ -165,8 +173,6 @@
 		66F9184517A2706F006C413D /* SceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTransition.h; sourceTree = "<group>"; };
 		66F9184B17AA363D006C413D /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		66F9184C17AA363D006C413D /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
-		66F9184D17AA363D006C413D /* SimpleShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleShader.cpp; sourceTree = "<group>"; };
-		66F9184E17AA363D006C413D /* SimpleShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleShader.h; sourceTree = "<group>"; };
 		66F9185317AA3F93006C413D /* Figure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Figure.cpp; sourceTree = "<group>"; };
 		66F9185417AA3F94006C413D /* Figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Figure.h; sourceTree = "<group>"; };
 		66F9185817AA4C48006C413D /* Vbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vbo.cpp; sourceTree = "<group>"; };
@@ -309,6 +315,16 @@
 			path = ../../../engine;
 			sourceTree = "<group>";
 		};
+		6645D38217B3626200B18C1A /* material */ = {
+			isa = PBXGroup;
+			children = (
+				6645D37D17B35E0C00B18C1A /* Material.h */,
+				6645D38317B3634700B18C1A /* Texture.cpp */,
+				6645D38417B3634700B18C1A /* Texture.h */,
+			);
+			name = material;
+			sourceTree = "<group>";
+		};
 		667FC339176AF9F7000E8D0E /* user */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +422,7 @@
 				66F9185717AA434A006C413D /* figure */,
 				66F9184817A2708F006C413D /* camera */,
 				66F9184917A2709F006C413D /* scene */,
+				6645D38217B3626200B18C1A /* material */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -439,8 +456,8 @@
 			children = (
 				66F9184B17AA363D006C413D /* Shader.cpp */,
 				66F9184C17AA363D006C413D /* Shader.h */,
-				66F9184D17AA363D006C413D /* SimpleShader.cpp */,
-				66F9184E17AA363D006C413D /* SimpleShader.h */,
+				6645D37917B3540800B18C1A /* ColorShader.cpp */,
+				6645D37A17B3540800B18C1A /* ColorShader.h */,
 			);
 			path = shader;
 			sourceTree = "<group>";
@@ -642,11 +659,12 @@
 				66F9184217A26CC7006C413D /* StandardCamera.cpp in Sources */,
 				66F9184617A2706F006C413D /* SceneTransition.cpp in Sources */,
 				66F9184F17AA363D006C413D /* Shader.cpp in Sources */,
-				66F9185117AA363D006C413D /* SimpleShader.cpp in Sources */,
 				66F9185517AA3F94006C413D /* Figure.cpp in Sources */,
 				66F9185A17AA4C49006C413D /* Vbo.cpp in Sources */,
 				66F9186317B327DC006C413D /* Window.cpp in Sources */,
 				6645D37817B3342C00B18C1A /* PrimitiveObject.cpp in Sources */,
+				6645D37B17B3540800B18C1A /* ColorShader.cpp in Sources */,
+				6645D38517B3634700B18C1A /* Texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,9 +691,11 @@
 				66F9184317A26CC7006C413D /* StandardCamera.cpp in Sources */,
 				66F9184717A2706F006C413D /* SceneTransition.cpp in Sources */,
 				66F9185017AA363D006C413D /* Shader.cpp in Sources */,
-				66F9185217AA363D006C413D /* SimpleShader.cpp in Sources */,
 				66F9185617AA3F94006C413D /* Figure.cpp in Sources */,
 				66F9185B17AA4C49006C413D /* Vbo.cpp in Sources */,
+				6645D38017B35E1E00B18C1A /* Window.cpp in Sources */,
+				6645D38117B35E2600B18C1A /* PrimitiveObject.cpp in Sources */,
+				6645D38617B3634E00B18C1A /* Texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

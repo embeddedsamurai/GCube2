@@ -1,16 +1,16 @@
 /*
  * The MIT License (MIT)
- * Copyright (c) 2011 GClue, inc.
+ * Copyright (c) 2013 GClue, inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,8 +20,9 @@
  * THE SOFTWARE.
  */
 
-#ifndef SIMPLESHADER_H_
-#define SIMPLESHADER_H_
+#ifndef __GCube__ColorShader__
+#define __GCube__ColorShader__
+
 
 #include "GCDefines.h"
 #include "Shader.h"
@@ -31,22 +32,20 @@ namespace GCube {
 /**
  * シェーダークラス.
  */
-class SimpleShader : public Shader {
+class ColorShader : public Shader {
 private:
-	GLuint gProgram;	//!< プログラム
-	float baseAlpha;	//!< 基準透明度
-	int texname;		//!< 使用しているtextureのID
+	GLuint gProgram; //!< プログラム
 	
 public:
 	/**
 	 * コンストラクタ.
 	 */
-	SimpleShader();
+	ColorShader();
 	
 	/**
 	 * デストラクタ.
 	 */
-	virtual ~SimpleShader();
+	virtual ~ColorShader();
 	
 	/**
 	 * シェーダの使用を開始します.
@@ -57,36 +56,6 @@ public:
 	 * 各種情報を設定します.
 	 */
 	virtual void setInfo(Figure *figure, Camera *camera, Scene *scene);
-	
-	/**
-	 * テクスチャをバインドします.
-	 * <br>
-	 * @param[in] texname テクスチャ名
-	 */
-	void bindTexture(int texname);
-	
-	/**
-	 * 基底の透明度をシェーダに設定します.
-	 * 明るさも同時に設定されます.
-	 * <br>
-	 * @param[in] a 透明度
-	 */
-    void setBaseAlpha(float baseAlpha);
-	
-	/**
-	 * 透明度をシェーダに設定します.
-	 * 明るさも同時に設定されます.
-	 * <br>
-	 * @param[in] a 透明度
-	 */
-	void setAlpha(float a);
-	
-	/**
-	 * 明るさをシェーダに設定します.
-	 * <br>
-	 * @param[in] b 明るさ
-	 */
-	void setBright(float b);
 	
 	/**
 	 * シェーダのAttributeへのバインド処理を行います.
@@ -114,7 +83,7 @@ public:
 	
 };
 
-DEF_SHARED_PTR(SimpleShader);
+DEF_SHARED_PTR(ColorShader);
 }
 
-#endif /* SIMPLESHADER_H_ */
+#endif /* defined(__GCube__ColorShader__) */

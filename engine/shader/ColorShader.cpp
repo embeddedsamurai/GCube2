@@ -1,16 +1,16 @@
 /*
  * The MIT License (MIT)
- * Copyright (c) 2011 GClue, inc.
+ * Copyright (c) 2013 GClue, inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,43 +20,38 @@
  * THE SOFTWARE.
  */
 
-#include "SimpleShader.h"
+#include "ColorShader.h"
 #include "../scene/Mesh.h"
 #include "../scene/Camera.h"
 #include "../scene/Figure.h"
 
 using namespace GCube;
 
-#define CONST_STR(name, str) static const char name[]=#str
-
+// vertex shader
 CONST_STR(gVertexShader,
-
+		  
 uniform mat4 u_mvpMatrix;
+uniform vec4 u_color;
 attribute vec3 a_position;
-attribute vec2 a_texcoord;
-varying vec2 v_texcoord;
+varying vec4 v_color;
 
 void main()
 {
-	v_texcoord = a_texcoord;
+	v_color = u_color;
 	gl_Position = u_mvpMatrix * vec4(a_position, 1.0);
 }
 
 );
 
+// fragment shader
 CONST_STR(gFragmentShader,
-
+		  
 precision mediump float;
-
-uniform sampler2D u_diffuseTexture;
-uniform float u_bright;
-uniform float u_alpha;
-varying vec2 v_texcoord;
+varying vec4 v_color;
 
 void main()
 {
-	gl_FragColor = vec4(vec3(1), u_alpha);
-//	gl_FragColor = vec4(texture2D(u_diffuseTexture, v_texcoord.st)) * vec4(vec3(u_bright), u_alpha);
+	gl_FragColor = v_color;
 }
 
 );
@@ -65,21 +60,18 @@ void main()
 // uniform index
 enum {
 	UNIFORM_MVP_MATRIX,   //!< MVPマトリクス変数へのユニフォーム
-	UNIFORM_TEXTURE_BASE, //!< テクスチャへのユニフォーム
-	UNIFORM_ALPHA,        //!< アルファ値へのユニフォーム
-	UNIFORM_BRIGHT,       //!< ブライトネス値へのユニフォーム
+	UNIFORM_COLOR,        //!< 描画色へのユニフォーム
 	NUM_UNIFORMS          //!< ユニフォーム数
 };
 static GLint uniforms[NUM_UNIFORMS];
 
-SimpleShader::SimpleShader() {
-//	gProgram = loadShader("shader/simpleShader", 0);
+
+
+ColorShader::ColorShader() {
 	gProgram = loadShader(gVertexShader, gFragmentShader, 0);
-	baseAlpha = 1.0;
-	texname = -1;
 }
 
-SimpleShader::~SimpleShader() {
+ColorShader::~ColorShader() {
 	if (gProgram) {
 		if (glIsProgram(gProgram)==GL_TRUE) {
 			glDeleteProgram(gProgram);
@@ -87,13 +79,11 @@ SimpleShader::~SimpleShader() {
 	}
 }
 
-void SimpleShader::useProgram() {
+void ColorShader::useProgram() {
 	glUseProgram(gProgram);
-	this->setAlpha(1.0);
-	this->texname = -1;
 }
 
-void SimpleShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
+void ColorShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
 	// projectionMatrix
 	if (!figure || !camera) return;
 	Matrix3D mtx;
@@ -106,44 +96,20 @@ void SimpleShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
 	// modelMatrix
 	mtx.multiply(&figure->transform);
 	
-	//
+	// ユニフォーム変数へ渡す
 	glUniformMatrix4fv(uniforms[UNIFORM_MVP_MATRIX], 1, GL_FALSE, mtx.matrix);
-}
-
-void SimpleShader::bindTexture(int texname) {
-	if (this->texname == texname) {
-		// 前回bindしたテクスチャと同じ場合には何も処理を行わない
-		return;
+	if (figure->material) {
+		Colorf color = figure->material->ambientColor;
+		glUniform4f(uniforms[UNIFORM_COLOR], color.r, color.g, color.b, color.a);
 	}
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texname);
-	glUniform1i(uniforms[UNIFORM_TEXTURE_BASE], 0);
-	
-	this->texname = texname;
 }
 
-void SimpleShader::setAlpha(float a) {
-	glUniform1f(uniforms[UNIFORM_ALPHA], a * baseAlpha);
-	glUniform1f(uniforms[UNIFORM_BRIGHT], a);
-}
-
-void SimpleShader::setBright(float b) {
-	glUniform1f(uniforms[UNIFORM_BRIGHT], b);
-}
-
-void SimpleShader::bindAttribute(GLuint program, const char *name, int user) {
+void ColorShader::bindAttribute(GLuint program, const char *name, int user) {
 	glBindAttribLocation(program, ATTRIB_VERTEX, "a_position");
-	glBindAttribLocation(program, ATTRIB_TEXCOORD, "a_texcoord");
 }
 
-void SimpleShader::getUniform(GLuint program, const char *name, int user) {
+void ColorShader::getUniform(GLuint program, const char *name, int user) {
 	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
-	uniforms[UNIFORM_TEXTURE_BASE] = glGetUniformLocation(program, "u_diffuseTexture");
-	uniforms[UNIFORM_ALPHA] = glGetUniformLocation(program, "u_alpha");
-	uniforms[UNIFORM_BRIGHT] = glGetUniformLocation(program, "u_bright");
-}
-
-void SimpleShader::setBaseAlpha(float baseAlpha) {
-	this->baseAlpha = baseAlpha;
+	uniforms[UNIFORM_COLOR] = glGetUniformLocation(program, "u_color");
 }
 

@@ -150,7 +150,6 @@ ERROR:	// エラー時の処理
 	if (program) {
 		glDeleteProgram(program);
 	}
-	LOGE("Failed to createProgram");
 	return NULL;
 }
 
@@ -178,8 +177,15 @@ GLuint Shader::compileShader(GLenum shaderType, const char* source) {
 	// コンパイル結果を取得
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
 	if (status == 0) {
+		char *log;
+		GLint length;
+		/* get the shader info log */
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
+		log = (char*)malloc(length);
+		glGetShaderInfoLog(shader, length, &status, log);
 		glDeleteShader(shader);
-		LOGE("%s compile error.", source);
+		LOGE("compile error. [%s]", log);
+		free(log);
 		return NULL;
 	}
 	return shader;
@@ -192,6 +198,14 @@ bool Shader::linkProgram(GLuint prog) {
 	// リンク結果を取得
 	glGetProgramiv(prog, GL_LINK_STATUS, &status);
 	if (status == 0) {
+		GLint length;
+		char *log;
+		/* get the program info log */
+		glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &length);
+		log = (char*)malloc(length);
+		glGetProgramInfoLog(prog, length, &status, log);
+		LOGE("link error. [%s]", log);
+		free(log);
 		return false;
 	}
 	return true;

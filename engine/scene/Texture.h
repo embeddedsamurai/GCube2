@@ -20,32 +20,23 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#ifndef __GCube__Texture__
+#define __GCube__Texture__
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Figure.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Vbo.h"
-#include "scene/Window.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "scene/PrimitiveObject.h"
-#include "shader/Shader.h"
-#include "shader/ColorShader.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
+#include "../GCDefines.h"
 
-#endif
+namespace GCube {
+	
+class Texture {
+public:
+	Texture() {};
+	virtual ~Texture() {};
+	
+public:
+	int id;
+};
+
+DEF_SHARED_PTR(Texture);
+}
+
+#endif /* defined(__GCube__Texture__) */

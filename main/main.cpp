@@ -21,7 +21,6 @@
  */
 
 #include "Main.h"
-//#include "glsample.h"
 
 using namespace GCube;
 
@@ -57,8 +56,12 @@ void Main::onInit() {
 	// プレート追加
 	Mesh_ptr mesh = PrimitiveObject::createPlate(Sizef(5, 3));
 	Figure_ptr fig(new Figure("Fig"));
-	fig->shader = SimpleShader_ptr(new SimpleShader());
 	fig->mesh = mesh;
+	// マテリアルとシェーダー設定
+	fig->material = Material_ptr(new Material());
+	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
+	ColorShader_ptr shader = ColorShader_ptr(new ColorShader());
+	fig->shader = shader;
 	sceneMain->rootNode.addChildNode(fig);
 	ctr->changeScene(sceneMain);
 

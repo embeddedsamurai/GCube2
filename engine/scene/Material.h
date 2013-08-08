@@ -20,32 +20,29 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#ifndef __GCube__Material__
+#define __GCube__Material__
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/Drawable.h"
-#include "scene/Figure.h"
-#include "scene/Mesh.h"
-#include "scene/Node.h"
-#include "scene/Vbo.h"
-#include "scene/Window.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "scene/PrimitiveObject.h"
-#include "shader/Shader.h"
-#include "shader/ColorShader.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
+#include "../GCDefines.h"
+#include "Texture.h"
 
-#endif
+namespace GCube {
+	
+class Material {
+public:
+	Material() {};
+	virtual ~Material() {};
+	
+public:
+	Colorf ambientColor;
+	Colorf diffuseColor;
+	Colorf specularColor;
+	
+	Texture_ptr texture;
+};
+
+DEF_SHARED_PTR(Material);
+}
+
+
+#endif /* defined(__GCube__Material__) */
