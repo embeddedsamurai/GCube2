@@ -42,6 +42,7 @@
 #include "scene/StandardCamera.h"
 #include "scene/PrimitiveObject.h"
 #include "scene/Texture.h"
+#include "scene/TextureData.h"
 #include "scene/Vbo.h"
 #include "scene/Window.h"
 #include "shader/ColorShader.h"

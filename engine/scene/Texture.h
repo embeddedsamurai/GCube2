@@ -24,6 +24,7 @@
 #define __GCube__Texture__
 
 #include "../GCDefines.h"
+#include "TextureData.h"
 #include "../math/Matrix3D.h"
 
 namespace GCube {
@@ -36,12 +37,9 @@ public:
 	virtual void bind();
 	virtual void clamp();
 	virtual void wrap();
-	virtual void reload();
 	
 public:
-	std::string filename; //!< ファイル名
-	int id;               //!< テクスチャID
-	Sizef size;           //!< 画像の大きさ
+	TextureData_ptr data; //!< データ
 	Matrix3D matrix;      //!< 変換行列
 	
 private:

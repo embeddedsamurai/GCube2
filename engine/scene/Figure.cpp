@@ -37,7 +37,6 @@ Figure::~Figure() {
 // 再構築
 void Figure::rebuild() {
 	shader->reload();
-	material->texture->reload();
 	mesh->rebuild();
 }
 

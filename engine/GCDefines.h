@@ -37,7 +37,7 @@
 # include <GLES2/gl2ext.h>
 # include <AL/al.h>
 # include <AL/alc.h>
-#define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr
+#define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr;typedef std::weak_ptr<name> name##_wkptr
 #endif
 
 // iOS
@@ -46,7 +46,7 @@
 # include <OpenGLES/ES2/glext.h>
 # include <OpenAL/al.h>
 # include <OpenAL/alc.h>
-#define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr
+#define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr;typedef std::weak_ptr<name> name##_wkptr
 #endif
 
 // Tizen
@@ -56,7 +56,7 @@
 # include <AL/al.h>
 # include <AL/alc.h>
 #include <boost/shared_ptr.hpp>
-#define DEF_SHARED_PTR(name) typedef boost::shared_ptr<name> name##_ptr
+#define DEF_SHARED_PTR(name) typedef boost::shared_ptr<name> name##_ptr;typedef boost::weak_ptr<name> name##_wkptr
 #endif
 
 

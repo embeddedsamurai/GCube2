@@ -20,32 +20,34 @@
  * THE SOFTWARE.
  */
 
-#include "Texture.h"
-#include "../ApplicationController.h"
-#include "../external/stb/stb_image.h"
-#include "../util/Log.h"
+#ifndef __GCube__TextureData__
+#define __GCube__TextureData__
 
-using namespace GCube;
+#include "../GCDefines.h"
 
-Texture::Texture(const char *fname, bool useMipmap) : useMipmap(useMipmap) {
-	// データ取得
-	data = TextureData::GetTextureData(fname, useMipmap);
-	// 基本読み込んだ画像は左上原点なので、反転しておく。
-	this->matrix.scale(1, -1, 1);
+namespace GCube {
+	
+class TextureData;
+DEF_SHARED_PTR(TextureData);
+
+class TextureData {
+public:
+	virtual ~TextureData() {};
+	
+	static TextureData_ptr GetTextureData(const char *fname, bool useMipmap=true);
+	static void ReloadAllData();
+	virtual void reload();
+	
+public:
+	std::string filename; //!< ファイル名
+	int id;               //!< テクスチャID
+	Sizef size;           //!< 画像の大きさ
+	
+private:
+	TextureData(const char *fname, bool useMipmap=true);
+	bool useMipmap;
+};
+
 }
 
-void Texture::bind() {
-	glBindTexture(GL_TEXTURE_2D, data->id);
-}
-
-void Texture::clamp() {
-	glBindTexture(GL_TEXTURE_2D, data->id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-}
-
-void Texture::wrap() {
-	glBindTexture(GL_TEXTURE_2D, data->id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-}
+#endif /* defined(__GCube__TextureData__) */

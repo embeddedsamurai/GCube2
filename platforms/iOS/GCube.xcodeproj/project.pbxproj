@@ -46,6 +46,8 @@
 		6645D38617B3634E00B18C1A /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D38317B3634700B18C1A /* Texture.cpp */; };
 		6645D38917B377C700B18C1A /* TexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D38717B377C600B18C1A /* TexShader.cpp */; };
 		6645D38A17B377C700B18C1A /* TexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D38717B377C600B18C1A /* TexShader.cpp */; };
+		6645D38D17B4898D00B18C1A /* TextureData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D38B17B4898C00B18C1A /* TextureData.cpp */; };
+		6645D38E17B4898D00B18C1A /* TextureData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D38B17B4898C00B18C1A /* TextureData.cpp */; };
 		666C092B1798D59300BD7777 /* vectorUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C76AE41797F8920001A284 /* vectorUtil.c */; };
 		666C092C1798D59A00BD7777 /* Matrix3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F585D21798D06F00AD1B6C /* Matrix3D.cpp */; };
 		666F36FA1798DF16009B91ED /* matrixUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 666F36F81798DF16009B91ED /* matrixUtil.c */; };
@@ -133,6 +135,8 @@
 		6645D38417B3634700B18C1A /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		6645D38717B377C600B18C1A /* TexShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TexShader.cpp; sourceTree = "<group>"; };
 		6645D38817B377C600B18C1A /* TexShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexShader.h; sourceTree = "<group>"; };
+		6645D38B17B4898C00B18C1A /* TextureData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureData.cpp; sourceTree = "<group>"; };
+		6645D38C17B4898C00B18C1A /* TextureData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureData.h; sourceTree = "<group>"; };
 		666F36F81798DF16009B91ED /* matrixUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrixUtil.c; sourceTree = "<group>"; };
 		666F36F91798DF16009B91ED /* matrixUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrixUtil.h; sourceTree = "<group>"; };
 		666F36FC17A0C819009B91ED /* Vector3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3D.cpp; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 				6645D37D17B35E0C00B18C1A /* Material.h */,
 				6645D38317B3634700B18C1A /* Texture.cpp */,
 				6645D38417B3634700B18C1A /* Texture.h */,
+				6645D38B17B4898C00B18C1A /* TextureData.cpp */,
+				6645D38C17B4898C00B18C1A /* TextureData.h */,
 			);
 			name = material;
 			sourceTree = "<group>";
@@ -672,6 +678,7 @@
 				6645D37B17B3540800B18C1A /* ColorShader.cpp in Sources */,
 				6645D38517B3634700B18C1A /* Texture.cpp in Sources */,
 				6645D38917B377C700B18C1A /* TexShader.cpp in Sources */,
+				6645D38D17B4898D00B18C1A /* TextureData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +711,7 @@
 				6645D38117B35E2600B18C1A /* PrimitiveObject.cpp in Sources */,
 				6645D38617B3634E00B18C1A /* Texture.cpp in Sources */,
 				6645D38A17B377C700B18C1A /* TexShader.cpp in Sources */,
+				6645D38E17B4898D00B18C1A /* TextureData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

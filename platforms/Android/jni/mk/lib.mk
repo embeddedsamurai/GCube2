@@ -21,6 +21,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    scene/SceneTransition.cpp \
                    scene/StandardCamera.cpp \
                    scene/Texture.cpp \
+                   scene/TextureData.cpp \
                    scene/Vbo.cpp \
                    scene/Window.cpp \
                    shader/ColorShader.cpp \
