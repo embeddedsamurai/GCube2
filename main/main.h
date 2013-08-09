@@ -31,6 +31,8 @@ class Main : public IApplicationEventListener {
 private:
 	int sid;
 	StandardCamera_ptr subCamera;
+	Figure_ptr fig;
+	Figure_ptr fig2;
 	
 public:
 	Main() {};

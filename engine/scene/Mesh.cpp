@@ -88,6 +88,11 @@ void Mesh::build(const MeshData_ptr &data) {
 	vbo->build();
 }
 
+// 再構築
+void Mesh::rebuild() {
+	vbo->rebuild();
+}
+
 // バインド
 void Mesh::bind() {
 	vbo->bind();

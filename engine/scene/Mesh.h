@@ -95,6 +95,7 @@ public:
 	virtual ~Mesh() {};
 	
 	virtual void build(const MeshData_ptr &data);
+	virtual void rebuild();
 	virtual void bind();
 	virtual int getIndexCount();
 	

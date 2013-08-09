@@ -27,10 +27,15 @@
 
 using namespace GCube;
 
-Shader::Shader() {
+Shader::Shader() : gProgram(0) {
 }
 
 Shader::~Shader() {
+	if (gProgram) {
+		if (glIsProgram(gProgram)==GL_TRUE) {
+			glDeleteProgram(gProgram);
+		}
+	}
 }
 
 GLuint Shader::loadShader(const char* vertexShader, const char* fragmentShader, int user) {
@@ -98,6 +103,9 @@ ERROR:	// エラー時の処理
 	return 0;
 }
 
+void Shader::useProgram() {
+	glUseProgram(gProgram);
+}
 
 ////////////////////////////////////////////////////////////////
 ///

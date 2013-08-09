@@ -51,7 +51,6 @@ void Vbo::build() {
 	}
 	
 	// interleaveにデータを並べ替え
-	std::vector<float> interleave;
 	int readPos[dataArray.size()];
 	for(int j = 0; j < dataArray.size(); j++) {
 		readPos[j] = 0;
@@ -62,15 +61,21 @@ void Vbo::build() {
 			int size = elementsArray[j];
 			for (int k=0; k<size; k++) {
 				float data = dataArray[j][readPos[j]++];
-				interleave.insert(interleave.end(), data);
+				interleaveArray.insert(interleaveArray.end(), data);
 			}
 		}
 	}
-	// TODO:データ削除
-	
+	// データ削除
+	dataArray.clear();
 	// VBO作成
-	vboNames[VBO_INTERLEAVE] = buildVBO(&interleave.front(),
-										interleave.size() * sizeof(float), GL_ARRAY_BUFFER);
+	this->rebuild();
+}
+
+// 再構築
+void Vbo::rebuild() {
+	// VBO作成
+	vboNames[VBO_INTERLEAVE] = buildVBO(&interleaveArray.front(),
+										interleaveArray.size() * sizeof(float), GL_ARRAY_BUFFER);
 
 	// インデックスのVBO作成
 	vboNames[VBO_ELEMENT] = buildVBO(&indexesArray.front(),
@@ -78,7 +83,7 @@ void Vbo::build() {
 
 	// Attribute設定
 	int pos = 0;
-	for(int j = 0; j < dataArray.size(); j++) {
+	for(int j = 0; j < elementsArray.size(); j++) {
 		int size = elementsArray[j];
 		glEnableVertexAttribArray(j);
 		glVertexAttribPointer(j, size, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*maxSize, (GLfloat*)0+pos);
@@ -92,7 +97,7 @@ void Vbo::bind() {
 	// dataのVBOをバインド
 	glBindBuffer(GL_ARRAY_BUFFER, vboNames[VBO_INTERLEAVE]);
 	int pos = 0;
-	for(int j = 0; j < dataArray.size(); j++) {
+	for(int j = 0; j < elementsArray.size(); j++) {
 		int size = elementsArray[j];
 		glEnableVertexAttribArray(j);
 		glVertexAttribPointer(j, size, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*maxSize, (GLfloat*)0+pos);

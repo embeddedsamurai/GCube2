@@ -24,16 +24,28 @@
 #define __GCube__Texture__
 
 #include "../GCDefines.h"
+#include "../math/Matrix3D.h"
 
 namespace GCube {
 	
 class Texture {
 public:
-	Texture() {};
+	Texture(const char *fname, bool useMipmap=true);
 	virtual ~Texture() {};
 	
+	virtual void bind();
+	virtual void clamp();
+	virtual void wrap();
+	virtual void reload();
+	
 public:
-	int id;
+	std::string filename; //!< ファイル名
+	int id;               //!< テクスチャID
+	Sizef size;           //!< 画像の大きさ
+	Matrix3D matrix;      //!< 変換行列
+	
+private:
+	bool useMipmap;
 };
 
 DEF_SHARED_PTR(Texture);

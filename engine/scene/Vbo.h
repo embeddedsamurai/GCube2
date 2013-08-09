@@ -44,6 +44,7 @@ public:
 	virtual void setIndex(const std::vector<short> &index);
 	
 	virtual void build();
+	virtual void rebuild();
 	virtual void bind();
 
 private:
@@ -54,6 +55,7 @@ private:
 	std::vector<std::vector<float>> dataArray;  //!< データ.
 	std::vector<short> indexesArray;            //!< インデックスデータ.
 	std::vector<int> elementsArray;             //!< 要素数データ.
+	std::vector<float> interleaveArray;
 	
 };
 DEF_SHARED_PTR(Vbo);

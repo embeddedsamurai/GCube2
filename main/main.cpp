@@ -54,15 +54,22 @@ void Main::onInit() {
 	// シーン作成
 	Scene_ptr sceneMain(new Scene("SceneMain"));
 	// プレート追加
-	Mesh_ptr mesh = PrimitiveObject::createPlate(Sizef(5, 3));
-	Figure_ptr fig(new Figure("Fig"));
-	fig->mesh = mesh;
+	fig = Figure_ptr(new Figure("Fig"));
+	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 3));
 	// マテリアルとシェーダー設定
 	fig->material = Material_ptr(new Material());
-	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
-	ColorShader_ptr shader = ColorShader_ptr(new ColorShader());
-	fig->shader = shader;
+	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
+	fig->shader = TexShader_ptr(new TexShader());
 	sceneMain->rootNode.addChildNode(fig);
+	// プレート追加２
+	fig2 = Figure_ptr(new Figure("Fig2"));
+	fig2->mesh = PrimitiveObject::createPlate(Sizef(2, 3));
+	fig2->material = Material_ptr(new Material());
+	fig2->material->ambientColor = Colorf(0, 0.5, 0.5);
+	fig2->shader = ColorShader_ptr(new ColorShader());
+	fig2->transform.translate(3, 1, 0);
+	sceneMain->rootNode.addChildNode(fig2);
+	// シーン変更
 	ctr->changeScene(sceneMain);
 
 	// メインウィンドウの背景色変更
@@ -81,9 +88,6 @@ void Main::onInit() {
 	subCamera->transform.rotate(45, GCube::RotateDirZ);
 	window->camera = subCamera;
 	ctr->windowArray.push_back(window);
-
-	//
-	this->onContextChanged();
 }
 
 // サイズ変更
@@ -93,10 +97,11 @@ void Main::onSizeChanged(float width, float height, DeviceOrientation orientatio
 
 // コンテキスト切り替え
 void Main::onContextChanged() {
-	// リソース読み込み
-	ApplicationController *ctr = ApplicationController::SharedInstance();
-	std::vector<char> buf;
-	ctr->getResource("texture/gclue_logo.png", buf);
+	LOGD("Main::onContextChanged()");
+	
+	// Figure再構築
+	fig->rebuild();
+	fig2->rebuild();
 }
 
 // 更新
@@ -107,6 +112,8 @@ void Main::onUpdate(float dt) {
 	subCamera->transform.translate(0, 0, 40);
 	ang += 3;
 	subCamera->transform.rotate(ang, GCube::RotateDirZ);
+	fig->material->texture->matrix.rotate(3, RotateDirX);
+//	tex->matrix.scale(1.01, 1.01, 1.01);
 }
 
 // タッチイベント

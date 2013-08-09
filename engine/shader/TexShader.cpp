@@ -20,25 +20,25 @@
  * THE SOFTWARE.
  */
 
-#include "ColorShader.h"
+#include "TexShader.h"
 #include "../scene/Mesh.h"
 #include "../scene/Camera.h"
 #include "../scene/Figure.h"
-#include "../util/Log.h"
 
 using namespace GCube;
 
 // vertex shader
 CONST_STR(gVertexShader,
-		  
+
 uniform mat4 u_mvpMatrix;
-uniform vec4 u_color;
+uniform mat4 u_texMatrix;
 attribute vec3 a_position;
-varying vec4 v_color;
+attribute vec2 a_texcoord;
+varying vec2 v_texcoord;
 
 void main()
 {
-	v_color = u_color;
+    v_texcoord = vec2(u_texMatrix * vec4(a_texcoord, 0, 1));
 	gl_Position = u_mvpMatrix * vec4(a_position, 1.0);
 }
 
@@ -46,13 +46,14 @@ void main()
 
 // fragment shader
 CONST_STR(gFragmentShader,
-		  
+
 precision mediump float;
-varying vec4 v_color;
+uniform sampler2D u_texture;
+varying vec2 v_texcoord;
 
 void main()
 {
-	gl_FragColor = v_color;
+	gl_FragColor = vec4(texture2D(u_texture, vec2(v_texcoord.st)));
 }
 
 );
@@ -60,23 +61,24 @@ void main()
 
 // uniform index
 enum {
-	UNIFORM_MVP_MATRIX,   //!< MVPマトリクス変数へのユニフォーム
-	UNIFORM_COLOR,        //!< 描画色へのユニフォーム
-	NUM_UNIFORMS          //!< ユニフォーム数
+	UNIFORM_MVP_MATRIX, //!< MVP変換行列
+	UNIFORM_TEXTURE,    //!< テクスチャ
+	UNIFORM_TEX_MATRIX, //!< テクスチャ変換行列
+	NUM_UNIFORMS        //!< ユニフォーム数
 };
 static GLint uniforms[NUM_UNIFORMS];
 
 
 
-ColorShader::ColorShader() {
+TexShader::TexShader() {
 	this->reload();
 }
 
-void ColorShader::reload() {
+void TexShader::reload() {
 	gProgram = loadShader(gVertexShader, gFragmentShader, 0);
 }
 
-void ColorShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
+void TexShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
 	// projectionMatrix
 	if (!figure || !camera) return;
 	Matrix3D mtx;
@@ -91,18 +93,23 @@ void ColorShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
 	
 	// ユニフォーム変数へ渡す
 	glUniformMatrix4fv(uniforms[UNIFORM_MVP_MATRIX], 1, GL_FALSE, mtx.matrix);
-	if (figure->material) {
-		Colorf color = figure->material->ambientColor;
-		glUniform4f(uniforms[UNIFORM_COLOR], color.r, color.g, color.b, color.a);
+	if (figure->material && figure->material->texture) {
+		// テクスチャ
+		figure->material->texture->bind();
+		glActiveTexture(GL_TEXTURE0);
+		glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
+		// 変換行列
+		glUniformMatrix4fv(uniforms[UNIFORM_TEX_MATRIX], 1, GL_FALSE, figure->material->texture->matrix.matrix);
 	}
 }
 
-void ColorShader::bindAttribute(GLuint program, const char *name, int user) {
+void TexShader::bindAttribute(GLuint program, const char *name, int user) {
 	glBindAttribLocation(program, ATTRIB_VERTEX, "a_position");
+	glBindAttribLocation(program, ATTRIB_TEXCOORD, "a_texcoord");
 }
 
-void ColorShader::getUniform(GLuint program, const char *name, int user) {
+void TexShader::getUniform(GLuint program, const char *name, int user) {
 	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
-	uniforms[UNIFORM_COLOR] = glGetUniformLocation(program, "u_color");
+	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_texture");
+	uniforms[UNIFORM_TEX_MATRIX] = glGetUniformLocation(program, "u_texMatrix");
 }
-

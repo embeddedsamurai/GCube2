@@ -37,6 +37,7 @@ public:
 	virtual ~Figure();
 	
 	virtual void draw(Window &window);
+	virtual void rebuild();
 	
 public:
 	Shader_ptr shader;

@@ -35,6 +35,9 @@ class Scene;
  * OpenGLES2.0のシェーダを扱う為の基底クラス.
  */
 class Shader {
+protected:
+	GLuint gProgram; //!< プログラム
+	
 private:
 	/**
 	 * Shaderのプログラムをコンパイルし、バインドしたプログラムを返却します.
@@ -82,9 +85,14 @@ public:
 	virtual ~Shader();
 	
 	/**
+	 * 再読み込みします.
+	 */
+	virtual void reload() = 0;
+	
+	/**
 	 * シェーダの使用を開始します.
 	 */
-	virtual void useProgram() = 0;
+	virtual void useProgram();
 	
 	/**
 	 * 各種情報を設定します.

@@ -20,8 +20,8 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__ColorShader__
-#define __GCube__ColorShader__
+#ifndef __GCube__TexShader__
+#define __GCube__TexShader__
 
 #include "GCDefines.h"
 #include "Shader.h"
@@ -29,25 +29,25 @@
 namespace GCube {
 
 /**
- * 単色塗りつぶしシェーダークラス.
+ * テクスチャ描画シェーダークラス.
  */
-class ColorShader : public Shader {
+class TexShader : public Shader {
 public:
 	/**
 	 * コンストラクタ.
 	 */
-	ColorShader();
+	TexShader();
 	
 	/**
 	 * デストラクタ.
 	 */
-	virtual ~ColorShader() {};
+	virtual ~TexShader() {};
 	
 	/**
 	 * 再読み込みします.
 	 */
 	virtual void reload();
-
+	
 	/**
 	 * 各種情報を設定します.
 	 */
@@ -79,7 +79,7 @@ public:
 	
 };
 
-DEF_SHARED_PTR(ColorShader);
+DEF_SHARED_PTR(TexShader);
 }
 
-#endif /* defined(__GCube__ColorShader__) */
+#endif /* defined(__GCube__TexShader__) */

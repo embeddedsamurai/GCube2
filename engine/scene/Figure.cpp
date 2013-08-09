@@ -34,6 +34,13 @@ Figure::Figure(const char *name) : Node(name) {
 Figure::~Figure() {
 }
 
+// 再構築
+void Figure::rebuild() {
+	shader->reload();
+	material->texture->reload();
+	mesh->rebuild();
+}
+
 // 描画
 void Figure::draw(Window &window) {
 	if (isVisible && shader && mesh) {
