@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    shader/ColorShader.cpp \
                    shader/FlatShader.cpp \
                    shader/Shader.cpp \
+                   shader/ShaderManager.cpp \
                    shader/TexShader.cpp \
                    sound/SoundData.cpp \
                    sound/SoundPlayer.cpp

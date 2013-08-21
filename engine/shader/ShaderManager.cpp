@@ -22,16 +22,38 @@
 
 #include "ShaderManager.h"
 #include "ColorShader.h"
+#include "TexShader.h"
+#include "FlatShader.h"
 
 using namespace GCube;
 
+static std::map<int, Shader_ptr> cache; //!< キャッシュ.
+
 Shader_ptr ShaderManager::GetShader(ShaderType type) {
-	switch (type) {
-		case ShaderTypeColor:
-			return ColorShader_ptr(new ColorShader());
-			break;
-		default:
-			break;
+	Shader_ptr ptr = cache[type];
+	if (!ptr) {
+		switch (type) {
+			case ShaderTypeColor:
+				ptr = ColorShader_ptr(new ColorShader());
+				break;
+			case ShaderTypeTex:
+				ptr = TexShader_ptr(new TexShader());
+				break;
+			case ShaderTypeFlat:
+				ptr = FlatShader_ptr(new FlatShader());
+				break;
+			default:
+				break;
+		}
+		cache[type] = ptr;
 	}
-	return NULL;
+	return ptr;
+}
+
+void ShaderManager::ReloadAllData() {
+	std::map<int, Shader_ptr>::iterator it = cache.begin();
+	while (it != cache.end()) {
+		(*it).second->reload();
+		it++;
+	}
 }

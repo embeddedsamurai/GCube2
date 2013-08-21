@@ -123,6 +123,7 @@ void ApplicationController::onResume(void) {
 void ApplicationController::onContextChanged(void) {
 	LOGD("ApplicationController::onContextChanged()");
 	TextureData::ReloadAllData();
+	ShaderManager::ReloadAllData();
 	main->onContextChanged();
 }
 

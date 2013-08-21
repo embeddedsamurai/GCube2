@@ -62,7 +62,8 @@ void Main::onInit() {
 	// マテリアルとシェーダー設定
 	fig->material = Material_ptr(new Material());
 	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
-	fig->shader = TexShader_ptr(new TexShader());
+	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
+	fig->shader = ShaderManager::GetShader(ShaderTypeTex);
 	node->addChildNode(fig);
 	// プレート追加２
 	fig2 = Figure_ptr(new Figure("Fig2"));
@@ -71,9 +72,7 @@ void Main::onInit() {
 	fig2->material = Material_ptr(new Material());
 	fig2->material->ambientColor = Colorf(0, 0.5, 0.5);
 //	fig2->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
-//	fig2->shader = ColorShader_ptr(new ColorShader());
-	fig2->shader = FlatShader_ptr(new FlatShader());
-//	fig2->shader = ShaderManager::GetShader(ShaderTypeColor);
+	fig2->shader = ShaderManager::GetShader(ShaderTypeFlat);
 	fig2->transform.translate(3, 1, 0);
 	fig2->transform.rotate(45, RotateDirX);
 	fig2->transform.rotate(45, RotateDirY);

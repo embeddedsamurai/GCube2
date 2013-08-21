@@ -29,6 +29,8 @@ namespace GCube {
 
 typedef enum {
 	ShaderTypeColor,
+	ShaderTypeTex,
+	ShaderTypeFlat,
 	NUM_ShaderType
 } ShaderType;
 
@@ -41,6 +43,7 @@ public:
 	static Shader_ptr GetShader(ShaderType type);
 //	static Shader_ptr GetCustomShader(int id);
 //	static void AddCustomShader(Shader_ptr shader, int id);
+	static void ReloadAllData();
 	
 };
 }
