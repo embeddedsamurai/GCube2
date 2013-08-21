@@ -41,11 +41,11 @@ void Figure::rebuild() {
 }
 
 // 描画
-void Figure::draw(Window &window) {
+void Figure::draw(const Window &window) {
 	if (isVisible && shader && mesh) {
 		shader->useProgram();
 		mesh->bind();
-		shader->setInfo(this, window.camera.get(), NULL);
+		shader->setInfo(this, window.camera.get());
 		glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_SHORT, NULL);
 	}
 }

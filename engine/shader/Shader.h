@@ -97,7 +97,7 @@ public:
 	/**
 	 * 各種情報を設定します.
 	 */
-	virtual void setInfo(Figure *figure, Camera *camera, Scene *scene) = 0;
+	virtual void setInfo(Figure *figure, Camera *camera) = 0;
 	
 	/**
 	 * 指定された名前のシェーダを読み込み、Programを作成します.

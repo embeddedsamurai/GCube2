@@ -145,18 +145,19 @@ void ApplicationController::onUpdate(float dt) {
 	main->onUpdate(dt);
 	// アクティブシーンに通知
 	if (activeScene) {
-		activeScene->onUpdate(dt);
+		activeScene->updateProcess(dt, Matrix3D());
 	}
 }
 
 void ApplicationController::onDraw() {
 //	LOGD("ApplicationController::onDraw()");
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	// 全体の背景色
 	glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_SCISSOR_TEST);
-	// mainに通知
-	main->onDraw();
 	if (activeScene) {
 		// 各ウィンドウを描画
 		std::vector<Window_ptr>::iterator it = windowArray.begin();
@@ -164,6 +165,7 @@ void ApplicationController::onDraw() {
 			Window_ptr v = (Window_ptr) *it;
 			// ウィンドウの背景色
 			glClearColor(v->bgColor.r, v->bgColor.g, v->bgColor.b, v->bgColor.a);
+			glClear(GL_DEPTH_BUFFER_BIT);
 			// ウィンドウの座標系を変換
 			Rectf rect;
 			if (v->isFullScreen) {
@@ -184,11 +186,13 @@ void ApplicationController::onDraw() {
 			if (v->camera) {
 				v->camera->aspect = v->frame.size.width / v->frame.size.height * aspect;
 				v->camera->updateProjectionMatrix();
-				activeScene->onDraw(*v.get());
+				activeScene->drawProcess(*v.get());
 			}
 			it++;
 		}
 	}
+	// mainに通知
+	main->onDraw();
 }
 	
 // タッチイベント

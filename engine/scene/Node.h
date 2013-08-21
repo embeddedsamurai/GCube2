@@ -37,19 +37,28 @@ public:
 	Node(const char* name = NULL);
 	virtual ~Node();
 	
-	virtual void updateProcess(float dt);
-	virtual void drawProcess(Window &window);
+	virtual void updateProcess(float dt, const Matrix3D &matrix);
+	virtual void drawProcess(const Window &window);
 	
 	Node *getParentNode() const;
 	
 	void addChildNode(const Node_ptr &childNode);
 	void removeChildNode(const Node_ptr &childNode);
 	
-private:
+	Node *findChildNodeByName(const char *searchName);
+	std::vector<Node*> findChildNodeByType(int type);
+
+
+public:
+	int tag;
+
+	
+protected:
 	void setParentNode(Node *newParent);
 	Node *parent;
 	const char *name;
 	std::vector<Node_ptr> children;
+	int type;
 };
 
 }

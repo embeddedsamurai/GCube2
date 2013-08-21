@@ -32,7 +32,7 @@ public:
 	Drawable() : isVisible(true) {};
 	virtual ~Drawable() {};
 	
-	virtual void draw(Window &window) = 0;
+	virtual void draw(const Window &window) = 0;
 public:
 	bool isVisible;
 	

@@ -20,28 +20,12 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
-
-#include "GCDefines.h"
-#include "Node.h"
 #include "Light.h"
 
-namespace GCube {
-
-class Scene : public Node {
-public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
-	
-	virtual std::vector<Node*> getLights();
-
-private:
-	
-};
-
-DEF_SHARED_PTR(Scene);
-
+using namespace GCube;
+// コンストラクタ
+Light::Light(const char *name) : Node(name) {
+	this->type=LightType();
+	diffuse = Colorf(1,1,1);
+	specular = Colorf(1,1,1);
 }
-
-#endif /* defined(__GCube__Scene__) */

@@ -36,7 +36,7 @@ public:
 	Figure(const char* name = NULL);
 	virtual ~Figure();
 	
-	virtual void draw(Window &window);
+	virtual void draw(const Window &window);
 	virtual void rebuild();
 	
 public:

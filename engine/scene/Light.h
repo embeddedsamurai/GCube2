@@ -20,28 +20,32 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__Light__
+#define __GCube__Light__
+
 
 #include "GCDefines.h"
 #include "Node.h"
-#include "Light.h"
+#include "../math/Matrix3D.h"
 
 namespace GCube {
 
-class Scene : public Node {
+class Light : public Node {
 public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
+	Light(const char* name = NULL);
+	virtual ~Light() {};
 	
-	virtual std::vector<Node*> getLights();
-
-private:
+	static int LightType() {return 100;};
+	
+public:
+	Colorf diffuse;
+	Colorf ambient;
+	Colorf specular;
 	
 };
 
-DEF_SHARED_PTR(Scene);
+DEF_SHARED_PTR(Light);
 
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__Light__) */

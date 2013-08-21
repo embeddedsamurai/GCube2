@@ -44,6 +44,13 @@ public:
 	 * @return Mesh
 	 */
 	static Mesh_ptr createPlate(Sizef size);
+	
+	/**
+	 * ボックスのMeshクラスを作成します.
+	 * @param[in] size サイズ
+	 * @return Mesh
+	 */
+	static Mesh_ptr createBox(Point3f size);
 };
 }
 

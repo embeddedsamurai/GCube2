@@ -78,18 +78,17 @@ void TexShader::reload() {
 	gProgram = loadShader(gVertexShader, gFragmentShader, 0);
 }
 
-void TexShader::setInfo(Figure *figure, Camera *camera, Scene *scene) {
+void TexShader::setInfo(Figure *figure, Camera *camera) {
 	// projectionMatrix
 	if (!figure || !camera) return;
-	Matrix3D mtx;
-	mtx.multiply(&camera->projectionMatrix);
+	Matrix3D mtx(camera->projectionMatrix);
 	
 	// viewMatrix
 	camera->updateViewMatrix();
 	mtx.multiply(&camera->viewMatrix);
 	
 	// modelMatrix
-	mtx.multiply(&figure->transform);
+	mtx.multiply(&figure->globalMatrix);
 	
 	// ユニフォーム変数へ渡す
 	glUniformMatrix4fv(uniforms[UNIFORM_MVP_MATRIX], 1, GL_FALSE, mtx.matrix);

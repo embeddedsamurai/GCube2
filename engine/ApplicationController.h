@@ -51,7 +51,7 @@ public:
 	
 	// Scene //
 	virtual void changeScene(const Scene_ptr &nextScene, SceneTransition *transition=NULL);
-	
+	virtual Scene_ptr getActiveScene() {return activeScene;};
 	
 	// Utils //
 	virtual std::string getLanguage();

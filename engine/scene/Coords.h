@@ -36,6 +36,7 @@ public:
 	
 public:
 	Matrix3D transform;
+	Matrix3D globalMatrix;
 	bool visibleAxis;
 	float axisSize;
 	

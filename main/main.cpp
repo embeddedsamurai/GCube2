@@ -53,6 +53,9 @@ void Main::onInit() {
 	
 	// シーン作成
 	Scene_ptr sceneMain(new Scene("SceneMain"));
+	Node_ptr node(new Node("Node"));
+	node->transform.translate(2, 0, 0);
+//	node->transform.rotate(90, RotateDirZ);
 	// プレート追加
 	fig = Figure_ptr(new Figure("Fig"));
 	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 3));
@@ -60,16 +63,31 @@ void Main::onInit() {
 	fig->material = Material_ptr(new Material());
 	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
 	fig->shader = TexShader_ptr(new TexShader());
-	sceneMain->rootNode.addChildNode(fig);
+	node->addChildNode(fig);
 	// プレート追加２
 	fig2 = Figure_ptr(new Figure("Fig2"));
-	fig2->mesh = PrimitiveObject::createPlate(Sizef(2, 3));
+//	fig2->mesh = PrimitiveObject::createPlate(Sizef(2, 3));
+	fig2->mesh = PrimitiveObject::createBox(Point3f(2, 3, 4));
 	fig2->material = Material_ptr(new Material());
 	fig2->material->ambientColor = Colorf(0, 0.5, 0.5);
-	fig2->shader = ColorShader_ptr(new ColorShader());
+//	fig2->shader = ColorShader_ptr(new ColorShader());
+	fig2->shader = FlatShader_ptr(new FlatShader());
 	fig2->transform.translate(3, 1, 0);
-	sceneMain->rootNode.addChildNode(fig2);
+	fig2->transform.rotate(45, RotateDirX);
+	fig2->transform.rotate(45, RotateDirY);
+	node->addChildNode(fig2);
+	
+	// ライト
+	Light_ptr light(new Light());
+	light->transform.translate(-3, 2, 9);
+	light->diffuse = Colorf(0.5,0,0);
+	node->addChildNode(light);
+	Light_ptr light2(new Light());
+	light2->transform.translate(6, 2, 9);
+	node->addChildNode(light2);
+
 	// シーン変更
+	sceneMain->addChildNode(node);
 	ctr->changeScene(sceneMain);
 
 	// メインウィンドウの背景色変更
@@ -82,12 +100,13 @@ void Main::onInit() {
 	window->bgColor = Colorf(1,0,0);
 	// サブウィンドウにカメラ設定
 	subCamera = StandardCamera_ptr(new StandardCamera("CameraMain"));
-	sceneMain->rootNode.addChildNode(subCamera);
+	sceneMain->addChildNode(subCamera);
 	subCamera->transform.loadIdentity();
 	subCamera->transform.translate(0, 0, 40);
 	subCamera->transform.rotate(45, GCube::RotateDirZ);
 	window->camera = subCamera;
 	ctr->windowArray.push_back(window);
+	
 }
 
 // サイズ変更
@@ -113,6 +132,12 @@ void Main::onUpdate(float dt) {
 	ang += 3;
 	subCamera->transform.rotate(ang, GCube::RotateDirZ);
 	fig->material->texture->matrix.rotate(3, RotateDirX);
+	
+	fig2->transform.loadIdentity();
+	fig2->transform.translate(3, 1, 0);
+	fig2->transform.rotate(45, RotateDirX);
+	fig2->transform.rotate(ang, RotateDirY);
+
 //	tex->matrix.scale(1.01, 1.01, 1.01);
 }
 

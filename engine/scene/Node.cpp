@@ -26,7 +26,7 @@
 using namespace GCube;
 
 // コンストラクタ
-Node::Node(const char *name) : parent(NULL), name(name) {
+Node::Node(const char *name) : parent(NULL), name(name), tag(0), type(0) {
 }
 
 // デストラクタ
@@ -35,20 +35,24 @@ Node::~Node() {
 	children.clear();
 }
 
+
 // 処理更新
-void Node::updateProcess(float dt) {
+void Node::updateProcess(float dt, const Matrix3D &matrix) {
+	// グローバル座標を計算
+	globalMatrix = Matrix3D(matrix);
+	globalMatrix.multiply(&this->transform);
 	// 子
 	if(!children.empty()) {
 		for(size_t i = 0; i < children.size(); ++i) {
 			if(NULL != children[i]) {
-				children[i]->updateProcess(dt);
+				children[i]->updateProcess(dt, globalMatrix);
 			}
 		}
 	}
 }
 
 // 描画
-void Node::drawProcess(Window &window) {
+void Node::drawProcess(const Window &window) {
 	// 軸表示
 	drawAxis();
 	// 描画
@@ -99,3 +103,37 @@ void Node::removeChildNode(const Node_ptr &childNode) {
 		}
 	}
 }
+
+// 名前指定でノード検索
+Node* Node::findChildNodeByName(const char *searchName) {
+	// TODO: 全件検索なので重い。。。
+	if(0 == strcmp(this->name, searchName)) {
+		return this;
+	}
+	if(!children.empty()) {
+		for(size_t i = 0; i < children.size(); ++i) {
+			Node *node = children[i]->findChildNodeByName(searchName);
+			if(node) {
+				return node;
+			}
+		}
+	}
+	return NULL;
+}
+
+// 名前指定でノード検索
+std::vector<Node*> Node::findChildNodeByType(int type) {
+	// TODO: 全件検索なので重い。。。
+	std::vector<Node*> nodes;
+	if(this->type == type) {
+		nodes.push_back(this);
+	}
+	if(!children.empty()) {
+		for(size_t i = 0; i < children.size(); ++i) {
+			std::vector<Node*> vec = children[i]->findChildNodeByType(type);
+			nodes.insert(nodes.end(), vec.begin(), vec.end());
+		}
+	}
+	return nodes;
+}
+

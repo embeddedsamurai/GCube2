@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    scene/Camera.cpp \
                    scene/Coords.cpp \
                    scene/Figure.cpp \
+                   scene/Light.cpp \
                    scene/Mesh.cpp \
                    scene/Node.cpp \
                    scene/PrimitiveObject.cpp \
@@ -25,6 +26,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    scene/Vbo.cpp \
                    scene/Window.cpp \
                    shader/ColorShader.cpp \
+                   shader/FlatShader.cpp \
                    shader/Shader.cpp \
                    shader/TexShader.cpp \
                    sound/SoundData.cpp \

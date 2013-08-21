@@ -20,8 +20,9 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__TexShader__
-#define __GCube__TexShader__
+#ifndef __GCube__FlatShader__
+#define __GCube__FlatShader__
+
 
 #include "GCDefines.h"
 #include "Shader.h"
@@ -29,19 +30,19 @@
 namespace GCube {
 
 /**
- * テクスチャ描画シェーダークラス.
+ * フラットシェーディング用シェーダークラス.
  */
-class TexShader : public Shader {
+class FlatShader : public Shader {
 public:
 	/**
 	 * コンストラクタ.
 	 */
-	TexShader();
+	FlatShader();
 	
 	/**
 	 * デストラクタ.
 	 */
-	virtual ~TexShader() {};
+	virtual ~FlatShader() {};
 	
 	/**
 	 * 再読み込みします.
@@ -79,7 +80,7 @@ public:
 	
 };
 
-DEF_SHARED_PTR(TexShader);
+DEF_SHARED_PTR(FlatShader);
 }
 
-#endif /* defined(__GCube__TexShader__) */
+#endif /* defined(__GCube__FlatShader__) */

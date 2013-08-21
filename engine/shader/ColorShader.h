@@ -51,7 +51,7 @@ public:
 	/**
 	 * 各種情報を設定します.
 	 */
-	virtual void setInfo(Figure *figure, Camera *camera, Scene *scene);
+	virtual void setInfo(Figure *figure, Camera *camera);
 	
 	/**
 	 * シェーダのAttributeへのバインド処理を行います.

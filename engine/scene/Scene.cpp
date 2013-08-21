@@ -22,29 +22,9 @@
 
 #include "Scene.h"
 
-
 using namespace GCube;
 
-// コンストラクタ
-Scene::Scene(const char *name) : name(name) {
+// ライト取得
+std::vector<Node*> Scene::getLights() {
+	return this->findChildNodeByType(Light::LightType());
 }
-
-// デストラクタ
-Scene::~Scene() {
-}
-
-// 更新処理
-void Scene::onUpdate(float dt) {
-	rootNode.updateProcess(dt);
-}
-
-// 描画
-void Scene::onDraw(Window &window) {
-	rootNode.drawProcess(window);
-}
-
-//void Scene::changeCamera(const Camera_ptr &nextCamera, SceneTransition *transition) {
-//	// TODO: トランジションサポート
-//	activeCamera = nextCamera;
-//}
-
