@@ -20,28 +20,34 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__TextureData__
+#define __GCube__TextureData__
 
-#include "GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+#include "../GCDefines.h"
 
 namespace GCube {
+	
+class TextureData;
+DEF_SHARED_PTR(TextureData);
 
-class Scene : public Node {
+class TextureData {
 public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
+	virtual ~TextureData() {};
 	
-	virtual std::vector<Node*> getLights();
-
+	static TextureData_ptr GetTextureData(const char *fname, bool useMipmap=true);
+	static void ReloadAllData();
+	virtual void reload();
+	
+public:
+	std::string filename; //!< ファイル名
+	int id;               //!< テクスチャID
+	Sizef size;           //!< 画像の大きさ
+	
 private:
-	
+	TextureData(const char *fname, bool useMipmap=true);
+	bool useMipmap;
 };
-
-DEF_SHARED_PTR(Scene);
 
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__TextureData__) */

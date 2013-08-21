@@ -97,7 +97,7 @@ public:
 
 	virtual void OnOrientationChanged (const Tizen::Ui::Control &source, Tizen::Ui::OrientationStatus orientationStatus);
 
-	void OnTouch (GCTouchAction type, const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo);
+	void OnTouch (GCube::TouchAction type, const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo);
 	virtual void OnTouchCanceled (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo);
 	virtual void OnTouchFocusIn (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo);
 	virtual void OnTouchFocusOut (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo);
@@ -121,7 +121,7 @@ private:
 	GCube::ApplicationController *gcube;
 	GCubeSettings *settings;
 
-	GCDeviceOrientation ConvertOrientState (Tizen::Ui::OrientationStatus orientationStatus);
+	GCube::DeviceOrientation ConvertOrientState (Tizen::Ui::OrientationStatus orientationStatus);
 };
 
 #endif // _GCUBEAPP_H_

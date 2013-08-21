@@ -20,28 +20,27 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__Window__
+#define __GCube__Window__
 
-#include "GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+#include "../GCDefines.h"
+#include "Camera.h"
 
 namespace GCube {
 
-class Scene : public Node {
+class Window {
 public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
+	Window() : isFullScreen(false) {};
+	virtual ~Window() {};
 	
-	virtual std::vector<Node*> getLights();
-
-private:
-	
+public:
+	Camera_ptr camera;
+	Rectf frame;
+	bool isFullScreen;
+	Colorf bgColor;
 };
 
-DEF_SHARED_PTR(Scene);
-
+DEF_SHARED_PTR(Window);
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__Window__) */

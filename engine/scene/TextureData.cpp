@@ -62,7 +62,8 @@ TextureData::TextureData(const char *fname, bool useMipmap) : useMipmap(useMipma
 
 void TextureData::reload() {
 	id = 0;
-	size = {0};
+	size.width = 0;
+	size.height = 0;
 	
 	// リソース読み込み
 	ApplicationController *ctr = ApplicationController::SharedInstance();

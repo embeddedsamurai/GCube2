@@ -20,28 +20,18 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#include "ShaderManager.h"
+#include "ColorShader.h"
 
-#include "GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+using namespace GCube;
 
-namespace GCube {
-
-class Scene : public Node {
-public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
-	
-	virtual std::vector<Node*> getLights();
-
-private:
-	
-};
-
-DEF_SHARED_PTR(Scene);
-
+Shader_ptr ShaderManager::GetShader(ShaderType type) {
+	switch (type) {
+		case ShaderTypeColor:
+			return ColorShader_ptr(new ColorShader());
+			break;
+		default:
+			break;
+	}
+	return NULL;
 }
-
-#endif /* defined(__GCube__Scene__) */

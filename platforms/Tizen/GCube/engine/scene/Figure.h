@@ -20,28 +20,34 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__Figure__
+#define __GCube__Figure__
 
-#include "GCDefines.h"
 #include "Node.h"
-#include "Light.h"
+#include "Drawable.h"
+#include "Mesh.h"
+#include "Material.h"
+#include "../shader/Shader.h"
 
 namespace GCube {
 
-class Scene : public Node {
+class Figure : public Node, public Drawable {
 public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
+	Figure(const char* name = NULL);
+	virtual ~Figure();
 	
-	virtual std::vector<Node*> getLights();
-
+	virtual void draw(const Window &window);
+	virtual void rebuild();
+	
+public:
+	Shader_ptr shader;
+	Mesh_ptr mesh;
+	Material_ptr material;
+	
 private:
 	
 };
-
-DEF_SHARED_PTR(Scene);
-
+DEF_SHARED_PTR(Figure);
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__Figure__) */

@@ -50,6 +50,7 @@
 #include "shader/FlatShader.h"
 #include "shader/TexShader.h"
 #include "shader/Shader.h"
+#include "shader/ShaderManager.h"
 #include "sound/SoundData.h"
 #include "sound/SoundPlayer.h"
 #include "util/Log.h"

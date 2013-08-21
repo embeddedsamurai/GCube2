@@ -20,28 +20,33 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__Texture__
+#define __GCube__Texture__
 
-#include "GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+#include "../GCDefines.h"
+#include "TextureData.h"
+#include "../math/Matrix3D.h"
 
 namespace GCube {
-
-class Scene : public Node {
+	
+class Texture {
 public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
+	Texture(const char *fname, bool useMipmap=true);
+	virtual ~Texture() {};
 	
-	virtual std::vector<Node*> getLights();
-
+	virtual void bind();
+	virtual void clamp();
+	virtual void wrap();
+	
+public:
+	TextureData_ptr data; //!< データ
+	Matrix3D matrix;      //!< 変換行列
+	
 private:
-	
+	bool useMipmap;
 };
 
-DEF_SHARED_PTR(Scene);
-
+DEF_SHARED_PTR(Texture);
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__Texture__) */

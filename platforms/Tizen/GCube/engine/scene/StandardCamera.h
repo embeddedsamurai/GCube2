@@ -37,7 +37,6 @@ public:
 	float zNear;       //!< ニアクリップ.
 	float zFar;        //!< ファークリップ.
 	float fieldOfView; //!< 画角.
-	float aspect;      //!< アスペクト比.
 	
 private:
 	

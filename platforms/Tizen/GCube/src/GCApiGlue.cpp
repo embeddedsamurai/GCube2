@@ -40,7 +40,7 @@ std::string GCGetLanguage() {
 	localeManager.Construct();
 	String lang = localeManager.GetSelectedLanguage();
 	// cstrに変換
-	int nLen = wcstombs( NULL, lang.GetPointer(), 0 );
+	int nLen = wcstombs( 0, lang.GetPointer(), 0 );
 	char* pstr = (char*) malloc ( nLen + 1 );
 	wcstombs(pstr, lang.GetPointer(), nLen+1);
 	std::string ret = std::string(pstr);
@@ -75,19 +75,19 @@ CATCH:
 }
 
 // ストレージパスを取得
-std::string GCGetStoragePath(GCStorageType type) {
+std::string GCGetStoragePath(StorageType type) {
 	String path;
 	switch (type) {
-		case GCStorageTypeDocument:
+		case StorageTypeDocument:
 			path = App::GetInstance()->GetAppDataPath();
 			break;
-		case GCStorageTypeCache:
+		case StorageTypeCache:
 			// TODO: キャッシュの概念を考える
 			path = App::GetInstance()->GetAppDataPath();
 			break;
 	}
 	// cstrに変換
-	int nLen = wcstombs( NULL, path.GetPointer(), 0 );
+	int nLen = wcstombs( 0, path.GetPointer(), 0 );
 	char* pstr = (char*) malloc ( nLen + 1 );
 	wcstombs(pstr, path.GetPointer(), nLen+1);
 	std::string ret = std::string(pstr);

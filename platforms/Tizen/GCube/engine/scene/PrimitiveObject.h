@@ -20,28 +20,38 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__PrimitiveObject__
+#define __GCube__PrimitiveObject__
 
 #include "GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+#include "Mesh.h"
 
 namespace GCube {
 
-class Scene : public Node {
-public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
-	
-	virtual std::vector<Node*> getLights();
-
+/**
+ * プリミティブ形状作成クラス.
+ */
+class PrimitiveObject {
 private:
+	PrimitiveObject(){};
+	virtual ~PrimitiveObject(){};
 	
+public:
+	
+	/**
+	 * プレートのMeshクラスを作成します.
+	 * @param[in] size サイズ
+	 * @return Mesh
+	 */
+	static Mesh_ptr createPlate(Sizef size);
+	
+	/**
+	 * ボックスのMeshクラスを作成します.
+	 * @param[in] size サイズ
+	 * @return Mesh
+	 */
+	static Mesh_ptr createBox(Point3f size);
 };
-
-DEF_SHARED_PTR(Scene);
-
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__PrimitiveObject__) */

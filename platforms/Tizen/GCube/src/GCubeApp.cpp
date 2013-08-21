@@ -182,7 +182,7 @@ GCubeApp::OnAppInitialized(void)
 	}
 
 	// サイズを通知
-	GCDeviceOrientation o = this->ConvertOrientState(pFrame->GetOrientationStatus());
+	DeviceOrientation o = this->ConvertOrientState(pFrame->GetOrientationStatus());
 	gcube->onSizeChanged(w, h, o);
 
 	if (settings->useOrientationSensor) {
@@ -261,35 +261,35 @@ GCubeApp::OnOrientationChanged (const Tizen::Ui::Control &source, Tizen::Ui::Ori
 	// 画面の回転を通知
 	__renderer->SetTargetControlHeight(source.GetHeight());
 	__renderer->SetTargetControlWidth(source.GetWidth());
-	GCDeviceOrientation o = this->ConvertOrientState(orientationStatus);
+	DeviceOrientation o = this->ConvertOrientState(orientationStatus);
 	gcube->onSizeChanged(source.GetWidthF(), source.GetHeightF(), o);
 }
 
-GCDeviceOrientation
+DeviceOrientation
 GCubeApp::ConvertOrientState (Tizen::Ui::OrientationStatus orientationStatus) {
 	// 画面の回転定数の変換
-	GCDeviceOrientation o;
+	DeviceOrientation o;
 	switch (orientationStatus) {
 		case ORIENTATION_STATUS_PORTRAIT:
-			o = GCDeviceOrientationPortrait;
+			o = DeviceOrientationPortrait;
 			break;
 		case ORIENTATION_STATUS_LANDSCAPE:
-			o = GCDeviceOrientationLandscapeLeft;
+			o = DeviceOrientationLandscapeLeft;
 			break;
 		case ORIENTATION_STATUS_PORTRAIT_REVERSE:
-			o = GCDeviceOrientationPortraitUpsideDown;
+			o = DeviceOrientationPortraitUpsideDown;
 			break;
 		case ORIENTATION_STATUS_LANDSCAPE_REVERSE:
-			o = GCDeviceOrientationLandscapeRight;
+			o = DeviceOrientationLandscapeRight;
 			break;
 		default:
-			o = GCDeviceOrientationUnknown;
+			o = DeviceOrientationUnknown;
 			break;
 	}
 	return o;
 }
 
-void GCubeApp::OnTouch (GCTouchAction type, const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo) {
+void GCubeApp::OnTouch (TouchAction type, const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo) {
 	long long tick = 0;
 	Tizen::System::SystemTime::GetTicks(tick);
 	ApplicationController *controller = ApplicationController::SharedInstance();
@@ -297,7 +297,7 @@ void GCubeApp::OnTouch (GCTouchAction type, const Tizen::Ui::Control &source, co
 }
 
 void GCubeApp::OnTouchCanceled (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo) {
-	this->OnTouch(GCTouchActionCancel, source, currentPosition, touchInfo);
+	this->OnTouch(TouchActionCancel, source, currentPosition, touchInfo);
 }
 
 void GCubeApp::OnTouchFocusIn (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo) {
@@ -309,15 +309,15 @@ void GCubeApp::OnTouchFocusOut (const Tizen::Ui::Control &source, const Tizen::G
 }
 
 void GCubeApp::OnTouchMoved (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo) {
-	this->OnTouch(GCTouchActionMove, source, currentPosition, touchInfo);
+	this->OnTouch(TouchActionMove, source, currentPosition, touchInfo);
 }
 
 void GCubeApp::OnTouchPressed (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo) {
-	this->OnTouch(GCTouchActionDown, source, currentPosition, touchInfo);
+	this->OnTouch(TouchActionDown, source, currentPosition, touchInfo);
 }
 
 void GCubeApp::OnTouchReleased (const Tizen::Ui::Control &source, const Tizen::Graphics::Point &currentPosition, const Tizen::Ui::TouchEventInfo &touchInfo) {
-	this->OnTouch(GCTouchActionUp, source, currentPosition, touchInfo);
+	this->OnTouch(TouchActionUp, source, currentPosition, touchInfo);
 }
 
 void GCubeApp::OnDataReceived(SensorType sensorType, SensorData& sensorData, result r)

@@ -22,11 +22,12 @@
 
 #include "Node.h"
 #include "Drawable.h"
+#include <string.h>
 
 using namespace GCube;
 
 // コンストラクタ
-Node::Node(const char *name) : parent(NULL), name(name), tag(0), type(0) {
+Node::Node(const char *name) : tag(0), parent(NULL), name(name), type(0) {
 }
 
 // デストラクタ

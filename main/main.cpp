@@ -70,8 +70,10 @@ void Main::onInit() {
 	fig2->mesh = PrimitiveObject::createBox(Point3f(2, 3, 4));
 	fig2->material = Material_ptr(new Material());
 	fig2->material->ambientColor = Colorf(0, 0.5, 0.5);
+//	fig2->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
 //	fig2->shader = ColorShader_ptr(new ColorShader());
 	fig2->shader = FlatShader_ptr(new FlatShader());
+//	fig2->shader = ShaderManager::GetShader(ShaderTypeColor);
 	fig2->transform.translate(3, 1, 0);
 	fig2->transform.rotate(45, RotateDirX);
 	fig2->transform.rotate(45, RotateDirY);

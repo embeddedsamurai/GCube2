@@ -20,28 +20,45 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__Vbo__
+#define __GCube__Vbo__
 
 #include "GCDefines.h"
-#include "Node.h"
-#include "Light.h"
 
 namespace GCube {
 
-class Scene : public Node {
-public:
-	Scene(const char* name = NULL) : Node(name) {};
-	virtual ~Scene() {};
-	
-	virtual std::vector<Node*> getLights();
-
-private:
-	
+// vbo index
+enum {
+	VBO_INTERLEAVE,
+	VBO_ELEMENT,
+	NUM_VBO
 };
 
-DEF_SHARED_PTR(Scene);
 
+class Vbo {
+public:
+	Vbo();
+	virtual ~Vbo();
+	
+	virtual void addElement(const std::vector<float> &data, int element);
+	virtual void setIndex(const std::vector<short> &index);
+	
+	virtual void build();
+	virtual void rebuild();
+	virtual void bind();
+
+private:
+	GLuint buildVBO(void *data, int size, GLenum buffer);
+	
+	int maxSize;
+	GLuint vboNames[NUM_VBO];                   //!< VBOの名前リスト.
+	std::vector< std::vector<float> > dataArray;//!< データ.
+	std::vector<short> indexesArray;            //!< インデックスデータ.
+	std::vector<int> elementsArray;             //!< 要素数データ.
+	std::vector<float> interleaveArray;
+	
+};
+DEF_SHARED_PTR(Vbo);
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__Vbo__) */

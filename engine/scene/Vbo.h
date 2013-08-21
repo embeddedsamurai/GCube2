@@ -52,7 +52,7 @@ private:
 	
 	int maxSize;
 	GLuint vboNames[NUM_VBO];                   //!< VBOの名前リスト.
-	std::vector<std::vector<float>> dataArray;  //!< データ.
+	std::vector< std::vector<float> > dataArray;  //!< データ.
 	std::vector<short> indexesArray;            //!< インデックスデータ.
 	std::vector<int> elementsArray;             //!< 要素数データ.
 	std::vector<float> interleaveArray;

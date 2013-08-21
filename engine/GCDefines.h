@@ -56,7 +56,8 @@
 # include <AL/al.h>
 # include <AL/alc.h>
 #include <boost/shared_ptr.hpp>
-#define DEF_SHARED_PTR(name) typedef boost::shared_ptr<name> name##_ptr;typedef boost::weak_ptr<name> name##_wkptr
+#include <boost/weak_ptr.hpp>
+#define DEF_SHARED_PTR(name) typedef boost::shared_ptr< name > name##_ptr;typedef boost::weak_ptr< name > name##_wkptr
 #endif
 
 
