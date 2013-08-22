@@ -25,7 +25,7 @@
 using namespace GCube;
 
 // コンストラクタ
-Figure::Figure(const char *name) : Node(name) {
+Figure::Figure(const char *name) : DrawableNode(name) {
 	shader = NULL;
 	mesh = NULL;
 }

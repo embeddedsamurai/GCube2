@@ -51,11 +51,8 @@
 
 // Tizen
 #ifdef __GCube_Tizen__
-//#ifndef __null
-//#define __null ((void*)0)
-//#endif
 # include <gl2.h>
-//# include <gl2ext.h>
+# include <gl2ext.h>
 # include <AL/al.h>
 # include <AL/alc.h>
 #include <boost/shared_ptr.hpp>

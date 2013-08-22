@@ -23,13 +23,38 @@
 #ifndef GCube_GCube_h
 #define GCube_GCube_h
 
+#define kGCubeVersion 0.1
+
 #include "GCDefines.h"
 #include "ApplicationController.h"
 #include "IApplicationEventListener.h"
+#include "external/stb/stb_image.h"
+#include "external/stb/stb_vorbis.h"
+#include "math/Matrix3D.h"
+#include "math/Vector3D.h"
+#include "scene/Camera.h"
+#include "scene/Coords.h"
+#include "scene/Drawable.h"
+#include "scene/Figure.h"
+#include "scene/Light.h"
+#include "scene/Mesh.h"
+#include "scene/Material.h"
+#include "scene/Node.h"
+#include "scene/Scene.h"
+#include "scene/SceneTransition.h"
+#include "scene/StandardCamera.h"
+#include "scene/PrimitiveObject.h"
+#include "scene/Texture.h"
+#include "scene/TextureData.h"
+#include "scene/Vbo.h"
+#include "scene/Window.h"
+#include "shader/ColorShader.h"
+#include "shader/FlatShader.h"
+#include "shader/TexShader.h"
+#include "shader/Shader.h"
+#include "shader/ShaderManager.h"
 #include "sound/SoundData.h"
 #include "sound/SoundPlayer.h"
 #include "util/Log.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
 
 #endif

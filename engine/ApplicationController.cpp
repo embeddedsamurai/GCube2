@@ -65,6 +65,11 @@ ApplicationController::~ApplicationController(void) {
 /////////////////////////////////////////////////////////////////////////
 #pragma mark - Public method
 
+// バージョン取得
+float ApplicationController::getVersion() {
+	return kGCubeVersion;
+}
+
 // シーン切り替え
 void ApplicationController::changeScene(const Scene_ptr &nextScene, SceneTransition *transition) {
 	// TODO: トランジションサポート
@@ -122,8 +127,8 @@ void ApplicationController::onResume(void) {
 
 void ApplicationController::onContextChanged(void) {
 	LOGD("ApplicationController::onContextChanged()");
-	TextureData::ReloadAllData();
-	ShaderManager::ReloadAllData();
+	textureCache.reloadAllData();
+	shaderManager.reloadAllData();
 	main->onContextChanged();
 }
 
@@ -198,7 +203,7 @@ void ApplicationController::onDraw() {
 	
 // タッチイベント
 void ApplicationController::onTouch(TouchAction action, float x, float y, long id, long time) {
-	LOGD("***********onTouch[%d](%f,%f)[%d] %u", action, x, y, id, time);
+	LOGD("***********onTouch[%d](%f,%f)[%ld] %ld", action, x, y, id, time);
 	main->onTouch(action, x, y, id, time);
 }
 

@@ -31,11 +31,12 @@ Shader::Shader() : gProgram(0) {
 }
 
 Shader::~Shader() {
-	if (gProgram) {
-		if (glIsProgram(gProgram)==GL_TRUE) {
-			glDeleteProgram(gProgram);
-		}
-	}
+	// TODO: 破棄用メソッド作成
+//	if (gProgram) {
+//		if (glIsProgram(gProgram)==GL_TRUE) {
+//			glDeleteProgram(gProgram);
+//		}
+//	}
 }
 
 GLuint Shader::loadShader(const char* vertexShader, const char* fragmentShader, int user) {

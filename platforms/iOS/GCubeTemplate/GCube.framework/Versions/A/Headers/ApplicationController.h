@@ -25,12 +25,20 @@
 
 #include "GCDefines.h"
 #include "IApplicationEventListener.h"
+#include "scene/Scene.h"
+#include "scene/Window.h"
 
 namespace GCube {
 
 class ApplicationController : public IApplicationEventListener {
 private:
-	GCube::Main *main;
+	Main *main;
+	Scene_ptr activeScene;
+	Sizef screenSize;
+	float aspect;
+public:
+	Colorf bgColor;
+	std::vector<Window_ptr> windowArray;
 	
 private:
 	ApplicationController();
@@ -41,9 +49,15 @@ public:
 	static ApplicationController* SharedInstance();
 	static void DestroyInstance();
 	
+	// Scene //
+	virtual void changeScene(const Scene_ptr &nextScene, SceneTransition *transition=NULL);
+	virtual Scene_ptr getActiveScene() {return activeScene;};
+	
+	// Utils //
+	virtual float getVersion();
 	virtual std::string getLanguage();
 	virtual void getResource(const char *fileName, std::vector<char>& outData);
-	virtual std::string getStoragePath(GCStorageType type);
+	virtual std::string getStoragePath(StorageType type);
 	
 	virtual int sendUserEvent(int type, int param1=0, long long param2=0, float param3=0, double param4=0, const char *param5=NULL);
 	
@@ -53,11 +67,11 @@ public:
 	virtual void onPause();
 	virtual void onResume();
 	virtual void onContextChanged();
-	virtual void onSizeChanged(float width, float height, GCDeviceOrientation orientation);
+	virtual void onSizeChanged(float width, float height, DeviceOrientation orientation);
 	virtual void onLowMemory();
 	virtual void onUpdate(float dt);
 	virtual void onDraw();
-	virtual void onTouch(GCTouchAction action, float x, float y, long id, long time);
+	virtual void onTouch(TouchAction action, float x, float y, long id, long time);
 	virtual void onOrientationChanged(float yaw, float pitch, float roll);
 	virtual int onUserEvent(int type, int param1=0, long long param2=0, float param3=0, double param4=0, const char *param5=NULL);
 	virtual void onDebugCommand(const char *command, int param);

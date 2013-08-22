@@ -27,6 +27,8 @@
 #include "IApplicationEventListener.h"
 #include "scene/Scene.h"
 #include "scene/Window.h"
+#include "scene/TextureCache.h"
+#include "shader/ShaderManager.h"
 
 namespace GCube {
 
@@ -36,9 +38,12 @@ private:
 	Scene_ptr activeScene;
 	Sizef screenSize;
 	float aspect;
+	
 public:
 	Colorf bgColor;
 	std::vector<Window_ptr> windowArray;
+	TextureCache textureCache;
+	ShaderManager shaderManager;
 	
 private:
 	ApplicationController();
@@ -54,6 +59,7 @@ public:
 	virtual Scene_ptr getActiveScene() {return activeScene;};
 	
 	// Utils //
+	virtual float getVersion();
 	virtual std::string getLanguage();
 	virtual void getResource(const char *fileName, std::vector<char>& outData);
 	virtual std::string getStoragePath(StorageType type);

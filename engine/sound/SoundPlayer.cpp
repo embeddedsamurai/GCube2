@@ -30,7 +30,7 @@
 // スレッド用関数
 void* thread_func(void *arg) {
 	GCube::SoundPlayer *instance = (GCube::SoundPlayer*)arg;
-	instance->playLoop();
+	if (instance) instance->playLoop();
 	return NULL;
 }
 
@@ -135,6 +135,7 @@ void SoundPlayer::playLoop() {
 	while (!cancel) {
 		//LOGD("playLoop");
 		sleep(1);
+		if (cancel) return;
 		
 		std::vector<SoundData*>::iterator it = sounds.begin();
 		while(it != sounds.end()) {

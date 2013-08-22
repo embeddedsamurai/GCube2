@@ -230,8 +230,8 @@ Java_com_gclue_gcube_NDKInterface_onTerminate(
 {
 	if (controller) {
 		controller->onTerminate();
-		ApplicationController::DestroyInstance();
 		controller = NULL;
+		ApplicationController::DestroyInstance();
 	}
 }
 

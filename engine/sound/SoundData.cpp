@@ -21,7 +21,7 @@
  */
 
 #include "SoundData.h"
-#include "GCube.h"
+#include "../GCube.h"
 
 #define BUFFER_SIZE (4096)
 

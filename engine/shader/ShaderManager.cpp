@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+#include "../ApplicationController.h"
 #include "ShaderManager.h"
 #include "ColorShader.h"
 #include "TexShader.h"
@@ -27,9 +28,12 @@
 
 using namespace GCube;
 
-static std::map<int, Shader_ptr> cache; //!< キャッシュ.
-
 Shader_ptr ShaderManager::GetShader(ShaderType type) {
+	ApplicationController *ctr = ApplicationController::SharedInstance();
+	return ctr->shaderManager.getShader(type);
+}
+
+Shader_ptr ShaderManager::getShader(ShaderType type) {
 	Shader_ptr ptr = cache[type];
 	if (!ptr) {
 		switch (type) {
@@ -50,7 +54,7 @@ Shader_ptr ShaderManager::GetShader(ShaderType type) {
 	return ptr;
 }
 
-void ShaderManager::ReloadAllData() {
+void ShaderManager::reloadAllData() {
 	std::map<int, Shader_ptr>::iterator it = cache.begin();
 	while (it != cache.end()) {
 		(*it).second->reload();

@@ -35,12 +35,13 @@ Vbo::Vbo() {
 // デストラクタ
 Vbo::~Vbo() {
 	// VBO破棄
-	for (int i = 0; i < NUM_VBO; i++) {
-		if (vboNames[i]) {
-			glDeleteBuffers(1, &vboNames[i]);
-			vboNames[i] = 0;
-		}
-	}
+	// TODO: 破棄用メソッド作成
+//	for (int i = 0; i < NUM_VBO; i++) {
+//		if (vboNames[i]) {
+//			glDeleteBuffers(1, &vboNames[i]);
+//			vboNames[i] = 0;
+//		}
+//	}
 }
 
 // ビルド

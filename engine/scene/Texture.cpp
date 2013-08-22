@@ -29,7 +29,8 @@ using namespace GCube;
 
 Texture::Texture(const char *fname, bool useMipmap) : useMipmap(useMipmap) {
 	// データ取得
-	data = TextureData::GetTextureData(fname, useMipmap);
+	ApplicationController *ctr = ApplicationController::SharedInstance();
+	data = ctr->textureCache.getTextureData(fname, useMipmap);
 	// 基本読み込んだ画像は左上原点なので、反転しておく。
 	this->matrix.scale(1, -1, 1);
 }

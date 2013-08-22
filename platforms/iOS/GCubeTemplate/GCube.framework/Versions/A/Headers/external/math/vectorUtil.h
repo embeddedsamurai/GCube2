@@ -50,6 +50,10 @@
 #ifndef __VECTOR_UTIL_H__
 #define __VECTOR_UTIL_H__
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 // A Vector is floating point array with either 3 or 4 components
 // functions with the vec4 prefix require 4 elements in the array
 // functions with vec3 prefix require only 3 elements in the array
@@ -96,5 +100,10 @@ float vec3Length(const float* vec);
 
 // Returns the distance between two 3D points
 float vec3Distance(const float* pointA, const float* pointB);
+
+	
+#ifdef __cplusplus
+}
+#endif
 
 #endif //__VECTOR_UTIL_H__

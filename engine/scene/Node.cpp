@@ -21,7 +21,8 @@
  */
 
 #include "Node.h"
-#include "Drawable.h"
+#include "DrawableNode.h"
+#include "Figure.h"
 #include <string.h>
 
 using namespace GCube;
@@ -57,7 +58,7 @@ void Node::drawProcess(const Window &window) {
 	// 軸表示
 	drawAxis();
 	// 描画
-	Drawable *drawable = dynamic_cast<Drawable*>(this);
+	DrawableNode *drawable = dynamic_cast<DrawableNode*>(this);
 	if (drawable && drawable->isVisible) {
 		drawable->draw(window);
 	}

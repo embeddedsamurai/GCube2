@@ -23,7 +23,7 @@
 #ifndef __GCube__SoundData_h
 #define __GCube__SoundData_h
 
-#include "GCDefines.h"
+#include "../GCDefines.h"
 #include "../external/stb/stb_vorbis.h"
 
 namespace GCube {

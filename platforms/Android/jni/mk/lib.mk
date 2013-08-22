@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    scene/SceneTransition.cpp \
                    scene/StandardCamera.cpp \
                    scene/Texture.cpp \
+                   scene/TextureCache.cpp \
                    scene/TextureData.cpp \
                    scene/Vbo.cpp \
                    scene/Window.cpp \
@@ -35,7 +36,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    
 
 LOCAL_CFLAGS    := -Werror -D__GCube_Android__ 
-LOCAL_LDLIBS    := -llog -lGLESv2
+#LOCAL_LDLIBS    := -llog -lGLESv2
   
 LOCAL_C_INCLUDES:= $(LOCAL_PATH)/ \
                    $(MY_PATH)/OpenAL/ \
@@ -50,6 +51,6 @@ LOCAL_C_INCLUDES:= $(LOCAL_PATH)/ \
                    $(LOCAL_PATH)/util \
 				   $(LOCAL_PATH)/../main/
 
-LOCAL_STATIC_LIBRARIES := openal
+#LOCAL_STATIC_LIBRARIES := openal
 
 include $(BUILD_STATIC_LIBRARY)

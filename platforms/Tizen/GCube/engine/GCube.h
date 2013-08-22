@@ -23,6 +23,8 @@
 #ifndef GCube_GCube_h
 #define GCube_GCube_h
 
+#define kGCubeVersion 0.1
+
 #include "GCDefines.h"
 #include "ApplicationController.h"
 #include "IApplicationEventListener.h"
@@ -32,7 +34,7 @@
 #include "math/Vector3D.h"
 #include "scene/Camera.h"
 #include "scene/Coords.h"
-#include "scene/Drawable.h"
+#include "scene/DrawableNode.h"
 #include "scene/Figure.h"
 #include "scene/Light.h"
 #include "scene/Mesh.h"

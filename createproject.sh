@@ -49,7 +49,7 @@ rm -f $outpath$droidpath/jni/Android.mk
 ## change project name
 mv $outpath$droidpath/jni/Android_template.mk $outpath$droidpath/jni/Android.mk
 sed -e "s/GCube/$1/" $gcubepath$droidpath/.project | sed -e "/engine/d" > $outpath$droidpath/.project
-sed -e "s/GCube/$1/" $gcubepath$droidpath/.cproject | sed -e "/engine/d"  > $outpath$droidpath/.cproject
+sed -e "s/\/GCube/\/$1/" $gcubepath$droidpath/.cproject | sed -e "/engine/d"  > $outpath$droidpath/.cproject
 sed -e "s/GCube/$1/" $gcubepath$droidpath/res/values/strings.xml > $outpath$droidpath/res/values/strings.xml
 sed -e "s/gcube\"/$1\"/" $gcubepath$droidpath/AndroidManifest.xml > $outpath$droidpath/AndroidManifest.xml
 activitypath='/src/com/gclue/gcube/MainActivity.java'

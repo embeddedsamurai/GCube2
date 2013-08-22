@@ -27,34 +27,6 @@
 
 using namespace GCube;
 
-static std::map<std::string, TextureData_wkptr> cacheMap;
-
-TextureData_ptr TextureData::GetTextureData(const char *fname, bool useMipmap) {
-	// キャッシュ存在チェック
-	std::map<std::string, TextureData_wkptr>::iterator it = cacheMap.find(fname);
-	if (it!=cacheMap.end()) {
-		if ((*it).second.lock()) {
-			return (*it).second.lock();
-		}
-	}
-	
-	// 新規作成
-	TextureData_ptr tex = TextureData_ptr(new TextureData(fname, useMipmap));
-	cacheMap[fname] = tex;
-	return tex;
-}
-
-void TextureData::ReloadAllData() {
-	std::map<std::string, TextureData_wkptr>::iterator it = cacheMap.begin();
-	while (it != cacheMap.end()) {
-		TextureData_wkptr tex = (*it).second;
-		if (tex.lock()) {
-			tex.lock()->reload();
-		}
-		it++;
-	}
-}
-
 TextureData::TextureData(const char *fname, bool useMipmap) : useMipmap(useMipmap) {
 	filename.assign(fname);
 	this->reload();
@@ -83,7 +55,7 @@ void TextureData::reload() {
 	GLuint texName = 0;
 	glGenTextures(1, &texName);
 	if (!texName) {
-		LOGE("** ERROR (create texture) ** %s", texName);
+		LOGE("** ERROR (create texture) ** %d", texName);
 		if(pixels) free(pixels);
 		exit(1);
 	}

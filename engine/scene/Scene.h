@@ -23,7 +23,7 @@
 #ifndef __GCube__Scene__
 #define __GCube__Scene__
 
-#include "GCDefines.h"
+#include "../GCDefines.h"
 #include "Node.h"
 #include "Light.h"
 

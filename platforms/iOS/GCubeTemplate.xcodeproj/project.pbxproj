@@ -10,7 +10,6 @@
 		661C634217865141003DB62E /* debug.txt in Resources */ = {isa = PBXBuildFile; fileRef = 661C633717865141003DB62E /* debug.txt */; };
 		661C634317865141003DB62E /* se_yay.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 661C633917865141003DB62E /* se_yay.ogg */; };
 		661C634417865141003DB62E /* gclue_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 661C633B17865141003DB62E /* gclue_logo.png */; };
-		661C634517865141003DB62E /* glsample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 661C633E17865141003DB62E /* glsample.cpp */; };
 		661C634617865141003DB62E /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 661C634017865141003DB62E /* Main.cpp */; };
 		661C63491786514E003DB62E /* GCUserEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 661C63481786514E003DB62E /* GCUserEvent.mm */; };
 		6621FA6317856C6C000F1EDB /* GCube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6621FA6217856C6C000F1EDB /* GCube.framework */; };
@@ -44,8 +43,6 @@
 		661C633917865141003DB62E /* se_yay.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = se_yay.ogg; sourceTree = "<group>"; };
 		661C633B17865141003DB62E /* gclue_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gclue_logo.png; sourceTree = "<group>"; };
 		661C633D17865141003DB62E /* GCubeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCubeConfig.h; sourceTree = "<group>"; };
-		661C633E17865141003DB62E /* glsample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glsample.cpp; sourceTree = "<group>"; };
-		661C633F17865141003DB62E /* glsample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glsample.h; sourceTree = "<group>"; };
 		661C634017865141003DB62E /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 		661C634117865141003DB62E /* Main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main.h; sourceTree = "<group>"; };
 		661C63481786514E003DB62E /* GCUserEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GCUserEvent.mm; sourceTree = "<group>"; };
@@ -138,8 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				661C633D17865141003DB62E /* GCubeConfig.h */,
-				661C633E17865141003DB62E /* glsample.cpp */,
-				661C633F17865141003DB62E /* glsample.h */,
 				661C634017865141003DB62E /* Main.cpp */,
 				661C634117865141003DB62E /* Main.h */,
 			);
@@ -314,7 +309,6 @@
 			files = (
 				66FE24ED17856A3200969BA7 /* main.m in Sources */,
 				66FE24F117856A3200969BA7 /* GCAppDelegate.mm in Sources */,
-				661C634517865141003DB62E /* glsample.cpp in Sources */,
 				661C634617865141003DB62E /* Main.cpp in Sources */,
 				661C63491786514E003DB62E /* GCUserEvent.mm in Sources */,
 			);

@@ -23,15 +23,14 @@
 #ifndef __GCube__Figure__
 #define __GCube__Figure__
 
-#include "Node.h"
-#include "Drawable.h"
+#include "DrawableNode.h"
 #include "Mesh.h"
 #include "Material.h"
 #include "../shader/Shader.h"
 
 namespace GCube {
 
-class Figure : public Node, public Drawable {
+class Figure : public DrawableNode {
 public:
 	Figure(const char* name = NULL);
 	virtual ~Figure();

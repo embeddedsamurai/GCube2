@@ -152,7 +152,7 @@ bool Matrix3D::equals(Matrix3D *mtx) {
 }
 
 // 乗算
-void Matrix3D::multiply(Matrix3D *mtx) {
+void Matrix3D::multiply(const Matrix3D *mtx) {
 	float ret[16];
 	mtxMultiply(ret, matrix, mtx->matrix);
 	memcpy(matrix, ret, sizeof(float)*16);
@@ -229,7 +229,7 @@ void Matrix3D::scale(float x, float y, float z, bool apply) {
 }
 
 // 法線ベクトル取得
-void Matrix3D::normalMatrix(float *mtxout) {
+void Matrix3D::normalMatrix(float *mtxout) const {
 	float tmp1[9];
 	float tmp2[9];
 	float normal[9];
