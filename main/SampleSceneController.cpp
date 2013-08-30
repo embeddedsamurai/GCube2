@@ -121,7 +121,7 @@ void SampleSceneController::onUpdate(float dt) {
 static Pointf pos;
 static Matrix3D mtx;
 void SampleSceneController::onTouchNode(TouchableNode& node, const TouchEvent &event) {
-	LOGD("touch![%s]", node.name);
+	//LOGD("touch![%s]", node.name);
 	if (event.action == TouchActionDown) {
 		pos = event.pos;
 		mtx = node.transform;

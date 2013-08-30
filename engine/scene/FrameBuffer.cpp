@@ -59,7 +59,7 @@ void FrameBuffer::createBuffer(const Sizef &size, bool useDepthBuffer) {
 }
 
 void FrameBuffer::deleteBuffer() {
-	if (framebufferID) return;
+	if (!framebufferID) return;
 
 	glDeleteRenderbuffers(1, &depthRenderbufferID);
 	glDeleteRenderbuffers(1, &colorRenderbufferID);
