@@ -20,28 +20,23 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__SampleSceneController__
-#define __GCube__SampleSceneController__
+#ifndef __GCube__FirstSceneController__
+#define __GCube__FirstSceneController__
 
 #include "GCube.h"
 
 namespace GCube {
 
-class SampleSceneController : public IApplicationEventListener, public INodeEventListener {
+class FirstSceneController : public IApplicationEventListener, public INodeEventListener {
 private:
 	int sid;
-	StandardCamera_ptr subCamera;
-	Figure_ptr fig;
-	Figure_ptr fig2;
 	
 public:
-	SampleSceneController() {};
-	virtual ~SampleSceneController() {};
+	FirstSceneController() {};
+	virtual ~FirstSceneController() {};
 	
 	// IApplicationEventListener
 	virtual void onInit();
-	virtual void onContextChanged();
-	virtual void onUpdate(float dt);
 	
 	// INodeEventListener
 	virtual void onTouchNode(TouchableNode& node, const TouchEvent &event);

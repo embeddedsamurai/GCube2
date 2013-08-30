@@ -30,13 +30,14 @@ namespace GCube {
 
 class Window {
 public:
-	Window() : isFullScreen(false) {};
+	Window() : isFullScreen(false), isVisible(true) {};
 	virtual ~Window() {};
 	
 public:
 	Camera_ptr camera;
 	Rectf frame;
 	bool isFullScreen;
+	bool isVisible;
 	Colorf bgColor;
 };
 

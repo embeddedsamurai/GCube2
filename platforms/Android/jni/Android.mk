@@ -33,7 +33,8 @@ LOCAL_LDLIBS    := -llog -lGLESv2 -lz -landroid
 LOCAL_STATIC_LIBRARIES := gcube openal 
 
 LOCAL_SRC_FILES := main/Main.cpp \
-                   main/SampleSceneController.cpp
+                   main/FirstSceneController.cpp \
+                   main/SecondSceneController.cpp
                    
 LOCAL_C_INCLUDES:= $(MY_PATH)/android/ \
                    $(MY_PATH)/OpenAL/ \

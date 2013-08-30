@@ -26,6 +26,7 @@ using namespace GCube;
 
 // コンストラクタ
 Figure::Figure(const char *name) : TouchableNode(name) {
+	type = FigureTypeID();
 //	shader = NULL;
 //	mesh = NULL;
 }

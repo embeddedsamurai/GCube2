@@ -71,9 +71,9 @@ float ApplicationController::getVersion() {
 }
 
 // シーン切り替え
-void ApplicationController::changeScene(const Scene_ptr &nextScene, SceneTransition *transition) {
+void ApplicationController::changeScene(int sceneID, SceneTransition *transition) {
 	// TODO: トランジションサポート
-	activeScene = nextScene;
+	activeScene = sceneMap[sceneID];
 }
 
 // 言語取得
@@ -127,8 +127,23 @@ void ApplicationController::onResume(void) {
 
 void ApplicationController::onContextChanged(void) {
 	LOGD("ApplicationController::onContextChanged()");
+	// テクスチャ、シェーダー再構築
 	textureCache.reloadAllData();
 	shaderManager.reloadAllData();
+	// 全Sceneの全Figure検索
+	std::map<int, Scene_ptr>::iterator it = sceneMap.begin();
+	while (it != sceneMap.end()) {
+		// 全Figure
+		std::vector<Node*> figs = (*it).second->findChildNodeByType(Figure::FigureTypeID());
+		std::vector<Node*>::iterator fit = figs.begin();
+		while (fit != figs.end()) {
+			// 再構築
+			((Figure*)(*fit))->rebuild();
+			fit++;
+		}
+		it++;
+	}
+
 	main->onContextChanged();
 }
 
@@ -180,6 +195,10 @@ void ApplicationController::onDraw() {
 		std::vector<Window_ptr>::iterator it = windowArray.begin();
 		while (it != windowArray.end()) {
 			Window_ptr v = (Window_ptr) *it;
+			if (!v->isVisible) {
+				it++;
+				continue;
+			}
 			// ウィンドウの背景色
 			glClearColor(v->bgColor.r, v->bgColor.g, v->bgColor.b, v->bgColor.a);
 			glClear(GL_DEPTH_BUFFER_BIT);

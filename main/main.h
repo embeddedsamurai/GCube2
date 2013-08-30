@@ -24,13 +24,15 @@
 #define __GCube__Main__
 
 #include "GCube.h"
-#include "SampleSceneController.h"
+#include "FirstSceneController.h"
+#include "SecondSceneController.h"
 
 namespace GCube {
 
 class Main : public IApplicationEventListener {
 private:
-	SampleSceneController sampleScene;
+	FirstSceneController firstScene;
+	SecondSceneController secondScene;
 	
 public:
 	Main() {};
@@ -38,7 +40,6 @@ public:
 	
 	virtual void onInit();
 	virtual void onSizeChanged(float width, float height, DeviceOrientation orientation);
-	virtual void onContextChanged();
 	virtual void onUpdate(float dt);
 	virtual int onUserEvent(int type, int param1=0, long long param2=0, float param3=0, double param4=0, const char *param5=NULL);
 	virtual void onDebugCommand(const char *command, int param);

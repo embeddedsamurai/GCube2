@@ -20,13 +20,14 @@
  * THE SOFTWARE.
  */
 
-#include "SampleSceneController.h"
+#include "SecondSceneController.h"
+
 
 using namespace GCube;
 
 // 初期化
-void SampleSceneController::onInit() {
-	LOGD("SampleSceneController::onInit()");
+void SecondSceneController::onInit() {
+	LOGD("SecondSceneController::onInit()");
 	
 	ApplicationController *ctr = ApplicationController::SharedInstance();
 	
@@ -39,7 +40,7 @@ void SampleSceneController::onInit() {
 	// シーン作成
 	Scene_ptr sceneMain(new Scene("SceneMain"));
 	Node_ptr node(new Node("Node"));
-	node->transform.translate(2, 0, 0);
+	node->transform.translate(3, 3, 0);
 	// プレート追加
 	fig = Figure_ptr(new Figure("Fig"));
 	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 3));
@@ -76,7 +77,7 @@ void SampleSceneController::onInit() {
 	
 	// シーン変更
 	sceneMain->addChildNode(node);
-	ctr->changeScene(sceneMain);
+	ctr->sceneMap[2] = sceneMain;
 	
 	// メインウィンドウの背景色変更
 	Window_ptr mainWindow = ctr->windowArray[0];
@@ -93,22 +94,14 @@ void SampleSceneController::onInit() {
 	subCamera->transform.translate(0, 0, 40);
 	subCamera->transform.rotate(45, GCube::RotateDirZ);
 	window->camera = subCamera;
+	window->isVisible = false;
 	ctr->windowArray.push_back(window);
 	
 }
 
-// コンテキスト切り替え
-void SampleSceneController::onContextChanged() {
-	LOGD("SampleSceneController::onContextChanged()");
-	
-	// Figure再構築
-	fig->rebuild();
-	fig2->rebuild();
-}
-
 // 更新
 static float ang = 0;
-void SampleSceneController::onUpdate(float dt) {
+void SecondSceneController::onUpdate(float dt) {
 	// サブウィンドウのカメラを回転
 	subCamera->transform.loadIdentity();
 	subCamera->transform.translate(0, 0, 40);
@@ -120,7 +113,7 @@ void SampleSceneController::onUpdate(float dt) {
 // ノードタッチイベント
 static Pointf pos;
 static Matrix3D mtx;
-void SampleSceneController::onTouchNode(TouchableNode& node, const TouchEvent &event) {
+void SecondSceneController::onTouchNode(TouchableNode& node, const TouchEvent &event) {
 	//LOGD("touch![%s]", node.name);
 	if (event.action == TouchActionDown) {
 		pos = event.pos;

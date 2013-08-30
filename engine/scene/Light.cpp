@@ -25,7 +25,7 @@
 using namespace GCube;
 // コンストラクタ
 Light::Light(const char *name) : Node(name) {
-	this->type=LightType();
+	this->type=LightTypeID();
 	diffuse = Colorf(1,1,1);
 	specular = Colorf(1,1,1);
 }

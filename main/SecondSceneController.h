@@ -20,28 +20,32 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__SecondSceneController__
+#define __GCube__SecondSceneController__
 
-#include "../GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+#include "GCube.h"
 
 namespace GCube {
 
-class Scene : public Node {
-public:
-	Scene(const char* name = NULL);
-	virtual ~Scene() {};
-	
-	virtual std::vector<Node*> getLights();
-
+class SecondSceneController : public IApplicationEventListener, public INodeEventListener {
 private:
+	int sid;
+	StandardCamera_ptr subCamera;
+	Figure_ptr fig;
+	Figure_ptr fig2;
 	
+public:
+	SecondSceneController() {};
+	virtual ~SecondSceneController() {};
+	
+	// IApplicationEventListener
+	virtual void onInit();
+	virtual void onUpdate(float dt);
+	
+	// INodeEventListener
+	virtual void onTouchNode(TouchableNode& node, const TouchEvent &event);
 };
-
-DEF_SHARED_PTR(Scene);
 
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__SecondSceneController__) */

@@ -48,7 +48,8 @@ void Main::onInit() {
 	}
 	
 	// サンプルシーン初期化
-	sampleScene.onInit();
+	firstScene.onInit();
+	secondScene.onInit();
 }
 
 // サイズ変更
@@ -56,15 +57,9 @@ void Main::onSizeChanged(float width, float height, DeviceOrientation orientatio
 	LOGD("Main::onSizeChanged(%f, %f, %d)", width, height, orientation);
 }
 
-// コンテキスト切り替え
-void Main::onContextChanged() {
-	LOGD("Main::onContextChanged()");
-	sampleScene.onContextChanged();
-}
-
 // 更新
 void Main::onUpdate(float dt) {
-	sampleScene.onUpdate(dt);
+	secondScene.onUpdate(dt);
 }
 
 // ユーザイベント

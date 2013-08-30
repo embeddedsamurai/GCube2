@@ -30,5 +30,5 @@ Scene::Scene(const char *name) : Node(name) {
 
 // ライト取得
 std::vector<Node*> Scene::getLights() {
-	return this->findChildNodeByType(Light::LightType());
+	return this->findChildNodeByType(Light::LightTypeID());
 }
