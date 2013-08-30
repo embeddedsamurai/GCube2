@@ -38,7 +38,8 @@ public:
 	virtual ~Node();
 	
 	virtual void updateProcess(float dt, const Matrix3D &matrix);
-	virtual void drawProcess(const Window &window);
+	virtual void drawProcess(const Window &window, bool hitTest=false);
+	virtual void hitTestProcess(const TouchEvent &event, const Colorf &color);
 	
 	Node *getParentNode() const;
 	
@@ -51,12 +52,12 @@ public:
 
 public:
 	int tag;
+	const char *name;
 
 	
 protected:
 	void setParentNode(Node *newParent);
 	Node *parent;
-	const char *name;
 	std::vector<Node_ptr> children;
 	int type;
 };

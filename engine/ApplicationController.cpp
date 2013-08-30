@@ -46,6 +46,8 @@ void ApplicationController::DestroyInstance() {
 
 ApplicationController::ApplicationController() {
 	LOGD("ApplicationController::ApplicationController()");
+	hitTestFramebuffer = 0;
+	hitTestRenderbuffer = 0;
 	// デフォルトウィンドウ作成
 	Window_ptr w(new Window());
 	w->isFullScreen = true;
@@ -134,6 +136,29 @@ void ApplicationController::onContextChanged(void) {
 
 void ApplicationController::onSizeChanged(float width, float height, DeviceOrientation orientation) {
 	LOGD("ApplicationController::onSizeChanged(%f, %f, %d)", width, height, orientation);
+	
+	// HitTest用のフレームバッファ作成
+	glDeleteRenderbuffers(1, &hitTestRenderbuffer);
+	glDeleteFramebuffers(1, &hitTestFramebuffer);
+	
+	glGenFramebuffers(1, &hitTestFramebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, hitTestFramebuffer);
+	
+	//Create the RenderBuffer for offscreen rendering // Color
+	glGenRenderbuffers(1, &hitTestRenderbuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, hitTestRenderbuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8_OES, width, height);
+	
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, hitTestRenderbuffer);
+//	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+//	LOGD("%d", status);
+//	if (status==GL_FRAMEBUFFER_COMPLETE) {
+//		LOGD("ok!!");
+//	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	
+	// サイズ変更
 	screenSize.width = width;
 	screenSize.height = height;
 	aspect = width / height;
@@ -156,6 +181,11 @@ void ApplicationController::onUpdate(float dt) {
 }
 
 void ApplicationController::onDraw() {
+	// HitTestシェーダー初期化
+	HitTestShader_ptr testShader = PTR_CAST(HitTestShader, ShaderManager::GetShader(ShaderTypeHitTest));
+	testShader->reset();
+	
+	// 描画
 //	LOGD("ApplicationController::onDraw()");
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -203,8 +233,41 @@ void ApplicationController::onDraw() {
 	
 // タッチイベント
 void ApplicationController::onTouch(TouchAction action, float x, float y, long id, long time) {
-	LOGD("***********onTouch[%d](%f,%f)[%ld] %ld", action, x, y, id, time);
-	main->onTouch(action, x, y, id, time);
+	float xx = x / screenSize.width * 2.0 - 1.0;
+	float yy = 1.0 - y / screenSize.height * 2.0;
+	LOGD("***********onTouch[%d](%f,%f)[%ld] %ld", action, xx, yy, id, time);
+	TouchEvent ev(action, x, y, id, time);
+	if (action==TouchActionDown) {
+		
+		// HitTest
+		glBindFramebuffer(GL_FRAMEBUFFER, hitTestFramebuffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, hitTestRenderbuffer);
+		
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		glDisable(GL_SCISSOR_TEST);
+		glViewport(0, 0, screenSize.width, screenSize.height);
+		Window_ptr v = windowArray[0];
+		// 背景色は黒
+		glClearColor(0, 0, 0, 1);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		if (v->camera) {
+			v->camera->updateProjectionMatrix();
+			activeScene->drawProcess(*v.get(), true);
+		}
+
+		// タッチ箇所の色取得
+		GLubyte pixel[4] = {0};
+		glReadPixels(x, screenSize.height-y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE,(void *)pixel);
+		//LOGD("%d,%d,%d,%d", pixel[0],pixel[1],pixel[2],pixel[3]);
+		Colorf color(pixel[0]/255.0, pixel[1]/255.0, pixel[2]/255.0);
+		activeScene->hitTestProcess(ev, color);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+	
+	main->onTouch(action, xx, yy, id, time);
 }
 
 // 傾きセンサイベント

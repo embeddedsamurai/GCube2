@@ -29,6 +29,8 @@ void Main::onInit() {
 	LOGD("Main::onInit()");
 	
 	ApplicationController *ctr = ApplicationController::SharedInstance();
+	// バージョンを取得
+	LOGD("ver:%f", ctr->getVersion());
 	// 言語設定を取得
 	LOGD("lang:%s", ctr->getLanguage().c_str());
 	// UserEventを送信
@@ -64,6 +66,8 @@ void Main::onInit() {
 	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
 	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
 	fig->shader = ShaderManager::GetShader(ShaderTypeTex);
+	fig->transform.translate(0, 3, 0);
+	fig->touchEventListener = this;
 	node->addChildNode(fig);
 	// プレート追加２
 	fig2 = Figure_ptr(new Figure("Fig2"));
@@ -76,6 +80,7 @@ void Main::onInit() {
 	fig2->transform.translate(3, 1, 0);
 	fig2->transform.rotate(45, RotateDirX);
 	fig2->transform.rotate(45, RotateDirY);
+	fig2->touchEventListener = this;
 	node->addChildNode(fig2);
 	
 	// ライト
@@ -136,7 +141,7 @@ void Main::onUpdate(float dt) {
 	
 	fig2->transform.loadIdentity();
 	fig2->transform.translate(3, 1, 0);
-	fig2->transform.rotate(45, RotateDirX);
+//	fig2->transform.rotate(45, RotateDirX);
 	fig2->transform.rotate(ang, RotateDirY);
 
 //	tex->matrix.scale(1.01, 1.01, 1.01);
@@ -164,3 +169,8 @@ void Main::onDebugCommand(const char *command, int param) {
 		LOGD("***TestCommand (%d)", param);
 	}
 }
+
+void Main::onTouchNode(TouchableNode& node, const TouchEvent &event) {
+	LOGD("touch![%s]", node.name);
+}
+

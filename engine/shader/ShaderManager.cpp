@@ -25,6 +25,7 @@
 #include "ColorShader.h"
 #include "TexShader.h"
 #include "FlatShader.h"
+#include "HitTestShader.h"
 
 using namespace GCube;
 
@@ -45,6 +46,9 @@ Shader_ptr ShaderManager::getShader(ShaderType type) {
 				break;
 			case ShaderTypeFlat:
 				ptr = FlatShader_ptr(new FlatShader());
+				break;
+			case ShaderTypeHitTest:
+				ptr = HitTestShader_ptr(new HitTestShader());
 				break;
 			default:
 				break;

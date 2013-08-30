@@ -27,7 +27,7 @@
 
 namespace GCube {
 	
-class Main : public IApplicationEventListener {
+class Main : public IApplicationEventListener, public INodeEventListener {
 private:
 	int sid;
 	StandardCamera_ptr subCamera;
@@ -45,6 +45,8 @@ public:
 	virtual void onTouch(TouchAction action, float x, float y, long id, long time);
 	virtual int onUserEvent(int type, int param1=0, long long param2=0, float param3=0, double param4=0, const char *param5=NULL);
 	virtual void onDebugCommand(const char *command, int param);
+	
+	virtual void onTouchNode(TouchableNode& node, const TouchEvent &event);
 };
 	
 }

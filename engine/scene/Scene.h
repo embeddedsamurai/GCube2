@@ -31,7 +31,8 @@ namespace GCube {
 
 class Scene : public Node {
 public:
-	Scene(const char* name = NULL) : Node(name) {};
+	Scene(const char* name = NULL);
+//	Scene(const char* name = NULL) : Node(name) {};
 	virtual ~Scene() {};
 	
 	virtual std::vector<Node*> getLights();

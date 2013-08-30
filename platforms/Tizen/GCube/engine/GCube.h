@@ -23,7 +23,7 @@
 #ifndef GCube_GCube_h
 #define GCube_GCube_h
 
-#define kGCubeVersion 0.1
+#define kGCubeVersion 0.2
 
 #include "GCDefines.h"
 #include "ApplicationController.h"
@@ -36,6 +36,7 @@
 #include "scene/Coords.h"
 #include "scene/DrawableNode.h"
 #include "scene/Figure.h"
+#include "scene/INodeEventListener.h"
 #include "scene/Light.h"
 #include "scene/Mesh.h"
 #include "scene/Material.h"
@@ -46,10 +47,12 @@
 #include "scene/PrimitiveObject.h"
 #include "scene/Texture.h"
 #include "scene/TextureData.h"
+#include "scene/TouchableNode.h"
 #include "scene/Vbo.h"
 #include "scene/Window.h"
 #include "shader/ColorShader.h"
 #include "shader/FlatShader.h"
+#include "shader/HitTestShader.h"
 #include "shader/TexShader.h"
 #include "shader/Shader.h"
 #include "shader/ShaderManager.h"

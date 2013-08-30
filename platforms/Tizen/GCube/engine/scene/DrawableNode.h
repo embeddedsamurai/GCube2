@@ -28,12 +28,19 @@
 
 namespace GCube {
 
+typedef enum {
+	DrawTypeNormal,
+	DrawTypeLine,
+	DrawTypeHitTest,
+	NUM_DrawType
+} DrawType;
+
 class DrawableNode : public Node {
 public:
 	DrawableNode(const char* name = NULL) : Node(name), isVisible(true) {};
 	virtual ~DrawableNode() {};
 	
-	virtual void draw(const Window &window) = 0;
+	virtual void draw(const Window &window, DrawType type=DrawTypeNormal) = 0;
 public:
 	bool isVisible;
 	

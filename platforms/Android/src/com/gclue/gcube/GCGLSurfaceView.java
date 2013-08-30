@@ -43,6 +43,7 @@ public class GCGLSurfaceView extends GLSurfaceView {
     public GCGLSurfaceView(Context context) {
         super(context);
         setEGLContextClientVersion(2);
+        setEGLConfigChooser(8, 8, 8, 8, 16, 0);
         setRenderer(new GCRenderer(context));
     }
 

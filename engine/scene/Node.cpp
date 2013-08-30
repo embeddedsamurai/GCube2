@@ -23,12 +23,14 @@
 #include "Node.h"
 #include "DrawableNode.h"
 #include "Figure.h"
+#include "TouchableNode.h"
+#include "../util/Log.h"
 #include <string.h>
 
 using namespace GCube;
 
 // コンストラクタ
-Node::Node(const char *name) : tag(0), parent(NULL), name(name), type(0) {
+Node::Node(const char *name) : tag(0), name(name), parent(NULL), type(0) {
 }
 
 // デストラクタ
@@ -54,19 +56,40 @@ void Node::updateProcess(float dt, const Matrix3D &matrix) {
 }
 
 // 描画
-void Node::drawProcess(const Window &window) {
+void Node::drawProcess(const Window &window, bool hitTest) {
 	// 軸表示
 	drawAxis();
 	// 描画
 	DrawableNode *drawable = dynamic_cast<DrawableNode*>(this);
 	if (drawable && drawable->isVisible) {
-		drawable->draw(window);
+		if (hitTest) {
+			drawable->draw(window, DrawTypeHitTest);
+		} else {
+			drawable->draw(window);
+		}
 	}
 	// 子
 	if(!children.empty()) {
 		for(size_t i = 0; i < children.size(); ++i) {
 			if(NULL != children[i]) {
-				children[i]->drawProcess(window);
+				children[i]->drawProcess(window, hitTest);
+			}
+		}
+	}
+}
+
+// 処理
+void Node::hitTestProcess(const TouchEvent &event, const Colorf &color) {
+	// Hitテスト
+	TouchableNode *node = dynamic_cast<TouchableNode*>(this);
+	if (node && node->isEnable) {
+		node->hitTest(event, color);
+	}
+	// 子
+	if(!children.empty()) {
+		for(size_t i = 0; i < children.size(); ++i) {
+			if(NULL != children[i]) {
+				children[i]->hitTestProcess(event, color);
 			}
 		}
 	}

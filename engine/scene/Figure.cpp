@@ -25,9 +25,9 @@
 using namespace GCube;
 
 // コンストラクタ
-Figure::Figure(const char *name) : DrawableNode(name) {
-	shader = NULL;
-	mesh = NULL;
+Figure::Figure(const char *name) : TouchableNode(name) {
+//	shader = NULL;
+//	mesh = NULL;
 }
 
 // デストラクタ
@@ -40,11 +40,17 @@ void Figure::rebuild() {
 }
 
 // 描画
-void Figure::draw(const Window &window) {
+void Figure::draw(const Window &window, DrawType type) {
 	if (isVisible && shader && mesh) {
-		shader->useProgram();
-		mesh->bind();
-		shader->setInfo(this, window.camera.get());
+		if (type==DrawTypeHitTest) {
+			testShader->useProgram();
+			mesh->bind();
+			testShader->setInfo(this, window.camera.get());
+		} else {
+			shader->useProgram();
+			mesh->bind();
+			shader->setInfo(this, window.camera.get());
+		}
 		glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_SHORT, NULL);
 	}
 }

@@ -32,6 +32,16 @@ namespace GCube {
  * テクスチャ描画シェーダークラス.
  */
 class TexShader : public Shader {
+protected:
+	// uniform index
+	enum {
+		UNIFORM_MVP_MATRIX, //!< MVP変換行列
+		UNIFORM_TEXTURE,    //!< テクスチャ
+		UNIFORM_TEX_MATRIX, //!< テクスチャ変換行列
+		NUM_UNIFORMS        //!< ユニフォーム数
+	};
+	GLint uniforms[NUM_UNIFORMS];
+	
 public:
 	/**
 	 * コンストラクタ.

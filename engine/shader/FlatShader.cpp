@@ -29,6 +29,7 @@
 
 using namespace GCube;
 
+//////////////////////////////////////////////////////////
 // vertex shader
 CONST_STR(gVertexShader,
 
@@ -78,22 +79,7 @@ void main()
 
 );
 
-
-// uniform index
-enum {
-	UNIFORM_MVP_MATRIX,   //!< MVP変換行列
-	UNIFORM_M_MATRIX,     //!< M変換行列
-	UNIFORM_TEXTURE,      //!< テクスチャ
-	UNIFORM_TEX_MATRIX,   //!< テクスチャ変換行列
-	UNIFORM_NORMAL_MATRIX,//!< 法線マトリックス
-	UNIFORM_LIGHT_POS,    //!< ライトの位置
-	UNIFORM_LIGHT_AMBIENT,//!< ライトの環境光色
-	UNIFORM_LIGHT_DIFFUSE,//!< ライトの拡散光色
-	UNIFORM_LIGHT_COUNT,  //!< ライトの数
-	NUM_UNIFORMS          //!< ユニフォーム数
-};
-static GLint uniforms[NUM_UNIFORMS];
-
+//////////////////////////////////////////////////////////
 
 
 FlatShader::FlatShader() {

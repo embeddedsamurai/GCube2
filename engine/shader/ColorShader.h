@@ -32,6 +32,15 @@ namespace GCube {
  * 単色塗りつぶしシェーダークラス.
  */
 class ColorShader : public Shader {
+protected:
+	// uniform index
+	enum {
+		UNIFORM_MVP_MATRIX,   //!< MVPマトリクス変数へのユニフォーム
+		UNIFORM_COLOR,        //!< 描画色へのユニフォーム
+		NUM_UNIFORMS          //!< ユニフォーム数
+	};
+	GLint uniforms[NUM_UNIFORMS];
+	
 public:
 	/**
 	 * コンストラクタ.

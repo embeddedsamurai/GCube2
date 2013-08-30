@@ -27,6 +27,7 @@
 
 using namespace GCube;
 
+//////////////////////////////////////////////////////////
 // vertex shader
 CONST_STR(gVertexShader,
 
@@ -58,16 +59,7 @@ void main()
 
 );
 
-
-// uniform index
-enum {
-	UNIFORM_MVP_MATRIX, //!< MVP変換行列
-	UNIFORM_TEXTURE,    //!< テクスチャ
-	UNIFORM_TEX_MATRIX, //!< テクスチャ変換行列
-	NUM_UNIFORMS        //!< ユニフォーム数
-};
-static GLint uniforms[NUM_UNIFORMS];
-
+//////////////////////////////////////////////////////////
 
 
 TexShader::TexShader() {

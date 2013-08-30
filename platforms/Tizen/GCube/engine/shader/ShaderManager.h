@@ -31,6 +31,7 @@ typedef enum {
 	ShaderTypeColor,
 	ShaderTypeTex,
 	ShaderTypeFlat,
+	ShaderTypeHitTest,
 	NUM_ShaderType
 } ShaderType;
 

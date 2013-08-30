@@ -28,6 +28,7 @@
 
 using namespace GCube;
 
+//////////////////////////////////////////////////////////
 // vertex shader
 CONST_STR(gVertexShader,
 		  
@@ -57,16 +58,7 @@ void main()
 
 );
 
-
-// uniform index
-enum {
-	UNIFORM_MVP_MATRIX,   //!< MVPマトリクス変数へのユニフォーム
-	UNIFORM_COLOR,        //!< 描画色へのユニフォーム
-	NUM_UNIFORMS          //!< ユニフォーム数
-};
-static GLint uniforms[NUM_UNIFORMS];
-
-
+//////////////////////////////////////////////////////////
 
 ColorShader::ColorShader() {
 	this->reload();

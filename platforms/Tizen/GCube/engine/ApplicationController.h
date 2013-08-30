@@ -39,6 +39,9 @@ private:
 	Sizef screenSize;
 	float aspect;
 	
+	GLuint hitTestFramebuffer;
+	GLuint hitTestRenderbuffer;
+	
 public:
 	Colorf bgColor;
 	std::vector<Window_ptr> windowArray;

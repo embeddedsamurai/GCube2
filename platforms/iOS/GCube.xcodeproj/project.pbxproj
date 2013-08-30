@@ -65,6 +65,7 @@
 		66798C6F17C5DFCE00AECDFE /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66798C6D17C5DFCD00AECDFE /* TextureCache.cpp */; };
 		667FC334176ABC9E000E8D0E /* GCAPIGlue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 667FC333176ABC9E000E8D0E /* GCAPIGlue.mm */; };
 		667FC33C176AFA07000E8D0E /* GCUserEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 667FC33B176AFA07000E8D0E /* GCUserEvent.mm */; };
+		6687870917CF0F62007B067B /* HitTestShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6687870717CF0F62007B067B /* HitTestShader.cpp */; };
 		66AFF4C71772DC4800025BF6 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 66AFF4C51772DC4800025BF6 /* stb_image.c */; };
 		66AFF4CA1772E2B500025BF6 /* gclue_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AFF4C91772E2B500025BF6 /* gclue_logo.png */; };
 		66AFF4CD177BD50E00025BF6 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 66AFF4CC177BD50E00025BF6 /* stb_vorbis.c */; };
@@ -163,6 +164,10 @@
 		66798C6E17C5DFCD00AECDFE /* TextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureCache.h; sourceTree = "<group>"; };
 		667FC333176ABC9E000E8D0E /* GCAPIGlue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GCAPIGlue.mm; sourceTree = "<group>"; };
 		667FC33B176AFA07000E8D0E /* GCUserEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GCUserEvent.mm; sourceTree = "<group>"; };
+		6687870517CEEF46007B067B /* TouchableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchableNode.h; sourceTree = "<group>"; };
+		6687870717CF0F62007B067B /* HitTestShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitTestShader.cpp; sourceTree = "<group>"; };
+		6687870817CF0F62007B067B /* HitTestShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestShader.h; sourceTree = "<group>"; };
+		6687870A17D02B5B007B067B /* INodeEventListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INodeEventListener.h; sourceTree = "<group>"; };
 		66AFF4C51772DC4800025BF6 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		66AFF4C61772DC4800025BF6 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		66AFF4C91772E2B500025BF6 /* gclue_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gclue_logo.png; sourceTree = "<group>"; };
@@ -453,9 +458,11 @@
 			children = (
 				66F9183017A26CC7006C413D /* Node.cpp */,
 				66F9183117A26CC7006C413D /* Node.h */,
+				6687870A17D02B5B007B067B /* INodeEventListener.h */,
 				66F9182A17A26CC7006C413D /* Coords.cpp */,
 				66F9182B17A26CC7006C413D /* Coords.h */,
 				66F9182D17A26CC7006C413D /* DrawableNode.h */,
+				6687870517CEEF46007B067B /* TouchableNode.h */,
 				66F9185717AA434A006C413D /* figure */,
 				66F9184817A2708F006C413D /* camera */,
 				66F9184917A2709F006C413D /* scene */,
@@ -498,6 +505,8 @@
 				66F9184C17AA363D006C413D /* Shader.h */,
 				6645D37917B3540800B18C1A /* ColorShader.cpp */,
 				6645D37A17B3540800B18C1A /* ColorShader.h */,
+				6687870717CF0F62007B067B /* HitTestShader.cpp */,
+				6687870817CF0F62007B067B /* HitTestShader.h */,
 				6645D38717B377C600B18C1A /* TexShader.cpp */,
 				6645D38817B377C600B18C1A /* TexShader.h */,
 				6645D38F17B49F2F00B18C1A /* FlatShader.cpp */,
@@ -715,6 +724,7 @@
 				6645D39517B4A3A600B18C1A /* Light.cpp in Sources */,
 				665299F317C461E0004DF8DD /* ShaderManager.cpp in Sources */,
 				66798C6F17C5DFCE00AECDFE /* TextureCache.cpp in Sources */,
+				6687870917CF0F62007B067B /* HitTestShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

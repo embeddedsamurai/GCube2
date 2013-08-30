@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    scene/Window.cpp \
                    shader/ColorShader.cpp \
                    shader/FlatShader.cpp \
+                   shader/HitTestShader.cpp \
                    shader/Shader.cpp \
                    shader/ShaderManager.cpp \
                    shader/TexShader.cpp \
