@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    scene/Camera.cpp \
                    scene/Coords.cpp \
                    scene/Figure.cpp \
+                   scene/FrameBuffer.cpp \
                    scene/Light.cpp \
                    scene/Mesh.cpp \
                    scene/Node.cpp \

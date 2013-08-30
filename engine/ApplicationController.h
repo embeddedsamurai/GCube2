@@ -29,6 +29,7 @@
 #include "scene/Window.h"
 #include "scene/TextureCache.h"
 #include "shader/ShaderManager.h"
+#include "scene/FrameBuffer.h"
 
 namespace GCube {
 
@@ -38,9 +39,7 @@ private:
 	Scene_ptr activeScene;
 	Sizef screenSize;
 	float aspect;
-	
-	GLuint hitTestFramebuffer;
-	GLuint hitTestRenderbuffer;
+	FrameBuffer hitTestBuffer;
 	
 public:
 	Colorf bgColor;

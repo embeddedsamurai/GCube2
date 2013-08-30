@@ -32,7 +32,7 @@ namespace GCube {
 
 class TouchableNode : public DrawableNode {
 public:
-	TouchableNode(const char* name = NULL) : DrawableNode(name), isTouchable(false), touchEventListener(NULL) {
+	TouchableNode(const char* name = NULL) : DrawableNode(name), isTouchable(false), touchEventListener(NULL), isActive(false) {
 		testShader = ShaderManager::GetShader(ShaderTypeHitTest);
 	};
 	virtual ~TouchableNode() {};

@@ -20,50 +20,33 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__TouchableNode__
-#define __GCube__TouchableNode__
+#ifndef __GCube__SampleSceneController__
+#define __GCube__SampleSceneController__
 
-#include "DrawableNode.h"
-#include "INodeEventListener.h"
-#include "../shader/HitTestShader.h"
-#include "../shader/ShaderManager.h"
+#include "GCube.h"
 
 namespace GCube {
 
-class TouchableNode : public DrawableNode {
-public:
-	TouchableNode(const char* name = NULL) : DrawableNode(name), isTouchable(false), touchEventListener(NULL), isActive(false) {
-		testShader = ShaderManager::GetShader(ShaderTypeHitTest);
-	};
-	virtual ~TouchableNode() {};
-	
-	virtual void hitTest(const TouchEvent &event, const Colorf &color) {
-		if (touchEventListener && isTouchable && testColor.equals(color)) {
-			isActive = true;
-			touchEventListener->onTouchNode(*this, event);
-		}
-	};
-	
-	virtual void touch(const TouchEvent &event) {
-		if (touchEventListener && isTouchable && isActive) {
-			touchEventListener->onTouchNode(*this, event);
-		}
-		if (event.action == TouchActionUp ||
-			event.action == TouchActionCancel) {
-			isActive = false;
-		}
-	};
+class SampleSceneController : public IApplicationEventListener, public INodeEventListener {
+private:
+	int sid;
+	StandardCamera_ptr subCamera;
+	Figure_ptr fig;
+	Figure_ptr fig2;
 	
 public:
-	bool isTouchable;
-	Colorf testColor;
-	INodeEventListener *touchEventListener;
-
-protected:
-	Shader_ptr testShader;
-	bool isActive;
+	SampleSceneController() {};
+	virtual ~SampleSceneController() {};
 	
+	// IApplicationEventListener
+	virtual void onInit();
+	virtual void onContextChanged();
+	virtual void onUpdate(float dt);
+	
+	// INodeEventListener
+	virtual void onTouchNode(TouchableNode& node, const TouchEvent &event);
 };
+
 }
 
-#endif /* defined(__GCube__TouchableNode__) */
+#endif /* defined(__GCube__SampleSceneController__) */

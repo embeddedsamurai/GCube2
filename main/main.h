@@ -24,15 +24,13 @@
 #define __GCube__Main__
 
 #include "GCube.h"
+#include "SampleSceneController.h"
 
 namespace GCube {
-	
-class Main : public IApplicationEventListener, public INodeEventListener {
+
+class Main : public IApplicationEventListener {
 private:
-	int sid;
-	StandardCamera_ptr subCamera;
-	Figure_ptr fig;
-	Figure_ptr fig2;
+	SampleSceneController sampleScene;
 	
 public:
 	Main() {};
@@ -42,11 +40,8 @@ public:
 	virtual void onSizeChanged(float width, float height, DeviceOrientation orientation);
 	virtual void onContextChanged();
 	virtual void onUpdate(float dt);
-	virtual void onTouch(TouchAction action, float x, float y, long id, long time);
 	virtual int onUserEvent(int type, int param1=0, long long param2=0, float param3=0, double param4=0, const char *param5=NULL);
 	virtual void onDebugCommand(const char *command, int param);
-	
-	virtual void onTouchNode(TouchableNode& node, const TouchEvent &event);
 };
 	
 }

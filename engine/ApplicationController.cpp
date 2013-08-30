@@ -46,8 +46,6 @@ void ApplicationController::DestroyInstance() {
 
 ApplicationController::ApplicationController() {
 	LOGD("ApplicationController::ApplicationController()");
-	hitTestFramebuffer = 0;
-	hitTestRenderbuffer = 0;
 	// デフォルトウィンドウ作成
 	Window_ptr w(new Window());
 	w->isFullScreen = true;
@@ -138,25 +136,8 @@ void ApplicationController::onSizeChanged(float width, float height, DeviceOrien
 	LOGD("ApplicationController::onSizeChanged(%f, %f, %d)", width, height, orientation);
 	
 	// HitTest用のフレームバッファ作成
-	glDeleteRenderbuffers(1, &hitTestRenderbuffer);
-	glDeleteFramebuffers(1, &hitTestFramebuffer);
-	
-	glGenFramebuffers(1, &hitTestFramebuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, hitTestFramebuffer);
-	
-	//Create the RenderBuffer for offscreen rendering // Color
-	glGenRenderbuffers(1, &hitTestRenderbuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, hitTestRenderbuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8_OES, width, height);
-	
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, hitTestRenderbuffer);
-//	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-//	LOGD("%d", status);
-//	if (status==GL_FRAMEBUFFER_COMPLETE) {
-//		LOGD("ok!!");
-//	}
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	hitTestBuffer.deleteBuffer();
+	hitTestBuffer.createBuffer(Sizef(width, height));
 	
 	// サイズ変更
 	screenSize.width = width;
@@ -240,8 +221,7 @@ void ApplicationController::onTouch(TouchAction action, float x, float y, long i
 	if (action==TouchActionDown) {
 		
 		// HitTest
-		glBindFramebuffer(GL_FRAMEBUFFER, hitTestFramebuffer);
-		glBindRenderbuffer(GL_RENDERBUFFER, hitTestRenderbuffer);
+		hitTestBuffer.bind();
 		
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);

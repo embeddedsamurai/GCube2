@@ -20,50 +20,28 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__TouchableNode__
-#define __GCube__TouchableNode__
+#ifndef __GCube__FrameBuffer__
+#define __GCube__FrameBuffer__
 
-#include "DrawableNode.h"
-#include "INodeEventListener.h"
-#include "../shader/HitTestShader.h"
-#include "../shader/ShaderManager.h"
+#include "../GCDefines.h"
 
 namespace GCube {
 
-class TouchableNode : public DrawableNode {
-public:
-	TouchableNode(const char* name = NULL) : DrawableNode(name), isTouchable(false), touchEventListener(NULL), isActive(false) {
-		testShader = ShaderManager::GetShader(ShaderTypeHitTest);
-	};
-	virtual ~TouchableNode() {};
-	
-	virtual void hitTest(const TouchEvent &event, const Colorf &color) {
-		if (touchEventListener && isTouchable && testColor.equals(color)) {
-			isActive = true;
-			touchEventListener->onTouchNode(*this, event);
-		}
-	};
-	
-	virtual void touch(const TouchEvent &event) {
-		if (touchEventListener && isTouchable && isActive) {
-			touchEventListener->onTouchNode(*this, event);
-		}
-		if (event.action == TouchActionUp ||
-			event.action == TouchActionCancel) {
-			isActive = false;
-		}
-	};
-	
-public:
-	bool isTouchable;
-	Colorf testColor;
-	INodeEventListener *touchEventListener;
+class FrameBuffer {
+private:
+	GLuint framebufferID;
+	GLuint colorRenderbufferID;
+	GLuint depthRenderbufferID;
 
-protected:
-	Shader_ptr testShader;
-	bool isActive;
+public:
+	FrameBuffer();
+	virtual ~FrameBuffer() {};
 	
+	void createBuffer(const Sizef &size, bool useDepthBuffer=true);
+	void deleteBuffer();
+	void bind();
 };
+
 }
 
-#endif /* defined(__GCube__TouchableNode__) */
+#endif /* defined(__GCube__FrameBuffer__) */
