@@ -234,9 +234,9 @@ void ApplicationController::onDraw() {
 // タッチイベント
 void ApplicationController::onTouch(TouchAction action, float x, float y, long id, long time) {
 	float xx = x / screenSize.width * 2.0 - 1.0;
-	float yy = 1.0 - y / screenSize.height * 2.0;
+	float yy = (1.0 - y / screenSize.height * 2.0) / aspect;
 	LOGD("***********onTouch[%d](%f,%f)[%ld] %ld", action, xx, yy, id, time);
-	TouchEvent ev(action, x, y, id, time);
+	TouchEvent ev(action, xx, yy, id, time);
 	if (action==TouchActionDown) {
 		
 		// HitTest
@@ -265,6 +265,8 @@ void ApplicationController::onTouch(TouchAction action, float x, float y, long i
 		activeScene->hitTestProcess(ev, color);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	} else {
+		activeScene->touchProcess(ev);
 	}
 	
 	main->onTouch(action, xx, yy, id, time);

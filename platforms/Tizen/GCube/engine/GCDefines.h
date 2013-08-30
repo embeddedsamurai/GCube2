@@ -106,15 +106,6 @@ typedef enum StorageType
 }
 StorageType;
 
-typedef struct TouchEvent {
-	TouchAction action;
-	float x;
-	float y;
-	long id;
-	long time;
-	TouchEvent(TouchAction action, float x, float y, long id, long time) : action(action), x(x), y(y), id(id), time(time) {};
-} TouchEvent;
-
 typedef struct Pointf {
 	float x;
 	float y;
@@ -157,6 +148,15 @@ typedef struct Rectf {
 	};
 	
 } Rectf;
+
+typedef struct TouchEvent {
+	TouchAction action;
+	Pointf pos;
+	long id;
+	long time;
+	TouchEvent(TouchAction action, float x, float y, long id, long time) : action(action), pos(Pointf(x, y)), id(id), time(time) {};
+} TouchEvent;
+
 
 }
 

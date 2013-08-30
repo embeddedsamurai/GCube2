@@ -40,6 +40,7 @@ public:
 	virtual void updateProcess(float dt, const Matrix3D &matrix);
 	virtual void drawProcess(const Window &window, bool hitTest=false);
 	virtual void hitTestProcess(const TouchEvent &event, const Colorf &color);
+	virtual void touchProcess(const TouchEvent &event);
 	
 	Node *getParentNode() const;
 	

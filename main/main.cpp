@@ -67,7 +67,7 @@ void Main::onInit() {
 	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
 	fig->shader = ShaderManager::GetShader(ShaderTypeTex);
 	fig->transform.translate(0, 3, 0);
-	fig->touchEventListener = this;
+//	fig->touchEventListener = this;
 	node->addChildNode(fig);
 	// プレート追加２
 	fig2 = Figure_ptr(new Figure("Fig2"));
@@ -81,6 +81,7 @@ void Main::onInit() {
 	fig2->transform.rotate(45, RotateDirX);
 	fig2->transform.rotate(45, RotateDirY);
 	fig2->touchEventListener = this;
+	fig2->isTouchable = true;
 	node->addChildNode(fig2);
 	
 	// ライト
@@ -139,10 +140,10 @@ void Main::onUpdate(float dt) {
 	subCamera->transform.rotate(ang, GCube::RotateDirZ);
 	fig->material->texture->matrix.rotate(3, RotateDirX);
 	
-	fig2->transform.loadIdentity();
-	fig2->transform.translate(3, 1, 0);
-//	fig2->transform.rotate(45, RotateDirX);
-	fig2->transform.rotate(ang, RotateDirY);
+//	fig2->transform.loadIdentity();
+//	fig2->transform.translate(3, 1, 0);
+////	fig2->transform.rotate(45, RotateDirX);
+//	fig2->transform.rotate(ang, RotateDirY);
 
 //	tex->matrix.scale(1.01, 1.01, 1.01);
 }
@@ -170,7 +171,25 @@ void Main::onDebugCommand(const char *command, int param) {
 	}
 }
 
+// ノードタッチイベント
+static Pointf pos;
+static Pointf pos2;
 void Main::onTouchNode(TouchableNode& node, const TouchEvent &event) {
-	LOGD("touch![%s]", node.name);
+//	LOGD("touch![%s]", node.name);
+	if (event.action == TouchActionDown) {
+		pos = event.pos;
+		float sx = fig2->transform.getX();
+		float sy = fig2->transform.getY();
+		pos2 = Pointf(sx, sy);
+	} else {
+		float dx = event.pos.x - pos.x;
+		float dy = event.pos.y - pos.y;
+		fig2->transform.loadIdentity();
+		fig2->transform.translate(dx * 13.0, dy * 13.0, 0);
+		fig2->transform.translate(pos2.x, pos2.y, 0);
+		fig2->transform.rotate(45, RotateDirX);
+		fig2->transform.rotate(45, RotateDirY);
+
+	}
 }
 

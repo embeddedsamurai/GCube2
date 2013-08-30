@@ -78,11 +78,11 @@ void Node::drawProcess(const Window &window, bool hitTest) {
 	}
 }
 
-// 処理
+// タッチ処理
 void Node::hitTestProcess(const TouchEvent &event, const Colorf &color) {
 	// Hitテスト
 	TouchableNode *node = dynamic_cast<TouchableNode*>(this);
-	if (node && node->isEnable) {
+	if (node) {
 		node->hitTest(event, color);
 	}
 	// 子
@@ -90,6 +90,23 @@ void Node::hitTestProcess(const TouchEvent &event, const Colorf &color) {
 		for(size_t i = 0; i < children.size(); ++i) {
 			if(NULL != children[i]) {
 				children[i]->hitTestProcess(event, color);
+			}
+		}
+	}
+}
+
+// タッチ処理
+void Node::touchProcess(const TouchEvent &event) {
+	// Hitテスト
+	TouchableNode *node = dynamic_cast<TouchableNode*>(this);
+	if (node) {
+		node->touch(event);
+	}
+	// 子
+	if(!children.empty()) {
+		for(size_t i = 0; i < children.size(); ++i) {
+			if(NULL != children[i]) {
+				children[i]->touchProcess(event);
 			}
 		}
 	}
