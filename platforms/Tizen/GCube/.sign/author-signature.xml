@@ -4,7 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="bin/GCube.exe">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>wGfWjANPrWilI4xvan4mmAG90EqB21gMIzV0XTJtMSY=</DigestValue>
+<DigestValue>bplXWnMeWLAN8wqLaU7dJFZJpup8QLizzp5wjXELQgo=</DigestValue>
 </Reference>
 <Reference URI="info/manifest.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -16,7 +16,7 @@
 </Reference>
 <Reference URI="lib/libGCubeLib.a">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>alNdPaAhGOPkXpmM//+WpLiISJXSaX9cTtqzaiYNbaM=</DigestValue>
+<DigestValue>dVCWKuqqRsVkVF9Se0hwVCe68wpEtOn1LbI7h6g5f7A=</DigestValue>
 </Reference>
 <Reference URI="res/assets/.DS_Store">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -55,9 +55,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-cmeNhCEyJ03NEcVIdE0IQpqBheXWmWmt89GxDJiznlYpbO4973bMSQoQyBjmGb5dOGeJkE+JrfZk
-IMci3gevy9ie+ME3lCNW8NwAj8ZOJTSHkSnCNqxKsb7mRkyIpxUNRkXFyShJbnMBCZbQiys2g1EN
-O5Nz0kwVwqabUpk509E=
+fzgrR4j8HsdVncFkpGgjAic4R/EWfjkUbeKvEhq0AXKdAX7y6V6lX0rYYl8sJIxYT1+VBvdbzCUY
+zCEOJv3QSgsnE89SzXORRP6Od4+YPSPV2qDQ+CK92zUpR9Zyl2Gok62hQLndHuskX/h1AiXsyv9U
+A8fV7RJCCPmpca9w1Dc=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

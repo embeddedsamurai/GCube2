@@ -38,6 +38,8 @@ public:
 	virtual void draw(const Window &window, DrawType type=DrawTypeNormal);
 	virtual void rebuild();
 	
+	static int FigureTypeID() {return 100;};
+	
 public:
 	Shader_ptr shader;
 	Mesh_ptr mesh;

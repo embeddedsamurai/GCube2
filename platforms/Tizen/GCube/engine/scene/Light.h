@@ -35,7 +35,7 @@ public:
 	Light(const char* name = NULL);
 	virtual ~Light() {};
 	
-	static int LightType() {return 100;};
+	static int LightTypeID() {return 200;};
 	
 public:
 	Colorf diffuse;

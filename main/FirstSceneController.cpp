@@ -41,11 +41,11 @@ void FirstSceneController::onInit() {
 	// プレート追加
 	Figure_ptr fig;
 	fig = Figure_ptr(new Figure("Fig"));
-	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 3));
+	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 5));
 	// マテリアルとシェーダー設定
 	fig->material = Material_ptr(new Material());
 //	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
-	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
+	fig->material->ambientColor = Colorf(0.5, 0, 0);
 	fig->shader = ShaderManager::GetShader(ShaderTypeColor);
 	fig->transform.translate(0, 3, 0);
 	fig->touchEventListener = this;

@@ -29,6 +29,9 @@ class SceneTransition {
 public:
 	SceneTransition() {};
 	virtual ~SceneTransition() {};
+	
+//	virtual void onUpdate(float dt);
+//	virtual void onDraw();
 };
 
 }

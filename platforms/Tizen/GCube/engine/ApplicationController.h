@@ -44,6 +44,7 @@ private:
 public:
 	Colorf bgColor;
 	std::vector<Window_ptr> windowArray;
+	std::map<int, Scene_ptr> sceneMap;
 	TextureCache textureCache;
 	ShaderManager shaderManager;
 	
@@ -57,7 +58,7 @@ public:
 	static void DestroyInstance();
 	
 	// Scene //
-	virtual void changeScene(const Scene_ptr &nextScene, SceneTransition *transition=NULL);
+	virtual void changeScene(int sceneID, SceneTransition *transition=NULL);
 	virtual Scene_ptr getActiveScene() {return activeScene;};
 	
 	// Utils //
@@ -65,6 +66,7 @@ public:
 	virtual std::string getLanguage();
 	virtual void getResource(const char *fileName, std::vector<char>& outData);
 	virtual std::string getStoragePath(StorageType type);
+	virtual float getAspect() {return aspect;};
 	
 	virtual int sendUserEvent(int type, int param1=0, long long param2=0, float param3=0, double param4=0, const char *param5=NULL);
 	

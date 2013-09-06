@@ -30,13 +30,7 @@ void SecondSceneController::onInit() {
 	LOGD("SecondSceneController::onInit()");
 	
 	ApplicationController *ctr = ApplicationController::SharedInstance();
-	
-	// 音読み込み
-	int bgmid = SoundPlayer::loadBGM("sound/bgm_house.ogg");
-	SoundPlayer *player = SoundPlayer::SharedInstance();
-	player->play(bgmid);
-	sid = SoundPlayer::loadSE("sound/se_yay.ogg");
-	
+		
 	// シーン作成
 	Scene_ptr sceneMain(new Scene("SceneMain"));
 	Node_ptr node(new Node("Node"));
@@ -115,17 +109,19 @@ static Pointf pos;
 static Matrix3D mtx;
 void SecondSceneController::onTouchNode(TouchableNode& node, const TouchEvent &event) {
 	//LOGD("touch![%s]", node.name);
+	if (event.id!=0) return;
 	if (event.action == TouchActionDown) {
 		pos = event.pos;
 		mtx = node.transform;
-		// 音再生
-		SoundPlayer *player = SoundPlayer::SharedInstance();
-		player->play(sid);
 	} else {
+		ApplicationController *ctr = ApplicationController::SharedInstance();
+		// 横幅を調べる(画角50度、距離50)
+		float w = tan(50 * M_PI / 180.0 / 2.0) * 50 * ctr->getAspect();
+		// ドラッグ先へ移動
 		float dx = event.pos.x - pos.x;
 		float dy = event.pos.y - pos.y;
 		node.transform.loadIdentity();
-		node.transform.translate(dx * 13.0, dy * 13.0, 0);
+		node.transform.translate(dx * w, dy * w, 0);
 		node.transform.multiply(&mtx);
 	}
 }

@@ -29,7 +29,6 @@ namespace GCube {
 
 class SecondSceneController : public IApplicationEventListener, public INodeEventListener {
 private:
-	int sid;
 	StandardCamera_ptr subCamera;
 	Figure_ptr fig;
 	Figure_ptr fig2;
