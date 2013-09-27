@@ -7,10 +7,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,45 +20,45 @@
  * THE SOFTWARE.
  */
 
-#ifndef GCube_GCube_h
-#define GCube_GCube_h
+#ifndef GL_WFOBJLOADER_H
+#define GL_WFOBJLOADER_H
 
-#define kGCubeVersion 0.2
 
-#include "GCDefines.h"
-#include "ApplicationController.h"
-#include "IApplicationEventListener.h"
-#include "external/stb/stb_image.h"
-#include "external/stb/stb_vorbis.h"
-#include "math/Matrix3D.h"
-#include "math/Vector3D.h"
-#include "scene/Camera.h"
-#include "scene/Coords.h"
-#include "scene/DrawableNode.h"
-#include "scene/Figure.h"
-#include "scene/INodeEventListener.h"
-#include "scene/Light.h"
-#include "scene/Mesh.h"
-#include "scene/Material.h"
-#include "scene/Node.h"
-#include "scene/Scene.h"
-#include "scene/SceneTransition.h"
-#include "scene/StandardCamera.h"
-#include "scene/PrimitiveObject.h"
-#include "scene/Texture.h"
-#include "scene/TextureData.h"
-#include "scene/TouchableNode.h"
-#include "scene/Vbo.h"
-#include "scene/Window.h"
-#include "shader/ColorShader.h"
-#include "shader/FlatShader.h"
-#include "shader/HitTestShader.h"
-#include "shader/TexShader.h"
-#include "shader/Shader.h"
-#include "shader/ShaderManager.h"
-#include "sound/SoundData.h"
-#include "sound/SoundPlayer.h"
-#include "util/Log.h"
-#include "util/loader/WFObjLoader.h"
+#include "../../GCDefines.h"
+#include "../../scene/Figure.h"
 
-#endif
+namespace GCube {
+
+/**
+ * Obj形式の3Dオブジェクト読み込みクラス.
+ */
+class WFObjLoader {
+private:
+	/**
+	 * 文字列分割.
+	 */
+	static std::vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems);
+	
+	/**
+	 * v/vn/vt用の行分割.
+	 */
+	static void scanLine(const std::string &line, std::vector<float> &outupt, int max, bool rightHanded);
+	
+public:
+	/**
+	 * ファイルから読み込みます.
+	 * @param fileName ファイル名
+	 */
+	static Figure_ptr loadFile(const char *fileName, bool rightHanded=true);
+	
+	/**
+	 * データから読み込みます.
+	 * @param data データ
+	 */
+	static Figure_ptr loadData(std::vector<char>* data, bool rightHanded=true);
+	
+};
+
+}
+
+#endif // end of GL_WFOBJLOADER_H

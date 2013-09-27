@@ -62,6 +62,9 @@
 		666FB4E217D06C38007F8D7C /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666FB4E017D06C38007F8D7C /* FrameBuffer.cpp */; };
 		666FB4E617D08A4B007F8D7C /* SecondSceneController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666FB4E417D08A4B007F8D7C /* SecondSceneController.cpp */; };
 		66740DFF1761C17800510BCB /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66740DFD1761C17800510BCB /* Main.cpp */; };
+		6676C76F17F4427800FF52F1 /* WFObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6676C76D17F4427800FF52F1 /* WFObjLoader.cpp */; };
+		6676C77217F50D5600FF52F1 /* akabeko.model in Resources */ = {isa = PBXBuildFile; fileRef = 6676C77117F50D5500FF52F1 /* akabeko.model */; };
+		6676C77417F50E0900FF52F1 /* akabeko.png in Resources */ = {isa = PBXBuildFile; fileRef = 6676C77317F50E0900FF52F1 /* akabeko.png */; };
 		66798C6717C4AC6100AECDFE /* ShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 665299F117C461DF004DF8DD /* ShaderManager.cpp */; };
 		66798C6817C4AC9C00AECDFE /* ColorShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D37917B3540800B18C1A /* ColorShader.cpp */; };
 		66798C6F17C5DFCE00AECDFE /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66798C6D17C5DFCD00AECDFE /* TextureCache.cpp */; };
@@ -167,6 +170,10 @@
 		66740DFD1761C17800510BCB /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 		66740DFE1761C17800510BCB /* Main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main.h; sourceTree = "<group>"; };
 		66740E001761C6C900510BCB /* IApplicationEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IApplicationEventListener.h; sourceTree = "<group>"; };
+		6676C76D17F4427800FF52F1 /* WFObjLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WFObjLoader.cpp; sourceTree = "<group>"; };
+		6676C76E17F4427800FF52F1 /* WFObjLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFObjLoader.h; sourceTree = "<group>"; };
+		6676C77117F50D5500FF52F1 /* akabeko.model */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akabeko.model; sourceTree = "<group>"; };
+		6676C77317F50E0900FF52F1 /* akabeko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = akabeko.png; sourceTree = "<group>"; };
 		66798C6D17C5DFCD00AECDFE /* TextureCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureCache.cpp; sourceTree = "<group>"; };
 		66798C6E17C5DFCD00AECDFE /* TextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureCache.h; sourceTree = "<group>"; };
 		667FC333176ABC9E000E8D0E /* GCAPIGlue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GCAPIGlue.mm; sourceTree = "<group>"; };
@@ -326,6 +333,7 @@
 		6632750F174DE743001E839D /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				6676C77017F50D4A00FF52F1 /* model */,
 				66AFF4D5177BDBF900025BF6 /* sound */,
 				66AFF4C81772E2B500025BF6 /* texture */,
 				66BBBAC3177D542A00C1476B /* etc */,
@@ -374,6 +382,24 @@
 				6645D39417B4A3A300B18C1A /* Light.h */,
 			);
 			name = light;
+			sourceTree = "<group>";
+		};
+		6676C76C17F4425F00FF52F1 /* loader */ = {
+			isa = PBXGroup;
+			children = (
+				6676C76D17F4427800FF52F1 /* WFObjLoader.cpp */,
+				6676C76E17F4427800FF52F1 /* WFObjLoader.h */,
+			);
+			path = loader;
+			sourceTree = "<group>";
+		};
+		6676C77017F50D4A00FF52F1 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6676C77317F50E0900FF52F1 /* akabeko.png */,
+				6676C77117F50D5500FF52F1 /* akabeko.model */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		667FC339176AF9F7000E8D0E /* user */ = {
@@ -544,6 +570,7 @@
 		66FC588A1757131F002D7A6F /* util */ = {
 			isa = PBXGroup;
 			children = (
+				6676C76C17F4425F00FF52F1 /* loader */,
 				66FC588C17571446002D7A6F /* Log.h */,
 			);
 			path = util;
@@ -653,6 +680,7 @@
 				663274F1174DA31F001E839D /* Default@2x.png in Resources */,
 				663274F3174DA31F001E839D /* Default-568h@2x.png in Resources */,
 				663274F6174DA31F001E839D /* MainStoryboard_iPhone.storyboard in Resources */,
+				6676C77417F50E0900FF52F1 /* akabeko.png in Resources */,
 				663274F9174DA31F001E839D /* MainStoryboard_iPad.storyboard in Resources */,
 				66FC589B17585F07002D7A6F /* Icon-72.png in Resources */,
 				66FC589C17585F07002D7A6F /* Icon-72@2x.png in Resources */,
@@ -660,6 +688,7 @@
 				66FC589E17585F07002D7A6F /* Icon-Small.png in Resources */,
 				66FC589F17585F07002D7A6F /* Icon-Small@2x.png in Resources */,
 				66FC58A017585F07002D7A6F /* Icon.png in Resources */,
+				6676C77217F50D5600FF52F1 /* akabeko.model in Resources */,
 				66FC58A117585F07002D7A6F /* Icon@2x.png in Resources */,
 				66AFF4CA1772E2B500025BF6 /* gclue_logo.png in Resources */,
 				66BBBABF177C37FB00C1476B /* se_yay.ogg in Resources */,
@@ -711,6 +740,7 @@
 				66740DFF1761C17800510BCB /* Main.cpp in Sources */,
 				667FC334176ABC9E000E8D0E /* GCAPIGlue.mm in Sources */,
 				667FC33C176AFA07000E8D0E /* GCUserEvent.mm in Sources */,
+				6676C76F17F4427800FF52F1 /* WFObjLoader.cpp in Sources */,
 				66AFF4C71772DC4800025BF6 /* stb_image.c in Sources */,
 				66AFF4CD177BD50E00025BF6 /* stb_vorbis.c in Sources */,
 				66AFF4D2177BDA1C00025BF6 /* SoundPlayer.cpp in Sources */,

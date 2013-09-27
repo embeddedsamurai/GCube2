@@ -69,12 +69,17 @@ CONST_STR(gFragmentShader,
 
 precision mediump float;
 uniform sampler2D u_texture;
+uniform bool u_useTexture;
 varying vec2 v_texcoord;
 varying vec3 v_color;
 
 void main()
 {
-	gl_FragColor = vec4(texture2D(u_texture, vec2(v_texcoord.st))) * vec4(v_color, 1.0);
+	if (u_useTexture) {
+		gl_FragColor = vec4(texture2D(u_texture, vec2(v_texcoord.st))) * vec4(v_color, 1.0);
+	} else {
+		gl_FragColor = vec4(v_color, 1.0);
+	}
 }
 
 );
@@ -107,11 +112,14 @@ void FlatShader::setInfo(Figure *figure, Camera *camera) {
 	
 	// テクスチャ
 	if (figure->material && figure->material->texture) {
-		figure->material->texture->bind();
 		glActiveTexture(GL_TEXTURE0);
+		figure->material->texture->bind();
 		glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
+		glUniform1i(uniforms[UNIFORM_USE_TEXTURE], 1);
 		// 変換行列
 		glUniformMatrix4fv(uniforms[UNIFORM_TEX_MATRIX], 1, GL_FALSE, figure->material->texture->matrix.matrix);
+	} else {
+		glUniform1i(uniforms[UNIFORM_USE_TEXTURE], 0);
 	}
 	
 	// 法線
@@ -154,6 +162,7 @@ void FlatShader::getUniform(GLuint program, const char *name, int user) {
 	uniforms[UNIFORM_M_MATRIX] = glGetUniformLocation(program, "u_mMatrix");
 	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_texture");
 	uniforms[UNIFORM_TEX_MATRIX] = glGetUniformLocation(program, "u_texMatrix");
+	uniforms[UNIFORM_USE_TEXTURE] = glGetUniformLocation(program, "u_useTexture");
 	uniforms[UNIFORM_LIGHT_POS] = glGetUniformLocation(program, "u_lightPos");
 	uniforms[UNIFORM_LIGHT_DIFFUSE] = glGetUniformLocation(program, "u_lightDiffuse");
 	uniforms[UNIFORM_LIGHT_COUNT] = glGetUniformLocation(program, "u_lightCount");

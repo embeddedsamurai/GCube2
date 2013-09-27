@@ -40,6 +40,7 @@ protected:
 		UNIFORM_M_MATRIX,     //!< M変換行列
 		UNIFORM_TEXTURE,      //!< テクスチャ
 		UNIFORM_TEX_MATRIX,   //!< テクスチャ変換行列
+		UNIFORM_USE_TEXTURE,  //!< テクスチャ使用フラグ
 		UNIFORM_NORMAL_MATRIX,//!< 法線マトリックス
 		UNIFORM_LIGHT_POS,    //!< ライトの位置
 		UNIFORM_LIGHT_AMBIENT,//!< ライトの環境光色
