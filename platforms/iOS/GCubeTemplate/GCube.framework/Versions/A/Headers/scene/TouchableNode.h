@@ -20,28 +20,50 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__TouchableNode__
+#define __GCube__TouchableNode__
 
-#include "../GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+#include "DrawableNode.h"
+#include "INodeEventListener.h"
+#include "../shader/HitTestShader.h"
+#include "../shader/ShaderManager.h"
 
 namespace GCube {
 
-class Scene : public Node {
+class TouchableNode : public DrawableNode {
 public:
-	Scene(const char* name = NULL);
-	virtual ~Scene() {};
+	TouchableNode(const char* name = NULL) : DrawableNode(name), isTouchable(false), touchEventListener(NULL), isActive(false) {
+		testShader = ShaderManager::GetShader(ShaderTypeHitTest);
+	};
+	virtual ~TouchableNode() {};
 	
-	virtual std::vector<Node*> getLights();
+	virtual void hitTest(const TouchEvent &event, const Colorf &color) {
+		if (touchEventListener && isTouchable && testColor.equals(color)) {
+			isActive = true;
+			touchEventListener->onTouchNode(*this, event);
+		}
+	};
+	
+	virtual void touch(const TouchEvent &event) {
+		if (touchEventListener && isTouchable && isActive) {
+			touchEventListener->onTouchNode(*this, event);
+		}
+		if (event.action == TouchActionUp ||
+			event.action == TouchActionCancel) {
+			isActive = false;
+		}
+	};
+	
+public:
+	bool isTouchable;
+	Colorf testColor;
+	INodeEventListener *touchEventListener;
 
-private:
+protected:
+	Shader_ptr testShader;
+	bool isActive;
 	
 };
-
-DEF_SHARED_PTR(Scene);
-
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__TouchableNode__) */

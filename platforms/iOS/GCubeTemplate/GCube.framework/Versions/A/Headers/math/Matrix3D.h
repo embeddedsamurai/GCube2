@@ -82,7 +82,7 @@ public:
 	 * <br><br>
 	 * @param[in] mtx かけ算を行うMatrix3D
 	 */
-	void multiply(Matrix3D *mtx);
+	void multiply(const Matrix3D *mtx);
 
 	/**
 	 * 逆行列に変換します.
@@ -129,7 +129,7 @@ public:
 	 * 法線ベクトルのマトリクスを取得します.
 	 * @param[out] mtxout マトリクスを格納する3x3の配列
 	 */
-	void normalMatrix(float *mtxout);
+	void normalMatrix(float *mtxout) const;
 	
 	/**
 	 * 変換行列を適用したVector3Dを返します.

@@ -32,10 +32,9 @@ DEF_SHARED_PTR(TextureData);
 
 class TextureData {
 public:
+	TextureData(const char *fname, bool useMipmap=true);
 	virtual ~TextureData() {};
 	
-	static TextureData_ptr GetTextureData(const char *fname, bool useMipmap=true);
-	static void ReloadAllData();
 	virtual void reload();
 	
 public:
@@ -44,7 +43,6 @@ public:
 	Sizef size;           //!< 画像の大きさ
 	
 private:
-	TextureData(const char *fname, bool useMipmap=true);
 	bool useMipmap;
 };
 

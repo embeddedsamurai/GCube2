@@ -20,28 +20,28 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__FrameBuffer__
+#define __GCube__FrameBuffer__
 
 #include "../GCDefines.h"
-#include "Node.h"
-#include "Light.h"
 
 namespace GCube {
 
-class Scene : public Node {
-public:
-	Scene(const char* name = NULL);
-	virtual ~Scene() {};
-	
-	virtual std::vector<Node*> getLights();
-
+class FrameBuffer {
 private:
-	
-};
+	GLuint framebufferID;
+	GLuint colorRenderbufferID;
+	GLuint depthRenderbufferID;
 
-DEF_SHARED_PTR(Scene);
+public:
+	FrameBuffer();
+	virtual ~FrameBuffer() {};
+	
+	void createBuffer(const Sizef &size, bool useDepthBuffer=true);
+	void deleteBuffer();
+	void bind();
+};
 
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__FrameBuffer__) */

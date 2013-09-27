@@ -23,21 +23,22 @@
 #ifndef __GCube__Figure__
 #define __GCube__Figure__
 
-#include "Node.h"
-#include "Drawable.h"
+#include "TouchableNode.h"
 #include "Mesh.h"
 #include "Material.h"
 #include "../shader/Shader.h"
 
 namespace GCube {
 
-class Figure : public Node, public Drawable {
+class Figure : public TouchableNode {
 public:
 	Figure(const char* name = NULL);
 	virtual ~Figure();
 	
-	virtual void draw(const Window &window);
+	virtual void draw(const Window &window, DrawType type=DrawTypeNormal);
 	virtual void rebuild();
+	
+	static int FigureTypeID() {return 100;};
 	
 public:
 	Shader_ptr shader;

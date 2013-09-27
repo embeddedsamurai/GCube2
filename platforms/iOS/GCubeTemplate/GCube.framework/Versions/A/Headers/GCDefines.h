@@ -38,6 +38,7 @@
 # include <AL/al.h>
 # include <AL/alc.h>
 #define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr;typedef std::weak_ptr<name> name##_wkptr
+#define PTR_CAST(name, val) std::dynamic_pointer_cast<name>(val)
 #endif
 
 // iOS
@@ -47,6 +48,7 @@
 # include <OpenAL/al.h>
 # include <OpenAL/alc.h>
 #define DEF_SHARED_PTR(name) typedef std::shared_ptr<name> name##_ptr;typedef std::weak_ptr<name> name##_wkptr
+#define PTR_CAST(name, val) std::dynamic_pointer_cast<name>(val)
 #endif
 
 // Tizen
@@ -58,6 +60,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 #define DEF_SHARED_PTR(name) typedef boost::shared_ptr< name > name##_ptr;typedef boost::weak_ptr< name > name##_wkptr
+#define PTR_CAST(name, val) boost::dynamic_pointer_cast<name>(val)
 #endif
 
 
@@ -103,7 +106,6 @@ typedef enum StorageType
 }
 StorageType;
 
-
 typedef struct Pointf {
 	float x;
 	float y;
@@ -129,6 +131,9 @@ typedef struct Colorf {
 	float b;
 	float a;
 	Colorf(float r=0, float g=0, float b=0, float a=1): r(r), g(g), b(b), a(a) {};
+	bool equals(const Colorf &color) {
+		return (r == color.r && g == color.g && b == color.b);
+	}
 } Colorf;
 
 typedef struct Rectf {
@@ -143,6 +148,15 @@ typedef struct Rectf {
 	};
 	
 } Rectf;
+
+typedef struct TouchEvent {
+	TouchAction action;
+	Pointf pos;
+	long id;
+	long time;
+	TouchEvent(TouchAction action, float x, float y, long id, long time) : action(action), pos(Pointf(x, y)), id(id), time(time) {};
+} TouchEvent;
+
 
 }
 

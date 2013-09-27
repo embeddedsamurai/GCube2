@@ -20,28 +20,24 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__TextureCache__
+#define __GCube__TextureCache__
 
 #include "../GCDefines.h"
-#include "Node.h"
-#include "Light.h"
+#include "TextureData.h"
 
 namespace GCube {
 
-class Scene : public Node {
+class TextureCache {
 public:
-	Scene(const char* name = NULL);
-	virtual ~Scene() {};
+	virtual ~TextureCache() {};
 	
-	virtual std::vector<Node*> getLights();
-
+	TextureData_ptr getTextureData(const char *fname, bool useMipmap=true);
+	void reloadAllData();
+	
 private:
-	
+	std::map<std::string, TextureData_wkptr> cacheMap;
 };
 
-DEF_SHARED_PTR(Scene);
-
 }
-
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__TextureCache__) */

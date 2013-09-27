@@ -77,6 +77,10 @@
 		66AFF4CD177BD50E00025BF6 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 66AFF4CC177BD50E00025BF6 /* stb_vorbis.c */; };
 		66AFF4D2177BDA1C00025BF6 /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66AFF4D0177BD9E200025BF6 /* SoundPlayer.cpp */; };
 		66AFF4D4177BDA8E00025BF6 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66AFF4D3177BDA8E00025BF6 /* OpenAL.framework */; };
+		66B5556D17F51C2700E5F7B3 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666FB4E017D06C38007F8D7C /* FrameBuffer.cpp */; };
+		66B5556E17F51C2D00E5F7B3 /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66798C6D17C5DFCD00AECDFE /* TextureCache.cpp */; };
+		66B5556F17F51C6000E5F7B3 /* WFObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6676C76D17F4427800FF52F1 /* WFObjLoader.cpp */; };
+		66B5557017F51C9300E5F7B3 /* HitTestShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6687870717CF0F62007B067B /* HitTestShader.cpp */; };
 		66BBBABB177C1E7C00C1476B /* SoundData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66BBBABA177C1E7C00C1476B /* SoundData.cpp */; };
 		66BBBABF177C37FB00C1476B /* se_yay.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 66BBBABE177C37E400C1476B /* se_yay.ogg */; };
 		66BBBAC5177D542A00C1476B /* debug.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66BBBAC4177D542A00C1476B /* debug.txt */; };
@@ -786,7 +790,9 @@
 				66FE2482178537C100969BA7 /* stb_image.c in Sources */,
 				66FE2484178537C100969BA7 /* stb_vorbis.c in Sources */,
 				6621FA7F17856EE6000F1EDB /* GCViewController.mm in Sources */,
+				66B5556E17F51C2D00E5F7B3 /* TextureCache.cpp in Sources */,
 				6621FA8017856EEA000F1EDB /* GCAPIGlue.mm in Sources */,
+				66B5557017F51C9300E5F7B3 /* HitTestShader.cpp in Sources */,
 				666C092B1798D59300BD7777 /* vectorUtil.c in Sources */,
 				666C092C1798D59A00BD7777 /* Matrix3D.cpp in Sources */,
 				666F36FA1798DF16009B91ED /* matrixUtil.c in Sources */,
@@ -797,11 +803,13 @@
 				66F9183F17A26CC7006C413D /* Node.cpp in Sources */,
 				66F9184117A26CC7006C413D /* Scene.cpp in Sources */,
 				66F9184317A26CC7006C413D /* StandardCamera.cpp in Sources */,
+				66B5556D17F51C2700E5F7B3 /* FrameBuffer.cpp in Sources */,
 				66F9184717A2706F006C413D /* SceneTransition.cpp in Sources */,
 				66F9185017AA363D006C413D /* Shader.cpp in Sources */,
 				66F9185617AA3F94006C413D /* Figure.cpp in Sources */,
 				66F9185B17AA4C49006C413D /* Vbo.cpp in Sources */,
 				6645D38017B35E1E00B18C1A /* Window.cpp in Sources */,
+				66B5556F17F51C6000E5F7B3 /* WFObjLoader.cpp in Sources */,
 				6645D38117B35E2600B18C1A /* PrimitiveObject.cpp in Sources */,
 				6645D38617B3634E00B18C1A /* Texture.cpp in Sources */,
 				6645D38A17B377C700B18C1A /* TexShader.cpp in Sources */,

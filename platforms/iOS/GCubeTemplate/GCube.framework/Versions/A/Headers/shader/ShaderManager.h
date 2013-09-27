@@ -31,20 +31,23 @@ typedef enum {
 	ShaderTypeColor,
 	ShaderTypeTex,
 	ShaderTypeFlat,
+	ShaderTypeHitTest,
 	NUM_ShaderType
 } ShaderType;
 
 class ShaderManager {
-private:
+public:
 	ShaderManager() {};
 	virtual ~ShaderManager() {};
 	
-public:
 	static Shader_ptr GetShader(ShaderType type);
+	Shader_ptr getShader(ShaderType type);
 //	static Shader_ptr GetCustomShader(int id);
 //	static void AddCustomShader(Shader_ptr shader, int id);
-	static void ReloadAllData();
+	void reloadAllData();
 	
+public:
+	std::map<int, Shader_ptr> cache; //!< キャッシュ.
 };
 }
 

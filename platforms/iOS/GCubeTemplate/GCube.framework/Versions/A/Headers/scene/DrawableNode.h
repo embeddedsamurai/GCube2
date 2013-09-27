@@ -20,28 +20,33 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef __GCube__DrawableNode__
+#define __GCube__DrawableNode__
 
-#include "../GCDefines.h"
 #include "Node.h"
-#include "Light.h"
+#include "Window.h"
 
 namespace GCube {
 
-class Scene : public Node {
-public:
-	Scene(const char* name = NULL);
-	virtual ~Scene() {};
-	
-	virtual std::vector<Node*> getLights();
+typedef enum {
+	DrawTypeNormal,
+	DrawTypeLine,
+	DrawTypeHitTest,
+	NUM_DrawType
+} DrawType;
 
+class DrawableNode : public Node {
+public:
+	DrawableNode(const char* name = NULL) : Node(name), isVisible(true) {};
+	virtual ~DrawableNode() {};
+	
+	virtual void draw(const Window &window, DrawType type=DrawTypeNormal) = 0;
+public:
+	bool isVisible;
+	
 private:
 	
 };
-
-DEF_SHARED_PTR(Scene);
-
 }
 
-#endif /* defined(__GCube__Scene__) */
+#endif /* defined(__GCube__Drawable__) */

@@ -20,25 +20,45 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Drawable__
-#define __GCube__Drawable__
+#ifndef __GCube__HitTestShader__
+#define __GCube__HitTestShader__
 
-#include "Window.h"
+
+#include "GCDefines.h"
+#include "ColorShader.h"
 
 namespace GCube {
 
-class Drawable {
-public:
-	Drawable() : isVisible(true) {};
-	virtual ~Drawable() {};
-	
-	virtual void draw(const Window &window) = 0;
-public:
-	bool isVisible;
-	
+/**
+ * HitTest用塗りつぶしシェーダークラス.
+ */
+class HitTestShader : public ColorShader {
 private:
+	int count;
 	
+public:
+	/**
+	 * コンストラクタ.
+	 */
+	HitTestShader();
+	
+	/**
+	 * デストラクタ.
+	 */
+	virtual ~HitTestShader() {};
+	
+	/**
+	 * 各種情報を設定します.
+	 */
+	virtual void setInfo(Figure *figure, Camera *camera);
+	
+	/**
+	 * リセットします.
+	 */
+	virtual void reset();
 };
+
+DEF_SHARED_PTR(HitTestShader);
 }
 
-#endif /* defined(__GCube__Drawable__) */
+#endif /* defined(__GCube__HitTestShader__) */

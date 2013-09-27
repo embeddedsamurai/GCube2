@@ -20,28 +20,22 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Scene__
-#define __GCube__Scene__
+#ifndef GCube_INodeEventListener_h
+#define GCube_INodeEventListener_h
 
-#include "../GCDefines.h"
-#include "Node.h"
-#include "Light.h"
 
 namespace GCube {
 
-class Scene : public Node {
+class TouchableNode;
+
+class INodeEventListener {
 public:
-	Scene(const char* name = NULL);
-	virtual ~Scene() {};
+	virtual~INodeEventListener() {};
 	
-	virtual std::vector<Node*> getLights();
-
-private:
-	
+	virtual void onTouchNode(TouchableNode& node, const TouchEvent &event) {};
 };
-
-DEF_SHARED_PTR(Scene);
 
 }
 
-#endif /* defined(__GCube__Scene__) */
+
+#endif

@@ -22,6 +22,10 @@
 		6699F88217867BF0002E51F9 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6699F87B17867BF0002E51F9 /* Icon-Small@2x.png */; };
 		6699F88317867BF0002E51F9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6699F87C17867BF0002E51F9 /* Icon.png */; };
 		6699F88417867BF0002E51F9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6699F87D17867BF0002E51F9 /* Icon@2x.png */; };
+		66B5556B17F51BC500E5F7B3 /* FirstSceneController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66B5556717F51BC500E5F7B3 /* FirstSceneController.cpp */; };
+		66B5556C17F51BC500E5F7B3 /* SecondSceneController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66B5556917F51BC500E5F7B3 /* SecondSceneController.cpp */; };
+		66B5557417F51CDC00E5F7B3 /* akabeko.model in Resources */ = {isa = PBXBuildFile; fileRef = 66B5557217F51CDC00E5F7B3 /* akabeko.model */; };
+		66B5557517F51CDC00E5F7B3 /* akabeko.png in Resources */ = {isa = PBXBuildFile; fileRef = 66B5557317F51CDC00E5F7B3 /* akabeko.png */; };
 		66C76AD81797B3B40001A284 /* bgm_house.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 66C76AD71797B3A60001A284 /* bgm_house.ogg */; };
 		66FE24DD17856A3200969BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FE24DC17856A3200969BA7 /* UIKit.framework */; };
 		66FE24DF17856A3200969BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FE24DE17856A3200969BA7 /* Foundation.framework */; };
@@ -56,6 +60,12 @@
 		6699F87B17867BF0002E51F9 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		6699F87C17867BF0002E51F9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6699F87D17867BF0002E51F9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		66B5556717F51BC500E5F7B3 /* FirstSceneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FirstSceneController.cpp; sourceTree = "<group>"; };
+		66B5556817F51BC500E5F7B3 /* FirstSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSceneController.h; sourceTree = "<group>"; };
+		66B5556917F51BC500E5F7B3 /* SecondSceneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SecondSceneController.cpp; sourceTree = "<group>"; };
+		66B5556A17F51BC500E5F7B3 /* SecondSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondSceneController.h; sourceTree = "<group>"; };
+		66B5557217F51CDC00E5F7B3 /* akabeko.model */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = akabeko.model; sourceTree = "<group>"; };
+		66B5557317F51CDC00E5F7B3 /* akabeko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = akabeko.png; sourceTree = "<group>"; };
 		66C76AD71797B3A60001A284 /* bgm_house.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bgm_house.ogg; sourceTree = "<group>"; };
 		66FE24D917856A3200969BA7 /* GCubeTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GCubeTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FE24DC17856A3200969BA7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -98,6 +108,7 @@
 		661C633517865141003DB62E /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				66B5557117F51CDC00E5F7B3 /* model */,
 				661C633617865141003DB62E /* etc */,
 				661C633817865141003DB62E /* sound */,
 				661C633A17865141003DB62E /* texture */,
@@ -137,6 +148,10 @@
 				661C633D17865141003DB62E /* GCubeConfig.h */,
 				661C634017865141003DB62E /* Main.cpp */,
 				661C634117865141003DB62E /* Main.h */,
+				66B5556717F51BC500E5F7B3 /* FirstSceneController.cpp */,
+				66B5556817F51BC500E5F7B3 /* FirstSceneController.h */,
+				66B5556917F51BC500E5F7B3 /* SecondSceneController.cpp */,
+				66B5556A17F51BC500E5F7B3 /* SecondSceneController.h */,
 			);
 			name = main;
 			path = ../../../main;
@@ -165,6 +180,15 @@
 			name = icon;
 			path = GCube/icon;
 			sourceTree = SOURCE_ROOT;
+		};
+		66B5557117F51CDC00E5F7B3 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				66B5557217F51CDC00E5F7B3 /* akabeko.model */,
+				66B5557317F51CDC00E5F7B3 /* akabeko.png */,
+			);
+			path = model;
+			sourceTree = "<group>";
 		};
 		66FE24D017856A3200969BA7 = {
 			isa = PBXGroup;
@@ -285,6 +309,7 @@
 				66FE24F517856A3200969BA7 /* Default@2x.png in Resources */,
 				66FE24F717856A3200969BA7 /* Default-568h@2x.png in Resources */,
 				66FE24FA17856A3200969BA7 /* MainStoryboard_iPhone.storyboard in Resources */,
+				66B5557517F51CDC00E5F7B3 /* akabeko.png in Resources */,
 				66FE24FD17856A3200969BA7 /* MainStoryboard_iPad.storyboard in Resources */,
 				661C634217865141003DB62E /* debug.txt in Resources */,
 				661C634317865141003DB62E /* se_yay.ogg in Resources */,
@@ -292,6 +317,7 @@
 				6699F87E17867BF0002E51F9 /* Icon-72.png in Resources */,
 				6699F87F17867BF0002E51F9 /* Icon-72@2x.png in Resources */,
 				6699F88017867BF0002E51F9 /* Icon-Small-50.png in Resources */,
+				66B5557417F51CDC00E5F7B3 /* akabeko.model in Resources */,
 				6699F88117867BF0002E51F9 /* Icon-Small.png in Resources */,
 				6699F88217867BF0002E51F9 /* Icon-Small@2x.png in Resources */,
 				6699F88317867BF0002E51F9 /* Icon.png in Resources */,
@@ -309,6 +335,8 @@
 			files = (
 				66FE24ED17856A3200969BA7 /* main.m in Sources */,
 				66FE24F117856A3200969BA7 /* GCAppDelegate.mm in Sources */,
+				66B5556C17F51BC500E5F7B3 /* SecondSceneController.cpp in Sources */,
+				66B5556B17F51BC500E5F7B3 /* FirstSceneController.cpp in Sources */,
 				661C634617865141003DB62E /* Main.cpp in Sources */,
 				661C63491786514E003DB62E /* GCUserEvent.mm in Sources */,
 			);
