@@ -92,7 +92,7 @@ FlatShader::FlatShader() {
 }
 
 void FlatShader::reload() {
-	gProgram = loadShader(gVertexShader, gFragmentShader, 0);
+	gProgram = loadShader(gVertexShader, gFragmentShader);
 }
 
 void FlatShader::setInfo(Figure *figure, Camera *camera) {
@@ -151,13 +151,11 @@ void FlatShader::setInfo(Figure *figure, Camera *camera) {
 	glUniform3fv(uniforms[UNIFORM_LIGHT_DIFFUSE], count, lightDif);
 }
 
-void FlatShader::bindAttribute(GLuint program, const char *name, int user) {
-	glBindAttribLocation(program, ATTRIB_VERTEX, "a_position");
-	glBindAttribLocation(program, ATTRIB_TEXCOORD, "a_texcoord");
-	glBindAttribLocation(program, ATTRIB_NORMAL, "a_normal");
-}
-
-void FlatShader::getUniform(GLuint program, const char *name, int user) {
+void FlatShader::prepareShader(GLuint program) {
+	attribs[AttribTypeVertex] = glGetAttribLocation(program, "a_position");
+	attribs[AttribTypeNormal] = glGetAttribLocation(program, "a_normal");
+	attribs[AttribTypeUV] = glGetAttribLocation(program, "a_texcoord");
+	
 	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
 	uniforms[UNIFORM_M_MATRIX] = glGetUniformLocation(program, "u_mMatrix");
 	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_texture");

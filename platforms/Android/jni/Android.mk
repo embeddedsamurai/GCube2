@@ -48,6 +48,7 @@ LOCAL_C_INCLUDES:= $(MY_PATH)/android/ \
                    $(ENGINE_PATH)/shader \
                    $(ENGINE_PATH)/sound \
                    $(ENGINE_PATH)/util \
+                   $(ENGINE_PATH)/util/loader \
                    $(MAIN_PATH)
                    
 

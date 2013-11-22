@@ -60,5 +60,6 @@
 #include "sound/SoundPlayer.h"
 #include "util/Log.h"
 #include "util/loader/WFObjLoader.h"
+#include "util/loader/GCObjLoader.h"
 
 #endif

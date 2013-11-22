@@ -36,15 +36,18 @@ void SecondSceneController::onInit() {
 	Node_ptr node(new Node("Node"));
 	node->transform.translate(3, 3, 0);
 	// プレート追加
-	fig = WFObjLoader::loadFile("model/akabeko.model");
+	fig = GCObjLoader::loadFile("model/sample.gcb");
+//	fig = WFObjLoader::loadFile("model/akabeko.model");
 //	fig = Figure_ptr(new Figure("Fig"));
 //	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 3));
 	// マテリアルとシェーダー設定
 	fig->material = Material_ptr(new Material());
 //	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
-	fig->material->texture = Texture_ptr(new Texture("model/akabeko.png"));
-//	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
-	fig->shader = ShaderManager::GetShader(ShaderTypeTex);
+//	fig->material->texture = Texture_ptr(new Texture("model/akabeko.png"));
+	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
+//	fig->shader = ShaderManager::GetShader(ShaderTypeTex);
+	fig->shader = ShaderManager::GetShader(ShaderTypeColor);
+//	fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
 	fig->transform.scale(3.0, 3.0, 3.0);
 	fig->transform.translate(0, 3, 0);
 	fig->touchEventListener = this;
@@ -55,6 +58,7 @@ void SecondSceneController::onInit() {
 	fig2->mesh = PrimitiveObject::createBox(Point3f(2, 3, 4));
 	fig2->material = Material_ptr(new Material());
 	fig2->material->ambientColor = Colorf(0, 0.5, 0.5);
+//	fig2->shader = ShaderManager::GetShader(ShaderTypeColor);
 	fig2->shader = ShaderManager::GetShader(ShaderTypeFlat);
 	fig2->transform.translate(3, 1, 0);
 	fig2->transform.rotate(45, RotateDirX);

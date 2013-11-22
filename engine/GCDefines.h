@@ -157,6 +157,16 @@ typedef struct TouchEvent {
 	TouchEvent(TouchAction action, float x, float y, long id, long time) : action(action), pos(Pointf(x, y)), id(id), time(time) {};
 } TouchEvent;
 
+typedef enum {
+	AttribTypeVertex,
+	AttribTypeNormal,
+	AttribTypeColor,
+	AttribTypeUV,
+	AttribTypeUV2,
+	AttribTypeUV3,
+	AttribTypeUV4,
+	NUM_ATTRIB_TYPE
+} AttribType;
 
 }
 

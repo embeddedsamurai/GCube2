@@ -67,7 +67,7 @@ TexShader::TexShader() {
 }
 
 void TexShader::reload() {
-	gProgram = loadShader(gVertexShader, gFragmentShader, 0);
+	gProgram = loadShader(gVertexShader, gFragmentShader);
 }
 
 void TexShader::setInfo(Figure *figure, Camera *camera) {
@@ -94,12 +94,10 @@ void TexShader::setInfo(Figure *figure, Camera *camera) {
 	}
 }
 
-void TexShader::bindAttribute(GLuint program, const char *name, int user) {
-	glBindAttribLocation(program, ATTRIB_VERTEX, "a_position");
-	glBindAttribLocation(program, ATTRIB_TEXCOORD, "a_texcoord");
-}
-
-void TexShader::getUniform(GLuint program, const char *name, int user) {
+void TexShader::prepareShader(GLuint program) {
+	attribs[AttribTypeVertex] = glGetAttribLocation(program, "a_position");
+	attribs[AttribTypeUV] = glGetAttribLocation(program, "a_texcoord");
+	
 	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
 	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_texture");
 	uniforms[UNIFORM_TEX_MATRIX] = glGetUniformLocation(program, "u_texMatrix");

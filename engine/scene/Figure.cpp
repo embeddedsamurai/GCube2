@@ -45,11 +45,11 @@ void Figure::draw(const Window &window, DrawType type) {
 	if (isVisible && shader && mesh) {
 		if (type==DrawTypeHitTest) {
 			testShader->useProgram();
-			mesh->bind();
+			mesh->bind(testShader);
 			testShader->setInfo(this, window.camera.get());
 		} else {
 			shader->useProgram();
-			mesh->bind();
+			mesh->bind(shader);
 			shader->setInfo(this, window.camera.get());
 		}
 		glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_SHORT, NULL);

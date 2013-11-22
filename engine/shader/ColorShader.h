@@ -63,29 +63,13 @@ public:
 	virtual void setInfo(Figure *figure, Camera *camera);
 	
 	/**
-	 * シェーダのAttributeへのバインド処理を行います.
+	 * シェーダーの準備を行います.
+	 * UniformやAttributeのLocationを取得してください.
 	 * <br><br>
-	 * ES2Rendererから継承した関数.
-	 * ES2Renderer内部から呼び出されるので、実装しないとエラーになります.
-	 * <br>
-	 * @param[in] program シェーダプログラム
-	 * @param[in] name シェーダファイルへの名前
-	 * @param[in] user ユーザ識別ID
+	 *
+	 * @param[in] program シェーダプログラムのID
 	 */
-	void bindAttribute(GLuint program, const char *name, int user);
-	
-	/**
-	 * シェーダのUniformを取得します.
-	 * <br><br>
-	 * ES2Rendererから継承した関数.
-	 * ES2Renderer内部から呼び出されるので、実装しないとエラーになります.
-	 * <br>
-	 * @param[in] program シェーダプログラム
-	 * @param[in] name シェーダファイルへの名前
-	 * @param[in] user ユーザ識別ID
-	 */
-	void getUniform(GLuint program, const char *name, int user);
-	
+	virtual void prepareShader(GLuint program);
 };
 
 DEF_SHARED_PTR(ColorShader);

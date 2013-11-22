@@ -53,6 +53,9 @@
 		6645D39517B4A3A600B18C1A /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D39317B4A3A100B18C1A /* Light.cpp */; };
 		6645D39617B4A3A600B18C1A /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6645D39317B4A3A100B18C1A /* Light.cpp */; };
 		665299F317C461E0004DF8DD /* ShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 665299F117C461DF004DF8DD /* ShaderManager.cpp */; };
+		66582759183465C000F4123A /* GCObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66582757183465C000F4123A /* GCObjLoader.cpp */; };
+		6658275A183465C000F4123A /* GCObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66582757183465C000F4123A /* GCObjLoader.cpp */; };
+		6658275C1834682600F4123A /* sample.gcb in Resources */ = {isa = PBXBuildFile; fileRef = 6658275B1834682600F4123A /* sample.gcb */; };
 		666C092B1798D59300BD7777 /* vectorUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C76AE41797F8920001A284 /* vectorUtil.c */; };
 		666C092C1798D59A00BD7777 /* Matrix3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F585D21798D06F00AD1B6C /* Matrix3D.cpp */; };
 		666F36FA1798DF16009B91ED /* matrixUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 666F36F81798DF16009B91ED /* matrixUtil.c */; };
@@ -162,6 +165,9 @@
 		6645D39417B4A3A300B18C1A /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
 		665299F117C461DF004DF8DD /* ShaderManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderManager.cpp; sourceTree = "<group>"; };
 		665299F217C461E0004DF8DD /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderManager.h; sourceTree = "<group>"; };
+		66582757183465C000F4123A /* GCObjLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GCObjLoader.cpp; sourceTree = "<group>"; };
+		66582758183465C000F4123A /* GCObjLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCObjLoader.h; sourceTree = "<group>"; };
+		6658275B1834682600F4123A /* sample.gcb */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.gcb; sourceTree = "<group>"; };
 		666F36F81798DF16009B91ED /* matrixUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrixUtil.c; sourceTree = "<group>"; };
 		666F36F91798DF16009B91ED /* matrixUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrixUtil.h; sourceTree = "<group>"; };
 		666F36FC17A0C819009B91ED /* Vector3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3D.cpp; sourceTree = "<group>"; };
@@ -393,6 +399,8 @@
 			children = (
 				6676C76D17F4427800FF52F1 /* WFObjLoader.cpp */,
 				6676C76E17F4427800FF52F1 /* WFObjLoader.h */,
+				66582757183465C000F4123A /* GCObjLoader.cpp */,
+				66582758183465C000F4123A /* GCObjLoader.h */,
 			);
 			path = loader;
 			sourceTree = "<group>";
@@ -400,6 +408,7 @@
 		6676C77017F50D4A00FF52F1 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6658275B1834682600F4123A /* sample.gcb */,
 				6676C77317F50E0900FF52F1 /* akabeko.png */,
 				6676C77117F50D5500FF52F1 /* akabeko.model */,
 			);
@@ -685,6 +694,7 @@
 				663274F3174DA31F001E839D /* Default-568h@2x.png in Resources */,
 				663274F6174DA31F001E839D /* MainStoryboard_iPhone.storyboard in Resources */,
 				6676C77417F50E0900FF52F1 /* akabeko.png in Resources */,
+				6658275C1834682600F4123A /* sample.gcb in Resources */,
 				663274F9174DA31F001E839D /* MainStoryboard_iPad.storyboard in Resources */,
 				66FC589B17585F07002D7A6F /* Icon-72.png in Resources */,
 				66FC589C17585F07002D7A6F /* Icon-72@2x.png in Resources */,
@@ -749,6 +759,7 @@
 				66AFF4CD177BD50E00025BF6 /* stb_vorbis.c in Sources */,
 				66AFF4D2177BDA1C00025BF6 /* SoundPlayer.cpp in Sources */,
 				66BBBABB177C1E7C00C1476B /* SoundData.cpp in Sources */,
+				66582759183465C000F4123A /* GCObjLoader.cpp in Sources */,
 				66C76AE71797F8920001A284 /* vectorUtil.c in Sources */,
 				66F585D41798D06F00AD1B6C /* Matrix3D.cpp in Sources */,
 				666F36FB1798DF5E009B91ED /* matrixUtil.c in Sources */,
@@ -809,6 +820,7 @@
 				66F9185617AA3F94006C413D /* Figure.cpp in Sources */,
 				66F9185B17AA4C49006C413D /* Vbo.cpp in Sources */,
 				6645D38017B35E1E00B18C1A /* Window.cpp in Sources */,
+				6658275A183465C000F4123A /* GCObjLoader.cpp in Sources */,
 				66B5556F17F51C6000E5F7B3 /* WFObjLoader.cpp in Sources */,
 				6645D38117B35E2600B18C1A /* PrimitiveObject.cpp in Sources */,
 				6645D38617B3634E00B18C1A /* Texture.cpp in Sources */,

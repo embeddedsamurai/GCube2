@@ -65,7 +65,7 @@ ColorShader::ColorShader() {
 }
 
 void ColorShader::reload() {
-	gProgram = loadShader(gVertexShader, gFragmentShader, 0);
+	gProgram = loadShader(gVertexShader, gFragmentShader);
 }
 
 void ColorShader::setInfo(Figure *figure, Camera *camera) {
@@ -88,11 +88,9 @@ void ColorShader::setInfo(Figure *figure, Camera *camera) {
 	}
 }
 
-void ColorShader::bindAttribute(GLuint program, const char *name, int user) {
-	glBindAttribLocation(program, ATTRIB_VERTEX, "a_position");
-}
-
-void ColorShader::getUniform(GLuint program, const char *name, int user) {
+void ColorShader::prepareShader(GLuint program) {
+	attribs[AttribTypeVertex] = glGetAttribLocation(program, "a_position");
+	
 	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
 	uniforms[UNIFORM_COLOR] = glGetUniformLocation(program, "u_color");
 }

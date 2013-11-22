@@ -28,6 +28,9 @@
 using namespace GCube;
 
 Shader::Shader() : gProgram(0) {
+	for (int i=0; i<NUM_ATTRIB_TYPE; i++) {
+		attribs[i] = -1;
+	}
 }
 
 Shader::~Shader() {
@@ -39,7 +42,11 @@ Shader::~Shader() {
 //	}
 }
 
-GLuint Shader::loadShader(const char* vertexShader, const char* fragmentShader, int user) {
+int Shader::getAttribLocation(AttribType type) {
+	return attribs[type];
+}
+
+GLuint Shader::loadShader(const char* vertexShader, const char* fragmentShader) {
 	GLuint vertShader = 0;
 	GLuint fragShader = 0;
 	
@@ -58,7 +65,7 @@ GLuint Shader::loadShader(const char* vertexShader, const char* fragmentShader, 
 	}
 	
 	// Create shader program
-	return createProgram(vertShader, fragShader, "abc", user);
+	return createProgram(vertShader, fragShader);
 	
 ERROR:	// エラー時の処理
 	if (vertShader) {
@@ -70,7 +77,7 @@ ERROR:	// エラー時の処理
 	return 0;
 }
 
-GLuint Shader::loadShader(const char* name, int user) {
+GLuint Shader::loadShader(const char* name) {
 	GLuint vertShader = 0;
 	GLuint fragShader = 0;
 	
@@ -92,7 +99,7 @@ GLuint Shader::loadShader(const char* name, int user) {
 		goto ERROR;
 	}
 	
-	return createProgram(vertShader, fragShader, name, user);
+	return createProgram(vertShader, fragShader);
 	
 ERROR:	// エラー時の処理
 	if (vertShader) {
@@ -114,7 +121,7 @@ void Shader::useProgram() {
 ///
 ////////////////////////////////////////////////////////////////
 
-GLuint Shader::createProgram(GLuint vertShader, GLuint fragShader, const char* name, int user) {
+GLuint Shader::createProgram(GLuint vertShader, GLuint fragShader) {
 	GLuint program = 0;
 	
 	// Create shader program
@@ -124,20 +131,13 @@ GLuint Shader::createProgram(GLuint vertShader, GLuint fragShader, const char* n
 	// Attach fragment shader to program
 	glAttachShader(program, fragShader);
 	
-	// attributeを設定
-	// この関数は、virtual関数なので、継承したクラスの
-	// メソッドを実行します。
-	bindAttribute(program, name, user);
-	
 	// Link program
 	if (!linkProgram(program)) {
 		goto ERROR;
 	}
 	
-	// Get uniform locations
-	// この関数は、virtual関数なので、継承したクラスの
-	// メソッドを実行します。
-	getUniform(program, name, user);
+	// この関数は、virtual関数なので、継承したクラスのメソッドを実行します。
+	prepareShader(program);
 	
 	// 後始末
 	if (vertShader) {

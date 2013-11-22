@@ -37,6 +37,7 @@ class Scene;
 class Shader {
 protected:
 	GLuint gProgram; //!< プログラム
+	GLint attribs[NUM_ATTRIB_TYPE];
 	
 private:
 	/**
@@ -59,11 +60,9 @@ private:
 	 * シェーダからprogramを作成します.
 	 * @param vertShader 頂点シェーダ
 	 * @param fragShader ピクセルシェーダ
-	 * @param name 識別するための
-	 * @param user 識別するためのID
 	 * @return program
 	 */
-	GLuint createProgram(GLuint vertShader, GLuint fragShader, const char* name, int user);
+	GLuint createProgram(GLuint vertShader, GLuint fragShader);
 	
 	/**
 	 * プログラムをリンクします.
@@ -103,10 +102,9 @@ public:
 	 * 指定された名前のシェーダを読み込み、Programを作成します.
 	 * <br><br>
 	 * @param[in] name シェーダ名
-	 * @param[in] user 識別ID
 	 * @return ProgramのIDを返却します。シェーダの読み込みに失敗した場合にはNULLを返却します。
 	 */
-	GLuint loadShader(const char* name, int user);
+	GLuint loadShader(const char* name);
 	
 	/**
 	 * 指定されたVertexShaderのソースとFragmentShaderのソースからProgramを作成します.
@@ -115,33 +113,27 @@ public:
 	 * @param user bindAttribute、getUniformで識別するためのタグ
 	 * @return Program
 	 */
-	GLuint loadShader(const char* vertexShader, const char* fragmentShader, int user);
+	GLuint loadShader(const char* vertexShader, const char* fragmentShader);
 	
 	/**
-	 * 指定されたprogramに合うシェーダのAttributeのバインド処理を行ってください.
+	 * シェーダーの準備を行います.
+	 * UniformやAttributeのLocationを取得してください.
 	 * <br><br>
 	 *
-	 * このES2Rendererを継承したクラスで、このメソッドを実装します。
+	 * このクラスを継承したクラスで、このメソッドを実装します。
 	 * このメソッドは、loadShaderが実行されたときに呼び出されます。
 	 *
 	 * @param[in] program シェーダプログラムのID
-	 * @param[in] name シェーダのファイル名
-	 * @param[in] user 識別ID
 	 */
-	virtual void bindAttribute(GLuint program, const char *name, int user) = 0;
+	virtual void prepareShader(GLuint program) = 0;
 	
 	/**
-	 * 指定されたprogrameに合うシェーダのUniformを取得します.
+	 * Attributeの場所を取得します.
 	 * <br><br>
 	 *
-	 * このES2Rendererを継承したクラスで、このメソッドを実装します。
-	 * このメソッドは、loadShaderが実行されたときに呼び出されます。
-	 *
-	 * @param[in] program シェーダプログラムのID
-	 * @param[in] name シェーダのファイル名
-	 * @param[in] user 識別ID
+	 * @param[in] type Attributeのタイプ
 	 */
-	virtual void getUniform(GLuint program, const char *name, int user) = 0;
+	virtual int getAttribLocation(AttribType type);
 };
 	
 DEF_SHARED_PTR(Shader);

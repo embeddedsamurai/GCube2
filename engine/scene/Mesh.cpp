@@ -78,11 +78,18 @@ void Mesh::build(const MeshData_ptr &data) {
 	if (data->vertices.size()==0 || data->vertexIndexes.size()==0) {
 		return;
 	}
-	vbo->addElement(data->vertices, 3);
-	if (data->normals.size()) vbo->addElement(data->normals, 3);
-	if (data->textureCoords.size()) vbo->addElement(data->textureCoords, 2);
-	if (data->mltTextureCoords.size()) vbo->addElement(data->mltTextureCoords, 2);
-	if (data->jointData.size()) vbo->addElement(data->jointData, 4);
+	vbo->addElement(data->vertices, AttribTypeVertex);
+	if (data->normals.size()) vbo->addElement(data->normals, AttribTypeNormal);
+	if (data->textureCoords.size()) vbo->addElement(data->textureCoords, AttribTypeUV);
+	if (data->mltTextureCoords.size()) vbo->addElement(data->mltTextureCoords, AttribTypeUV2);
+	vbo->setIndex(data->vertexIndexes);
+	indexCount = data->vertexIndexes.size();
+	vbo->build();
+}
+
+// ビルド（インターリーブ）
+void Mesh::build(const MeshInterleaveData_ptr &data) {
+	vbo->setInterleaveData(data->data, data->attribs);
 	vbo->setIndex(data->vertexIndexes);
 	indexCount = data->vertexIndexes.size();
 	vbo->build();
@@ -94,8 +101,8 @@ void Mesh::rebuild() {
 }
 
 // バインド
-void Mesh::bind() {
-	vbo->bind();
+void Mesh::bind(const Shader_ptr &shader) {
+	vbo->bind(shader);
 }
 
 // サイズを取得

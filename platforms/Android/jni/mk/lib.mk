@@ -34,7 +34,8 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    shader/ShaderManager.cpp \
                    shader/TexShader.cpp \
                    sound/SoundData.cpp \
-                   sound/SoundPlayer.cpp
+                   sound/SoundPlayer.cpp \
+                   util/loader/WFObjLoader.cpp
                    
 
 LOCAL_CFLAGS    := -Werror -D__GCube_Android__ 
@@ -51,6 +52,7 @@ LOCAL_C_INCLUDES:= $(LOCAL_PATH)/ \
                    $(LOCAL_PATH)/shader \
                    $(LOCAL_PATH)/sound \
                    $(LOCAL_PATH)/util \
+                   $(LOCAL_PATH)/util/loader \
 				   $(LOCAL_PATH)/../main/
 
 #LOCAL_STATIC_LIBRARIES := openal

@@ -53,6 +53,11 @@ using namespace GCube;
     return self;
 }
 
+// ステータスバー表示（iOS7）
+- (BOOL)prefersStatusBarHidden {
+    return !_settings->showStatusBar;
+}
+
 // view読み込み
 - (void)viewDidLoad
 {
@@ -75,6 +80,7 @@ using namespace GCube;
 	float scale = [UIScreen mainScreen].scale;
 	gcube->onInit();
 	gcube->onSizeChanged(view.bounds.size.width*scale, view.bounds.size.height*scale, (DeviceOrientation)self.interfaceOrientation);
+	gcube->onUpdate(0);
 	
 	if (_settings->useOrientationSensor) {
 		// 傾きセンサー開始

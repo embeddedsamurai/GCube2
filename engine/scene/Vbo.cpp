@@ -44,22 +44,38 @@ Vbo::~Vbo() {
 //	}
 }
 
+// Attributeのサイズを取得
+int Vbo::getAttribSize(AttribType type) {
+	switch (type) {
+		case AttribTypeUV:
+		case AttribTypeUV2:
+		case AttribTypeUV3:
+		case AttribTypeUV4:
+			return 2;
+		default:
+			return 3;
+	}
+}
+
 // ビルド
 void Vbo::build() {
 	// ビルドは一回だけ
-  	if (vboNames[0]!=0 || vboNames[1]!=0) {
+  	if (interleaveArray.size()!=0) {
+		this->rebuild();
 		return;
 	}
 	
 	// interleaveにデータを並べ替え
 	int readPos[dataArray.size()];
+	maxSize = 0;
 	for(int j = 0; j < dataArray.size(); j++) {
 		readPos[j] = 0;
-		maxSize += elementsArray[j];
+		maxSize += getAttribSize(attribArray[j]);
 	}
-	for (int i=0; i<indexesArray.size(); i++) {
+//	for (int i=0; i<indexesArray.size(); i++) {
+	for (int i=0; i<dataArray[0].size()/3; i++) { // TODO:頂点数/3
 		for(int j = 0; j < dataArray.size(); j++) {
-			int size = elementsArray[j];
+			int size = getAttribSize(attribArray[j]);
 			for (int k=0; k<size; k++) {
 				float data = dataArray[j][readPos[j]++];
 				interleaveArray.insert(interleaveArray.end(), data);
@@ -81,27 +97,21 @@ void Vbo::rebuild() {
 	// インデックスのVBO作成
 	vboNames[VBO_ELEMENT] = buildVBO(&indexesArray.front(),
 									 indexesArray.size() * sizeof(unsigned short), GL_ELEMENT_ARRAY_BUFFER);
-
-	// Attribute設定
-	int pos = 0;
-	for(int j = 0; j < elementsArray.size(); j++) {
-		int size = elementsArray[j];
-		glEnableVertexAttribArray(j);
-		glVertexAttribPointer(j, size, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*maxSize, (GLfloat*)0+pos);
-		pos += size;
-	}
-	
 }
 
 // バインド
-void Vbo::bind() {
+void Vbo::bind(const Shader_ptr &shader) {
 	// dataのVBOをバインド
 	glBindBuffer(GL_ARRAY_BUFFER, vboNames[VBO_INTERLEAVE]);
 	int pos = 0;
-	for(int j = 0; j < elementsArray.size(); j++) {
-		int size = elementsArray[j];
-		glEnableVertexAttribArray(j);
-		glVertexAttribPointer(j, size, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*maxSize, (GLfloat*)0+pos);
+	for(int j = 0; j < attribArray.size(); j++) {
+		AttribType type = attribArray[j];
+		int size = getAttribSize(type);
+		int loc = shader->getAttribLocation(type);
+		if (loc>=0) {
+			glEnableVertexAttribArray(loc);
+			glVertexAttribPointer(loc, size, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*maxSize, (GLfloat*)0+pos);
+		}
 		pos += size;
 	}
 	// indexのVBOをバインド
@@ -109,9 +119,20 @@ void Vbo::bind() {
 }
 
 // 要素追加
-void Vbo::addElement(const std::vector<float> &data, int element) {
+void Vbo::addElement(const std::vector<float> &data, AttribType type) {
 	dataArray.push_back(data);
-	elementsArray.push_back(element);
+	attribArray.push_back(type);
+}
+
+// 要素追加（インターリーブ）
+void Vbo::setInterleaveData(const std::vector<float> &data, const std::vector<AttribType> &attribs) {
+	interleaveArray = std::vector<float>(data);
+	attribArray = std::vector<AttribType>(attribs);
+	//
+	maxSize = 0;
+	for(int j = 0; j < attribArray.size(); j++) {
+		maxSize += getAttribSize(attribArray[j]);
+	}
 }
 
 // インデックス設定

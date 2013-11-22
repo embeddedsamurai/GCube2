@@ -20,47 +20,38 @@
  * THE SOFTWARE.
  */
 
-#ifndef __GCube__Vbo__
-#define __GCube__Vbo__
+#ifndef __GCube__GCObjLoader__
+#define __GCube__GCObjLoader__
 
-#include "GCDefines.h"
-#include "Shader.h"
+#include "../../GCDefines.h"
+#include "../../scene/Figure.h"
 
 namespace GCube {
 
-// vbo index
-enum {
-	VBO_INTERLEAVE,
-	VBO_ELEMENT,
-	NUM_VBO
-};
-
-class Vbo {
-public:
-	Vbo();
-	virtual ~Vbo();
-	
-	virtual void setInterleaveData(const std::vector<float> &data, const std::vector<AttribType> &attribs);
-	virtual void addElement(const std::vector<float> &data, AttribType type);
-	virtual void setIndex(const std::vector<short> &index);
-	
-	virtual void build();
-	virtual void rebuild();
-	virtual void bind(const Shader_ptr &shader);
-
+/**
+ * GCubeオリジナル形式の3Dオブジェクト読み込みクラス.
+ */
+class GCObjLoader {
 private:
-	int getAttribSize(AttribType type);
-	GLuint buildVBO(void *data, int size, GLenum buffer);
 	
-	int maxSize;
-	GLuint vboNames[NUM_VBO];                   //!< VBOの名前リスト.
-	std::vector< std::vector<float> > dataArray;  //!< データ.
-	std::vector<short> indexesArray;            //!< インデックスデータ.
-	std::vector<AttribType> attribArray;        //!< 要素データ.
-	std::vector<float> interleaveArray;
+public:
+	/**
+	 * ファイルから読み込みます.
+	 * @param fileName ファイル名
+	 */
+	static Figure_ptr loadFile(const char *fileName, bool rightHanded=true);
 	
+	/**
+	 * データから読み込みます.
+	 * @param data データ
+	 */
+	static Figure_ptr loadData(std::vector<char>* data, bool rightHanded=true);
+	
+	
+	static Mesh_ptr meshProcess(std::istringstream &stream);
+
 };
-DEF_SHARED_PTR(Vbo);
+
 }
 
-#endif /* defined(__GCube__Vbo__) */
+#endif /* defined(__GCube__GCObjLoader__) */
