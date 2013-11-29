@@ -37,7 +37,6 @@ class Scene;
 class Shader {
 protected:
 	GLuint gProgram; //!< プログラム
-	GLint attribs[NUM_ATTRIB_TYPE];
 	
 private:
 	/**
@@ -96,7 +95,7 @@ public:
 	/**
 	 * 各種情報を設定します.
 	 */
-	virtual void setInfo(Figure *figure, Camera *camera) = 0;
+	virtual void setInfo(Scene *scene, Figure *figure, Camera *camera) = 0;
 	
 	/**
 	 * 指定された名前のシェーダを読み込み、Programを作成します.
@@ -133,7 +132,7 @@ public:
 	 *
 	 * @param[in] type Attributeのタイプ
 	 */
-	virtual int getAttribLocation(AttribType type);
+	virtual int getAttribLocation(AttribType type) = 0;
 };
 	
 DEF_SHARED_PTR(Shader);

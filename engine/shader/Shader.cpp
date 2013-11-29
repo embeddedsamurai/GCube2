@@ -28,9 +28,6 @@
 using namespace GCube;
 
 Shader::Shader() : gProgram(0) {
-	for (int i=0; i<NUM_ATTRIB_TYPE; i++) {
-		attribs[i] = -1;
-	}
 }
 
 Shader::~Shader() {
@@ -42,9 +39,6 @@ Shader::~Shader() {
 //	}
 }
 
-int Shader::getAttribLocation(AttribType type) {
-	return attribs[type];
-}
 
 GLuint Shader::loadShader(const char* vertexShader, const char* fragmentShader) {
 	GLuint vertShader = 0;

@@ -115,7 +115,7 @@ Mesh_ptr GCObjLoader::meshProcess(std::istringstream &stream) {
 		attribArray.push_back(AttribTypeColor);
 	}
 	for (int i=0; i<uvnum; i++) {
-		attribArray.push_back((AttribType)(AttribTypeUV+i));
+		attribArray.push_back((AttribType)(AttribTypeUV0+i));
 	}
 	
 	// index

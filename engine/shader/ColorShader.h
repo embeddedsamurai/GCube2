@@ -24,22 +24,28 @@
 #define __GCube__ColorShader__
 
 #include "GCDefines.h"
-#include "Shader.h"
+#include "BaseShader.h"
 
 namespace GCube {
 
 /**
  * 単色塗りつぶしシェーダークラス.
  */
-class ColorShader : public Shader {
+class ColorShader : public BaseShader {
 protected:
-	// uniform index
-	enum {
-		UNIFORM_MVP_MATRIX,   //!< MVPマトリクス変数へのユニフォーム
-		UNIFORM_COLOR,        //!< 描画色へのユニフォーム
-		NUM_UNIFORMS          //!< ユニフォーム数
-	};
-	GLint uniforms[NUM_UNIFORMS];
+	GLint colorUniform;
+	
+	/**
+	 * シェーダーの準備を行います.
+	 * <br><br>
+	 * @param[in] program シェーダプログラムのID
+	 */
+	virtual void prepareExtraShader(GLuint program);
+
+	/**
+	 * 各種追加情報を設定します.
+	 */
+	virtual void setExtraInfo(Figure *figure, Camera *camera);
 	
 public:
 	/**
@@ -57,19 +63,6 @@ public:
 	 */
 	virtual void reload();
 
-	/**
-	 * 各種情報を設定します.
-	 */
-	virtual void setInfo(Figure *figure, Camera *camera);
-	
-	/**
-	 * シェーダーの準備を行います.
-	 * UniformやAttributeのLocationを取得してください.
-	 * <br><br>
-	 *
-	 * @param[in] program シェーダプログラムのID
-	 */
-	virtual void prepareShader(GLuint program);
 };
 
 DEF_SHARED_PTR(ColorShader);

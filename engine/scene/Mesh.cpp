@@ -80,8 +80,8 @@ void Mesh::build(const MeshData_ptr &data) {
 	}
 	vbo->addElement(data->vertices, AttribTypeVertex);
 	if (data->normals.size()) vbo->addElement(data->normals, AttribTypeNormal);
-	if (data->textureCoords.size()) vbo->addElement(data->textureCoords, AttribTypeUV);
-	if (data->mltTextureCoords.size()) vbo->addElement(data->mltTextureCoords, AttribTypeUV2);
+	if (data->textureCoords.size()) vbo->addElement(data->textureCoords, AttribTypeUV0);
+	if (data->mltTextureCoords.size()) vbo->addElement(data->mltTextureCoords, AttribTypeUV1);
 	vbo->setIndex(data->vertexIndexes);
 	indexCount = data->vertexIndexes.size();
 	vbo->build();

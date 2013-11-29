@@ -31,16 +31,16 @@ using namespace GCube;
 // vertex shader
 CONST_STR(gVertexShader,
 
-uniform mat4 u_mvpMatrix;
-uniform mat4 u_texMatrix;
-attribute vec3 a_position;
-attribute vec2 a_texcoord;
-varying vec2 v_texcoord;
+uniform mat4 u_ModelViewProjectionMatrix;
+uniform mat4 u_TextureMatrix;
+attribute vec3 a_Vertex;
+attribute vec2 a_MultiTexCoord0;
+varying vec2 v_Texcoord;
 
 void main()
 {
-    v_texcoord = vec2(u_texMatrix * vec4(a_texcoord, 0, 1));
-	gl_Position = u_mvpMatrix * vec4(a_position, 1.0);
+    v_Texcoord = vec2(u_TextureMatrix * vec4(a_MultiTexCoord0, 0, 1));
+	gl_Position = u_ModelViewProjectionMatrix * vec4(a_Vertex, 1.0);
 }
 
 );
@@ -49,12 +49,12 @@ void main()
 CONST_STR(gFragmentShader,
 
 precision mediump float;
-uniform sampler2D u_texture;
-varying vec2 v_texcoord;
+uniform sampler2D u_Texture;
+varying vec2 v_Texcoord;
 
 void main()
 {
-	gl_FragColor = vec4(texture2D(u_texture, vec2(v_texcoord.st)));
+	gl_FragColor = vec4(texture2D(u_Texture, vec2(v_Texcoord.st)));
 }
 
 );
@@ -68,37 +68,4 @@ TexShader::TexShader() {
 
 void TexShader::reload() {
 	gProgram = loadShader(gVertexShader, gFragmentShader);
-}
-
-void TexShader::setInfo(Figure *figure, Camera *camera) {
-	// projectionMatrix
-	if (!figure || !camera) return;
-	Matrix3D mtx(camera->projectionMatrix);
-	
-	// viewMatrix
-	camera->updateViewMatrix();
-	mtx.multiply(&camera->viewMatrix);
-	
-	// modelMatrix
-	mtx.multiply(&figure->globalMatrix);
-	
-	// ユニフォーム変数へ渡す
-	glUniformMatrix4fv(uniforms[UNIFORM_MVP_MATRIX], 1, GL_FALSE, mtx.matrix);
-	if (figure->material && figure->material->texture) {
-		// テクスチャ
-		figure->material->texture->bind();
-		glActiveTexture(GL_TEXTURE0);
-		glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
-		// 変換行列
-		glUniformMatrix4fv(uniforms[UNIFORM_TEX_MATRIX], 1, GL_FALSE, figure->material->texture->matrix.matrix);
-	}
-}
-
-void TexShader::prepareShader(GLuint program) {
-	attribs[AttribTypeVertex] = glGetAttribLocation(program, "a_position");
-	attribs[AttribTypeUV] = glGetAttribLocation(program, "a_texcoord");
-	
-	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
-	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_texture");
-	uniforms[UNIFORM_TEX_MATRIX] = glGetUniformLocation(program, "u_texMatrix");
 }

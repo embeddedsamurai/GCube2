@@ -89,6 +89,7 @@
 		66BBBAC5177D542A00C1476B /* debug.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66BBBAC4177D542A00C1476B /* debug.txt */; };
 		66C76AD61797AFC70001A284 /* bgm_house.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 66C76AD51797AFC10001A284 /* bgm_house.ogg */; };
 		66C76AE71797F8920001A284 /* vectorUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C76AE41797F8920001A284 /* vectorUtil.c */; };
+		66CDBC961846F6EE00519439 /* BaseShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66CDBC941846F6EE00519439 /* BaseShader.cpp */; };
 		66F585D41798D06F00AD1B6C /* Matrix3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F585D21798D06F00AD1B6C /* Matrix3D.cpp */; };
 		66F9183617A26CC7006C413D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182817A26CC7006C413D /* Camera.cpp */; };
 		66F9183717A26CC7006C413D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F9182817A26CC7006C413D /* Camera.cpp */; };
@@ -209,6 +210,8 @@
 		66C76AD51797AFC10001A284 /* bgm_house.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bgm_house.ogg; sourceTree = "<group>"; };
 		66C76AE41797F8920001A284 /* vectorUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vectorUtil.c; sourceTree = "<group>"; };
 		66C76AE51797F8920001A284 /* vectorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectorUtil.h; sourceTree = "<group>"; };
+		66CDBC941846F6EE00519439 /* BaseShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseShader.cpp; sourceTree = "<group>"; };
+		66CDBC951846F6EE00519439 /* BaseShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseShader.h; sourceTree = "<group>"; };
 		66F585D21798D06F00AD1B6C /* Matrix3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix3D.cpp; sourceTree = "<group>"; };
 		66F585D31798D06F00AD1B6C /* Matrix3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3D.h; sourceTree = "<group>"; };
 		66F9182817A26CC7006C413D /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
@@ -553,6 +556,8 @@
 				665299F217C461E0004DF8DD /* ShaderManager.h */,
 				66F9184B17AA363D006C413D /* Shader.cpp */,
 				66F9184C17AA363D006C413D /* Shader.h */,
+				66CDBC941846F6EE00519439 /* BaseShader.cpp */,
+				66CDBC951846F6EE00519439 /* BaseShader.h */,
 				6645D37917B3540800B18C1A /* ColorShader.cpp */,
 				6645D37A17B3540800B18C1A /* ColorShader.h */,
 				6687870717CF0F62007B067B /* HitTestShader.cpp */,
@@ -760,6 +765,7 @@
 				66AFF4D2177BDA1C00025BF6 /* SoundPlayer.cpp in Sources */,
 				66BBBABB177C1E7C00C1476B /* SoundData.cpp in Sources */,
 				66582759183465C000F4123A /* GCObjLoader.cpp in Sources */,
+				66CDBC961846F6EE00519439 /* BaseShader.cpp in Sources */,
 				66C76AE71797F8920001A284 /* vectorUtil.c in Sources */,
 				66F585D41798D06F00AD1B6C /* Matrix3D.cpp in Sources */,
 				666F36FB1798DF5E009B91ED /* matrixUtil.c in Sources */,

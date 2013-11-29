@@ -32,15 +32,15 @@ using namespace GCube;
 // vertex shader
 CONST_STR(gVertexShader,
 		  
-uniform mat4 u_mvpMatrix;
-uniform vec4 u_color;
-attribute vec3 a_position;
-varying vec4 v_color;
+uniform mat4 u_ModelViewProjectionMatrix;
+uniform vec4 u_Color;
+attribute vec3 a_Vertex;
+varying vec4 v_Color;
 
 void main()
 {
-	v_color = u_color;
-	gl_Position = u_mvpMatrix * vec4(a_position, 1.0);
+	v_Color = u_Color;
+	gl_Position = u_ModelViewProjectionMatrix * vec4(a_Vertex, 1.0);
 }
 
 );
@@ -49,11 +49,11 @@ void main()
 CONST_STR(gFragmentShader,
 		  
 precision mediump float;
-varying vec4 v_color;
+varying vec4 v_Color;
 
 void main()
 {
-	gl_FragColor = v_color;
+	gl_FragColor = v_Color;
 }
 
 );
@@ -68,30 +68,14 @@ void ColorShader::reload() {
 	gProgram = loadShader(gVertexShader, gFragmentShader);
 }
 
-void ColorShader::setInfo(Figure *figure, Camera *camera) {
-	// projectionMatrix
-	if (!figure || !camera) return;
-	Matrix3D mtx(camera->projectionMatrix);
-	
-	// viewMatrix
-	camera->updateViewMatrix();
-	mtx.multiply(&camera->viewMatrix);
-	
-	// modelMatrix
-	mtx.multiply(&figure->globalMatrix);
-	
-	// ユニフォーム変数へ渡す
-	glUniformMatrix4fv(uniforms[UNIFORM_MVP_MATRIX], 1, GL_FALSE, mtx.matrix);
+void ColorShader::setExtraInfo(Figure *figure, Camera *camera) {
 	if (figure->material) {
 		Colorf color = figure->material->ambientColor;
-		glUniform4f(uniforms[UNIFORM_COLOR], color.r, color.g, color.b, color.a);
+		glUniform4f(colorUniform, color.r, color.g, color.b, color.a);
 	}
 }
 
-void ColorShader::prepareShader(GLuint program) {
-	attribs[AttribTypeVertex] = glGetAttribLocation(program, "a_position");
-	
-	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
-	uniforms[UNIFORM_COLOR] = glGetUniformLocation(program, "u_color");
+void ColorShader::prepareExtraShader(GLuint program) {
+	colorUniform = glGetUniformLocation(program, "u_Color");
 }
 

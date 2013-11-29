@@ -30,6 +30,7 @@ namespace GCube {
 
 class Window;
 class Node;
+class Scene;
 DEF_SHARED_PTR(Node);
 
 class Node : public Coords {
@@ -38,7 +39,7 @@ public:
 	virtual ~Node();
 	
 	virtual void updateProcess(float dt, const Matrix3D &matrix);
-	virtual void drawProcess(const Window &window, bool hitTest=false);
+	virtual void drawProcess(Scene &scene, const Window &window, bool hitTest=false);
 	virtual void hitTestProcess(const TouchEvent &event, const Colorf &color);
 	virtual void touchProcess(const TouchEvent &event);
 	

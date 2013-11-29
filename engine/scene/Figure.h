@@ -35,7 +35,7 @@ public:
 	Figure(const char* name = NULL);
 	virtual ~Figure();
 	
-	virtual void draw(const Window &window, DrawType type=DrawTypeNormal);
+	virtual void draw(Scene &scene, const Window &window, DrawType type=DrawTypeNormal);
 	virtual void rebuild();
 	
 	static int FigureTypeID() {return 100;};

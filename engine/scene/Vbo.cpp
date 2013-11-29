@@ -46,14 +46,10 @@ Vbo::~Vbo() {
 
 // Attributeのサイズを取得
 int Vbo::getAttribSize(AttribType type) {
-	switch (type) {
-		case AttribTypeUV:
-		case AttribTypeUV2:
-		case AttribTypeUV3:
-		case AttribTypeUV4:
-			return 2;
-		default:
-			return 3;
+	if (type<AttribTypeUV0) {
+		return 3;
+	} else {
+		return 2;
 	}
 }
 

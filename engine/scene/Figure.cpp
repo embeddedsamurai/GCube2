@@ -41,16 +41,16 @@ void Figure::rebuild() {
 }
 
 // 描画
-void Figure::draw(const Window &window, DrawType type) {
+void Figure::draw(Scene &scene, const Window &window, DrawType type) {
 	if (isVisible && shader && mesh) {
 		if (type==DrawTypeHitTest) {
 			testShader->useProgram();
 			mesh->bind(testShader);
-			testShader->setInfo(this, window.camera.get());
+			testShader->setInfo(&scene, this, window.camera.get());
 		} else {
 			shader->useProgram();
 			mesh->bind(shader);
-			shader->setInfo(this, window.camera.get());
+			shader->setInfo(&scene, this, window.camera.get());
 		}
 		glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_SHORT, NULL);
 	}

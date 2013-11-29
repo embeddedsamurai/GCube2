@@ -33,20 +33,7 @@ HitTestShader::HitTestShader() {
 	this->reset();
 }
 
-void HitTestShader::setInfo(Figure *figure, Camera *camera) {
-	// projectionMatrix
-	if (!figure || !camera) return;
-	Matrix3D mtx(camera->projectionMatrix);
-	
-	// viewMatrix
-	camera->updateViewMatrix();
-	mtx.multiply(&camera->viewMatrix);
-	
-	// modelMatrix
-	mtx.multiply(&figure->globalMatrix);
-	
-	// ユニフォーム変数へ渡す
-	glUniformMatrix4fv(uniforms[UNIFORM_MVP_MATRIX], 1, GL_FALSE, mtx.matrix);
+void HitTestShader::setExtraInfo(Figure *figure, Camera *camera) {
 	if (figure->isTouchable) {
 		// 色作成
 		count++;
@@ -55,11 +42,11 @@ void HitTestShader::setInfo(Figure *figure, Camera *camera) {
 		int b = count       & 0xff;
 		Colorf color(r/255.0, g/255.0, b/255.0, 1);
 		//LOGD("%d, %d, %d", r, g, b);
-		glUniform4f(uniforms[UNIFORM_COLOR], color.r, color.g, color.b, color.a);
+		glUniform4f(colorUniform, color.r, color.g, color.b, color.a);
 		figure->testColor = color;
 	} else {
 		Colorf color(0, 0, 0, 1);
-		glUniform4f(uniforms[UNIFORM_COLOR], color.r, color.g, color.b, color.a);
+		glUniform4f(colorUniform, color.r, color.g, color.b, color.a);
 		figure->testColor = color;
 	}
 }

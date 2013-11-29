@@ -38,7 +38,9 @@ public:
 	Colorf diffuseColor;
 	Colorf specularColor;
 	
-	Texture_ptr texture;
+	Texture_ptr texture0;
+	Texture_ptr texture1;
+	Texture_ptr texture2;
 };
 
 DEF_SHARED_PTR(Material);

@@ -42,12 +42,12 @@ void SecondSceneController::onInit() {
 //	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 3));
 	// マテリアルとシェーダー設定
 	fig->material = Material_ptr(new Material());
-//	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
+	fig->material->texture0 = Texture_ptr(new Texture("texture/gclue_logo.png"));
 //	fig->material->texture = Texture_ptr(new Texture("model/akabeko.png"));
 	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
 //	fig->shader = ShaderManager::GetShader(ShaderTypeTex);
-	fig->shader = ShaderManager::GetShader(ShaderTypeColor);
-//	fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
+//	fig->shader = ShaderManager::GetShader(ShaderTypeColor);
+	fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
 	fig->transform.scale(3.0, 3.0, 3.0);
 	fig->transform.translate(0, 3, 0);
 	fig->touchEventListener = this;

@@ -40,7 +40,7 @@ public:
 	DrawableNode(const char* name = NULL) : Node(name), isVisible(true) {};
 	virtual ~DrawableNode() {};
 	
-	virtual void draw(const Window &window, DrawType type=DrawTypeNormal) = 0;
+	virtual void draw(Scene &scene, const Window &window, DrawType type=DrawTypeNormal) = 0;
 public:
 	bool isVisible;
 	

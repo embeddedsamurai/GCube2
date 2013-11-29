@@ -33,33 +33,39 @@ using namespace GCube;
 // vertex shader
 CONST_STR(gVertexShader,
 
-uniform mat4 u_mMatrix;
-uniform mat4 u_mvpMatrix;
-uniform mat4 u_texMatrix;
-uniform mat3 u_nMatrix;
-uniform int u_lightCount;
-uniform vec3 u_lightPos[10];
-uniform vec3 u_lightDiffuse[10];
-attribute vec3 a_position;
-attribute vec3 a_normal;
-attribute vec2 a_texcoord;
-varying vec2 v_texcoord;
-varying vec3 v_color;
+struct LightSourceParameters {
+  vec4 ambient; // Acli
+  vec4 diffuse; // Dcli
+  vec4 specular; // Scli
+  vec4 position; // Ppli
+};
+
+uniform mat4 u_ModelViewMatrix;
+uniform mat4 u_ModelViewProjectionMatrix;
+uniform mat3 u_NormalMatrix;
+uniform mat4 u_TextureMatrix;
+uniform int u_MaxLights;
+uniform LightSourceParameters u_LightSource[5];
+attribute vec3 a_Vertex;
+attribute vec3 a_Normal;
+attribute vec2 a_MultiTexCoord0;
+varying vec2 v_Texcoord;
+varying vec4 v_Color;
 
 void main()
 {
 	// light
-	vec4 pos = u_mMatrix * vec4(a_position, 1.0);
-	vec3 normal = normalize(u_nMatrix * a_normal);
-	v_color = vec3(0);
-	for( int i = 0; i < u_lightCount; i++ ) {
-		vec3 lightDir = normalize(u_lightPos[i] - vec3(pos));
-		v_color += vec3(dot(lightDir, normal)) * u_lightDiffuse[i];
+	vec4 pos = u_ModelViewMatrix * vec4(a_Vertex, 1.0);
+	vec3 normal = normalize(u_NormalMatrix * a_Normal);
+	v_Color = vec4(0);
+	for( int i = 0; i < u_MaxLights; i++ ) {
+		vec3 lightDir = normalize(u_LightSource[i].position.xyz - vec3(pos));
+		v_Color += dot(lightDir, normal) * u_LightSource[i].diffuse;
 	}
 	// tex
-    v_texcoord = vec2(u_texMatrix * vec4(a_texcoord, 0, 1));
+    v_Texcoord = vec2(u_TextureMatrix * vec4(a_MultiTexCoord0, 0, 1));
 	// pos
-	gl_Position = u_mvpMatrix * vec4(a_position, 1.0);
+	gl_Position = u_ModelViewProjectionMatrix * vec4(a_Vertex, 1.0);
 }
 
 );
@@ -68,17 +74,17 @@ void main()
 CONST_STR(gFragmentShader,
 
 precision mediump float;
-uniform sampler2D u_texture;
-uniform bool u_useTexture;
-varying vec2 v_texcoord;
-varying vec3 v_color;
+uniform sampler2D u_Texture;
+uniform bool u_UseTexture;
+varying vec2 v_Texcoord;
+varying vec4 v_Color;
 
 void main()
 {
-	if (u_useTexture) {
-		gl_FragColor = vec4(texture2D(u_texture, vec2(v_texcoord.st))) * vec4(v_color, 1.0);
+	if (u_UseTexture) {
+		gl_FragColor = vec4(texture2D(u_Texture, vec2(v_Texcoord.st))) * v_Color;
 	} else {
-		gl_FragColor = vec4(v_color, 1.0);
+		gl_FragColor = v_Color;
 	}
 }
 
@@ -93,76 +99,4 @@ FlatShader::FlatShader() {
 
 void FlatShader::reload() {
 	gProgram = loadShader(gVertexShader, gFragmentShader);
-}
-
-void FlatShader::setInfo(Figure *figure, Camera *camera) {
-	// projectionMatrix
-	if (!figure || !camera) return;
-	Matrix3D mvp(camera->projectionMatrix);
-	
-	// viewMatrix
-	camera->updateViewMatrix();
-	mvp.multiply(&camera->viewMatrix);
-	
-	// modelMatrix
-	mvp.multiply(&figure->globalMatrix);
-	
-	glUniformMatrix4fv(uniforms[UNIFORM_M_MATRIX], 1, GL_FALSE, figure->globalMatrix.matrix);
-	glUniformMatrix4fv(uniforms[UNIFORM_MVP_MATRIX], 1, GL_FALSE, mvp.matrix);
-	
-	// テクスチャ
-	if (figure->material && figure->material->texture) {
-		glActiveTexture(GL_TEXTURE0);
-		figure->material->texture->bind();
-		glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
-		glUniform1i(uniforms[UNIFORM_USE_TEXTURE], 1);
-		// 変換行列
-		glUniformMatrix4fv(uniforms[UNIFORM_TEX_MATRIX], 1, GL_FALSE, figure->material->texture->matrix.matrix);
-	} else {
-		glUniform1i(uniforms[UNIFORM_USE_TEXTURE], 0);
-	}
-	
-	// 法線
-	GLfloat normalMtx[9];
-	figure->globalMatrix.normalMatrix(normalMtx);
-	glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, GL_FALSE, normalMtx);
-
-	// ライト
-	ApplicationController *ctr = ApplicationController::SharedInstance();
-	std::vector<Node*> lights = ctr->getActiveScene()->getLights();
-	std::vector<Node*>::iterator it = lights.begin();
-	GLfloat lightPos[lights.size()*3];
-	GLfloat lightDif[lights.size()*3];
-	int count = 0;
-	while (it != lights.end()) {
-		Light *l = (Light*) *it;
-		int idx = count * 3;
-		lightPos[idx  ] = l->globalMatrix.getX();
-		lightPos[idx+1] = l->globalMatrix.getY();
-		lightPos[idx+2] = l->globalMatrix.getZ();
-		lightDif[idx  ] = l->diffuse.r;
-		lightDif[idx+1] = l->diffuse.g;
-		lightDif[idx+2] = l->diffuse.b;
-		count++;
-		it++;
-	}
-	glUniform1i(uniforms[UNIFORM_LIGHT_COUNT], count);
-	glUniform3fv(uniforms[UNIFORM_LIGHT_POS], count, lightPos);
-	glUniform3fv(uniforms[UNIFORM_LIGHT_DIFFUSE], count, lightDif);
-}
-
-void FlatShader::prepareShader(GLuint program) {
-	attribs[AttribTypeVertex] = glGetAttribLocation(program, "a_position");
-	attribs[AttribTypeNormal] = glGetAttribLocation(program, "a_normal");
-	attribs[AttribTypeUV] = glGetAttribLocation(program, "a_texcoord");
-	
-	uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "u_mvpMatrix");
-	uniforms[UNIFORM_M_MATRIX] = glGetUniformLocation(program, "u_mMatrix");
-	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_texture");
-	uniforms[UNIFORM_TEX_MATRIX] = glGetUniformLocation(program, "u_texMatrix");
-	uniforms[UNIFORM_USE_TEXTURE] = glGetUniformLocation(program, "u_useTexture");
-	uniforms[UNIFORM_LIGHT_POS] = glGetUniformLocation(program, "u_lightPos");
-	uniforms[UNIFORM_LIGHT_DIFFUSE] = glGetUniformLocation(program, "u_lightDiffuse");
-	uniforms[UNIFORM_LIGHT_COUNT] = glGetUniformLocation(program, "u_lightCount");
-	uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(program, "u_nMatrix");
 }
