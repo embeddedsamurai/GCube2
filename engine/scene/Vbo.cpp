@@ -44,6 +44,15 @@ Vbo::~Vbo() {
 //	}
 }
 
+bool Vbo::hasAttribute(AttribType type) {
+	for (int i=0; i<attribArray.size(); i++) {
+		if (attribArray[i]==type) {
+			return true;
+		}
+	}
+	return false;
+}
+
 // Attributeのサイズを取得
 int Vbo::getAttribSize(AttribType type) {
 	if (type<AttribTypeUV0) {

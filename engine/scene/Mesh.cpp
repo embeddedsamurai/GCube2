@@ -105,6 +105,10 @@ void Mesh::bind(const Shader_ptr &shader) {
 	vbo->bind(shader);
 }
 
+bool Mesh::hasAttribute(AttribType type) {
+	return vbo->hasAttribute(type);
+}
+
 // サイズを取得
 int Mesh::getIndexCount() {
 	return indexCount;

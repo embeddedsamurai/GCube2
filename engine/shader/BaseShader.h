@@ -44,6 +44,7 @@ protected:
 		UNIFORM_TEX_MATRIX,   //!< テクスチャ変換行列
 		UNIFORM_TEXTURE,      //!< テクスチャ
 		UNIFORM_USE_TEXTURE,  //!< テクスチャ使用フラグ
+		UNIFORM_USE_COLOR,    //!< 頂点カラー使用フラグ
 		UNIFORM_MAX_LIGHT,    //!< ライトの数
 		NUM_UNIFORMS          //!< ユニフォーム数
 	};

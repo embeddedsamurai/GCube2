@@ -61,6 +61,7 @@ void BaseShader::prepareShader(GLuint program) {
 	uniforms[UNIFORM_TEX_MATRIX] = glGetUniformLocation(program, "u_TextureMatrix");
 	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_Texture");
 	uniforms[UNIFORM_USE_TEXTURE] = glGetUniformLocation(program, "u_UseTexture");
+	uniforms[UNIFORM_USE_COLOR] = glGetUniformLocation(program, "u_UseColor");
 	// textures
 	char name[50];
 	for (int i=0; i<kMaxTextureUnit; i++) {
@@ -111,6 +112,13 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 		GLfloat normalMtx[9];
 		figure->globalMatrix.normalMatrix(normalMtx);
 		glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, GL_FALSE, normalMtx);
+	}
+	
+	// color
+	if (figure->mesh->hasAttribute(AttribTypeColor)) {
+		glUniform1i(uniforms[UNIFORM_USE_COLOR], 1);
+	} else {
+		glUniform1i(uniforms[UNIFORM_USE_COLOR], 0);
 	}
 	
 	// texture

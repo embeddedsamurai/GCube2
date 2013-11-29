@@ -47,6 +47,7 @@ public:
 	virtual void build();
 	virtual void rebuild();
 	virtual void bind(const Shader_ptr &shader);
+	virtual bool hasAttribute(AttribType type);
 
 private:
 	int getAttribSize(AttribType type);

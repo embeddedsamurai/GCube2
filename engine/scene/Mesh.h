@@ -96,6 +96,7 @@ public:
 	virtual void rebuild();
 	virtual void bind(const Shader_ptr &shader);
 	virtual int getIndexCount();
+	virtual bool hasAttribute(AttribType type);
 	
 
 private:

@@ -46,8 +46,10 @@ uniform mat3 u_NormalMatrix;
 uniform mat4 u_TextureMatrix;
 uniform int u_MaxLights;
 uniform LightSourceParameters u_LightSource[5];
+uniform bool u_UseColor;
 attribute vec3 a_Vertex;
 attribute vec3 a_Normal;
+attribute vec3 a_Color;
 attribute vec2 a_MultiTexCoord0;
 varying vec2 v_Texcoord;
 varying vec4 v_Color;
@@ -61,6 +63,9 @@ void main()
 	for( int i = 0; i < u_MaxLights; i++ ) {
 		vec3 lightDir = normalize(u_LightSource[i].position.xyz - vec3(pos));
 		v_Color += dot(lightDir, normal) * u_LightSource[i].diffuse;
+	}
+	if (u_UseColor) {
+		v_Color *= vec4(a_Color, 1.0);
 	}
 	// tex
     v_Texcoord = vec2(u_TextureMatrix * vec4(a_MultiTexCoord0, 0, 1));
