@@ -36,28 +36,29 @@ void SecondSceneController::onInit() {
 	Node_ptr node(new Node("Node"));
 	node->transform.translate(3, 3, 0);
 	// プレート追加
-	fig = GCObjLoader::loadFile("model/sample.gcb");
+//	fig = GCObjLoader::loadFile("model/sample.gcb");
 //	fig = WFObjLoader::loadFile("model/akabeko.model");
+	fig = WFObjLoader::loadFile("model/sample.obj");
 //	fig = Figure_ptr(new Figure("Fig"));
 //	fig->mesh = PrimitiveObject::createPlate(Sizef(5, 3));
 	// マテリアルとシェーダー設定
-	fig->material = Material_ptr(new Material());
-	fig->material->texture0 = Texture_ptr(new Texture("texture/gclue_logo.png"));
+//	fig->material = Material_ptr(new Material());
+//	fig->material->texture0 = Texture_ptr(new Texture("texture/gclue_logo.png"));
 //	fig->material->texture = Texture_ptr(new Texture("model/akabeko.png"));
-	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
+//	fig->material->ambientColor = Colorf(0, 0.5, 0.5);
 //	fig->shader = ShaderManager::GetShader(ShaderTypeTex);
 //	fig->shader = ShaderManager::GetShader(ShaderTypeColor);
-	fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
+//	fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
 	fig->transform.scale(3.0, 3.0, 3.0);
-	fig->transform.translate(0, 3, 0);
+	fig->transform.translate(0, -3, 0);
 	fig->touchEventListener = this;
 	fig->isTouchable = true;
 	node->addChildNode(fig);
 	// プレート追加２
 	fig2 = Figure_ptr(new Figure("Fig2"));
 	fig2->mesh = PrimitiveObject::createBox(Point3f(2, 3, 4));
-	fig2->material = Material_ptr(new Material());
-	fig2->material->ambientColor = Colorf(0, 0.5, 0.5);
+//	fig2->material = Material_ptr(new Material());
+//	fig2->material->ambientColor = Colorf(0, 0.5, 0.5);
 //	fig2->shader = ShaderManager::GetShader(ShaderTypeColor);
 	fig2->shader = ShaderManager::GetShader(ShaderTypeFlat);
 	fig2->transform.translate(3, 1, 0);
@@ -70,7 +71,7 @@ void SecondSceneController::onInit() {
 	// ライト
 	Light_ptr light(new Light());
 	light->transform.translate(-3, 2, 9);
-	light->diffuse = Colorf(0.5,0,0);
+//	light->diffuse = Colorf(0.5,0,0);
 	node->addChildNode(light);
 	Light_ptr light2(new Light());
 	light2->transform.translate(6, 2, 9);

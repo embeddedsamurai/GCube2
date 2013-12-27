@@ -44,6 +44,9 @@ private:
 	 */
 	static void scanLine(const std::string &line, std::vector<float> &outupt, int max, bool rightHanded);
 	
+	
+	static std::map<std::string, Material_ptr> loadMaterial(const char *fileName);
+
 public:
 	/**
 	 * ファイルから読み込みます.

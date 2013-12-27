@@ -70,7 +70,10 @@ Figure_ptr WFObjLoader::loadData(std::vector<char>* data, bool rightHanded) {
 	std::vector<float> textureCoords;	//!< テクスチャ座標
 	std::istringstream stream(std::string(data->begin(), data->end()));
 	
+	std::map<std::string, Material_ptr> materialMap;
+	Figure_ptr fig = Figure_ptr(new Figure("obj"));
 	MeshData_ptr mdata(new MeshData());
+	Figure_ptr root = fig;
 
 	// １行毎に処理
 	unsigned short faceCount = 0;
@@ -132,19 +135,113 @@ Figure_ptr WFObjLoader::loadData(std::vector<char>* data, bool rightHanded) {
 		// テクスチャ
 		if (strncmp(line.c_str(), "vt ", 3) == 0) {
 			WFObjLoader::scanLine(line, textureCoords, 2, rightHanded);
+		} else
+		if (strncmp(line.c_str(), "g ", 2) == 0) {
+		} else
+		// グループ
+		if (strncmp(line.c_str(), "o ", 2) == 0) {
+			if (mdata->vertexIndexes.size()) {
+				
+				if (root!=fig) {
+					root->addChildNode(fig);
+				}
+				
+				Mesh_ptr mesh(new Mesh());
+				mesh->build(mdata);
+				fig->mesh = mesh;
+				// TODO:
+				fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
+				
+				fig = Figure_ptr(new Figure("obj"));
+				// TODO:
+				fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
+				fig->isTouchable = true;
+				mdata = MeshData_ptr(new MeshData());
+				faceCount = 0;
+			}
+		} else
+		if (strncmp(line.c_str(), "usemtl ", 7) == 0) {
+			fig->material = materialMap[line.substr(7).c_str()];
+		} else
+		if (strncmp(line.c_str(), "mtllib ", 7) == 0) {
+			materialMap = loadMaterial(line.substr(7).c_str());
 		}
+		
+	}
+	
+	if (root!=fig) {
+		root->addChildNode(fig);
 	}
 	
 	Mesh_ptr mesh(new Mesh());
 	mesh->build(mdata);
-
-	Figure_ptr fig = Figure_ptr(new Figure("Fig"));
 	fig->mesh = mesh;
-//	// マテリアルとシェーダー設定
-//	fig->material = Material_ptr(new Material());
-//	fig->material->texture = Texture_ptr(new Texture("texture/gclue_logo.png"));
-//	fig->material->ambientColor = Colorf(0.5, 0, 0);
+	// TODO:
+	fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
 
-	return fig;
+	return root;
 }
+
+
+// マテリアルファイル読み込み
+std::map<std::string, Material_ptr> WFObjLoader::loadMaterial(const char *fileName) {
+	LOGD("%s", fileName);
+	
+	// リソース読み込み
+	ApplicationController *ctr = ApplicationController::SharedInstance();
+	std::vector<char> data;
+	ctr->getResource(fileName, data);
+	
+	std::map<std::string, Material_ptr> materialMap;
+	
+	//newmtl 材料名
+	//Ns　輝度
+	//Ka　環境色
+	//Kd　拡散色
+	//Ks　反射色
+	//Ni　光の屈折率
+	//d　 アルファ値
+	//illum 0:照明なし、1:反射ハイライトなし、2:Ksの値で反射ハイライトあり
+	//map_Kd テクスチャファイル名
+	
+	std::istringstream stream(std::string(data.begin(), data.end()));
+	std::string line;
+	Material_ptr material(new Material());
+	while(std::getline(stream, line)) {
+		// 改行コードを削除
+		if (line[line.size()-1] == '\n') line.erase(line.size()-1);
+		if (line[line.size()-1] == '\r') line.erase(line.size()-1);
+		
+		// 材料名
+		if (strncmp(line.c_str(), "newmtl ", 7) == 0) {
+			material = Material_ptr(new Material());
+			materialMap[line.substr(7)] = material;
+		} else
+		// 環境色
+		if (strncmp(line.c_str(), "Ka ", 3) == 0) {
+			std::vector<float> values;
+			WFObjLoader::scanLine(line, values, 3, true);
+			material->ambientColor = Colorf(values[0], values[1], values[2]);
+		}
+		// 拡散色
+		if (strncmp(line.c_str(), "Kd ", 3) == 0) {
+			std::vector<float> values;
+			WFObjLoader::scanLine(line, values, 3, true);
+			material->diffuseColor = Colorf(values[0], values[1], values[2]);
+		}
+		// 反射色
+		if (strncmp(line.c_str(), "Ks ", 3) == 0) {
+			std::vector<float> values;
+			WFObjLoader::scanLine(line, values, 3, true);
+			material->specularColor = Colorf(values[0], values[1], values[2]);
+		}
+		// テクスチャ
+		if (strncmp(line.c_str(), "map_Kd ", 3) == 0) {
+			material->texture0 = Texture_ptr(new Texture(line.substr(7).c_str()));
+		}
+	}
+	
+	return materialMap;
+}
+
 

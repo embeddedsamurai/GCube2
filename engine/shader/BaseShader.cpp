@@ -62,6 +62,13 @@ void BaseShader::prepareShader(GLuint program) {
 	uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(program, "u_Texture");
 	uniforms[UNIFORM_USE_TEXTURE] = glGetUniformLocation(program, "u_UseTexture");
 	uniforms[UNIFORM_USE_COLOR] = glGetUniformLocation(program, "u_UseColor");
+	uniforms[UNIFORM_USE_MATERIAL] = glGetUniformLocation(program, "u_UseMaterial");
+	uniforms[UNIFORM_F_MATERIAL_EMISSION] = glGetUniformLocation(program, "u_FrontMaterial.emission");
+	uniforms[UNIFORM_F_MATERIAL_AMBIENT] = glGetUniformLocation(program, "u_FrontMaterial.ambient");
+	uniforms[UNIFORM_F_MATERIAL_DIFFUSE] = glGetUniformLocation(program, "u_FrontMaterial.diffuse");
+	uniforms[UNIFORM_F_MATERIAL_SPECULAR] = glGetUniformLocation(program, "u_FrontMaterial.specular");
+	uniforms[UNIFORM_F_MATERIAL_SHININESS] = glGetUniformLocation(program, "u_FrontMaterial.shininess");
+
 	// textures
 	char name[50];
 	for (int i=0; i<kMaxTextureUnit; i++) {
@@ -156,6 +163,33 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 		}
 	} else {
 		glUniform1i(uniforms[UNIFORM_USE_TEXTURE], 0);
+	}
+
+	// material
+	if (figure->material) {
+		bool useflg = false;
+		if (uniforms[UNIFORM_F_MATERIAL_AMBIENT]>=0) {
+			Colorf col = figure->material->ambientColor;
+			glUniform4f(uniforms[UNIFORM_F_MATERIAL_AMBIENT], col.r, col.g, col.b, 1);
+			useflg = true;
+		}
+		if (uniforms[UNIFORM_F_MATERIAL_DIFFUSE]>=0) {
+			Colorf col = figure->material->diffuseColor;
+			glUniform4f(uniforms[UNIFORM_F_MATERIAL_DIFFUSE], col.r, col.g, col.b, 1);
+			useflg = true;
+		}
+		if (uniforms[UNIFORM_F_MATERIAL_SPECULAR]>=0) {
+			Colorf col = figure->material->specularColor;
+			glUniform4f(uniforms[UNIFORM_F_MATERIAL_SPECULAR], col.r, col.g, col.b, 1);
+			useflg = true;
+		}
+		if (useflg) {
+			glUniform1i(uniforms[UNIFORM_USE_MATERIAL], 1);
+		} else {
+			glUniform1i(uniforms[UNIFORM_USE_MATERIAL], 0);
+		}
+	} else {
+		glUniform1i(uniforms[UNIFORM_USE_MATERIAL], 0);
 	}
 
 	// lights

@@ -58,6 +58,8 @@
 		6658275C1834682600F4123A /* sample.gcb in Resources */ = {isa = PBXBuildFile; fileRef = 6658275B1834682600F4123A /* sample.gcb */; };
 		666C092B1798D59300BD7777 /* vectorUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C76AE41797F8920001A284 /* vectorUtil.c */; };
 		666C092C1798D59A00BD7777 /* Matrix3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F585D21798D06F00AD1B6C /* Matrix3D.cpp */; };
+		666C16EC186D0DE300EAEAF4 /* sample.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 666C16EA186D0DE300EAEAF4 /* sample.mtl */; };
+		666C16ED186D0DE300EAEAF4 /* sample.obj in Resources */ = {isa = PBXBuildFile; fileRef = 666C16EB186D0DE300EAEAF4 /* sample.obj */; };
 		666F36FA1798DF16009B91ED /* matrixUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 666F36F81798DF16009B91ED /* matrixUtil.c */; };
 		666F36FB1798DF5E009B91ED /* matrixUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 666F36F81798DF16009B91ED /* matrixUtil.c */; };
 		666F36FE17A0C819009B91ED /* Vector3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666F36FC17A0C819009B91ED /* Vector3D.cpp */; };
@@ -169,6 +171,8 @@
 		66582757183465C000F4123A /* GCObjLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GCObjLoader.cpp; sourceTree = "<group>"; };
 		66582758183465C000F4123A /* GCObjLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCObjLoader.h; sourceTree = "<group>"; };
 		6658275B1834682600F4123A /* sample.gcb */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.gcb; sourceTree = "<group>"; };
+		666C16EA186D0DE300EAEAF4 /* sample.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.mtl; sourceTree = "<group>"; };
+		666C16EB186D0DE300EAEAF4 /* sample.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.obj; sourceTree = "<group>"; };
 		666F36F81798DF16009B91ED /* matrixUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrixUtil.c; sourceTree = "<group>"; };
 		666F36F91798DF16009B91ED /* matrixUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrixUtil.h; sourceTree = "<group>"; };
 		666F36FC17A0C819009B91ED /* Vector3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3D.cpp; sourceTree = "<group>"; };
@@ -411,6 +415,8 @@
 		6676C77017F50D4A00FF52F1 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				666C16EA186D0DE300EAEAF4 /* sample.mtl */,
+				666C16EB186D0DE300EAEAF4 /* sample.obj */,
 				6658275B1834682600F4123A /* sample.gcb */,
 				6676C77317F50E0900FF52F1 /* akabeko.png */,
 				6676C77117F50D5500FF52F1 /* akabeko.model */,
@@ -712,6 +718,8 @@
 				66AFF4CA1772E2B500025BF6 /* gclue_logo.png in Resources */,
 				66BBBABF177C37FB00C1476B /* se_yay.ogg in Resources */,
 				66BBBAC5177D542A00C1476B /* debug.txt in Resources */,
+				666C16ED186D0DE300EAEAF4 /* sample.obj in Resources */,
+				666C16EC186D0DE300EAEAF4 /* sample.mtl in Resources */,
 				66C76AD61797AFC70001A284 /* bgm_house.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

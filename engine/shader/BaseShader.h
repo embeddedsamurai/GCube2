@@ -46,6 +46,12 @@ protected:
 		UNIFORM_USE_TEXTURE,  //!< テクスチャ使用フラグ
 		UNIFORM_USE_COLOR,    //!< 頂点カラー使用フラグ
 		UNIFORM_MAX_LIGHT,    //!< ライトの数
+		UNIFORM_USE_MATERIAL, //!< マテリアル使用フラグ
+		UNIFORM_F_MATERIAL_EMISSION, //!< マテリアルの放射光色
+		UNIFORM_F_MATERIAL_AMBIENT,  //!< マテリアルの環境光色
+		UNIFORM_F_MATERIAL_DIFFUSE,  //!< マテリアルの拡散光色
+		UNIFORM_F_MATERIAL_SPECULAR, //!< マテリアルの反射光色
+		UNIFORM_F_MATERIAL_SHININESS,//!< マテリアルの鏡面反射の強さ
 		NUM_UNIFORMS          //!< ユニフォーム数
 	};
 	GLint uniforms[NUM_UNIFORMS];
@@ -57,7 +63,7 @@ protected:
 	enum {
 		UNIFORM_LIGHT_AMBIENT,  //!< ライトの環境光色
 		UNIFORM_LIGHT_DIFFUSE,  //!< ライトの拡散光色
-		UNIFORM_LIGHT_SPECULAR, //!< ライトの拡散光色
+		UNIFORM_LIGHT_SPECULAR, //!< ライトの反射光色
 		UNIFORM_LIGHT_POS,      //!< ライトの位置
 		NUM_LIGHT_UNIFORMS      //!< ユニフォーム数
 	};
