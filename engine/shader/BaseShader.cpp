@@ -168,6 +168,11 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 	// material
 	if (figure->material) {
 		bool useflg = false;
+		if (uniforms[UNIFORM_F_MATERIAL_EMISSION]>=0) {
+			Colorf col = figure->material->emissionColor;
+			glUniform4f(uniforms[UNIFORM_F_MATERIAL_EMISSION], col.r, col.g, col.b, 1);
+			useflg = true;
+		}
 		if (uniforms[UNIFORM_F_MATERIAL_AMBIENT]>=0) {
 			Colorf col = figure->material->ambientColor;
 			glUniform4f(uniforms[UNIFORM_F_MATERIAL_AMBIENT], col.r, col.g, col.b, 1);
@@ -181,6 +186,10 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 		if (uniforms[UNIFORM_F_MATERIAL_SPECULAR]>=0) {
 			Colorf col = figure->material->specularColor;
 			glUniform4f(uniforms[UNIFORM_F_MATERIAL_SPECULAR], col.r, col.g, col.b, 1);
+			useflg = true;
+		}
+		if (uniforms[UNIFORM_F_MATERIAL_SHININESS]>=0) {
+			glUniform1f(uniforms[UNIFORM_F_MATERIAL_SHININESS], figure->material->shininess);
 			useflg = true;
 		}
 		if (useflg) {

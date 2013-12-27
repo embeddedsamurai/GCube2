@@ -42,12 +42,15 @@ struct LightSourceParameters {
 
 struct MaterialParameters
 {
-//	vec4 emission;    // Ecm
+	vec4 emission;    // Ecm
 	vec4 ambient;     // Acm
 	vec4 diffuse;     // Dcm
 	vec4 specular;    // Scm
-//	float shininess;  // Srm
+	float shininess;  // Srm
 };
+
+const int ZERO = 0;
+const int ONE = 1;
 
 uniform mat4 u_ModelViewMatrix;
 uniform mat4 u_ModelViewProjectionMatrix;
@@ -68,11 +71,11 @@ varying vec4 v_Color;
 void main()
 {
 	// light
-	vec4 pos = u_ModelViewMatrix * vec4(a_Vertex, 1.0);
+	vec4 pos = u_ModelViewMatrix * vec4(a_Vertex, ONE);
 	vec3 normal = normalize(u_NormalMatrix * a_Normal);
-	v_Color = vec4(0);
-	for( int i = 0; i < u_MaxLights; i++ ) {
-		if (i==0) v_Color = vec4(0);
+	v_Color = vec4(ZERO);
+	for( int i = ZERO; i < u_MaxLights; i++ ) {
+		if (i==ZERO) v_Color = vec4(ZERO);
 		vec3 lightDir = normalize(u_LightSource[i].position.xyz - vec3(pos));
 		if (u_UseMaterial) {
 			v_Color += dot(lightDir, normal) * u_LightSource[i].diffuse * u_FrontMaterial.diffuse;
@@ -80,17 +83,18 @@ void main()
 			v_Color += dot(lightDir, normal) * u_LightSource[i].diffuse;
 		}
 	}
+	// VertexColor
 	if (u_UseColor) {
-		v_Color *= vec4(a_Color, 1.0);
+		v_Color *= vec4(a_Color, ONE);
 	}
 	// Material
 	if (u_UseMaterial) {
 		v_Color += u_FrontMaterial.ambient;
 	}
 	// tex
-    v_Texcoord = vec2(u_TextureMatrix * vec4(a_MultiTexCoord0, 0, 1));
+    v_Texcoord = vec2(u_TextureMatrix * vec4(a_MultiTexCoord0, ZERO, ONE));
 	// pos
-	gl_Position = u_ModelViewProjectionMatrix * vec4(a_Vertex, 1.0);
+	gl_Position = u_ModelViewProjectionMatrix * vec4(a_Vertex, ONE);
 }
 
 );
