@@ -30,6 +30,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <cstdio>
 
 // Android
 #ifdef __GCube_Android__

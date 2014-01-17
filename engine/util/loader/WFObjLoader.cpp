@@ -59,11 +59,20 @@ Figure_ptr WFObjLoader::loadFile(const char *fileName, bool rightHanded) {
 	ApplicationController *ctr = ApplicationController::SharedInstance();
 	std::vector<char> data;
 	ctr->getResource(fileName, data);
-	return loadData(&data);
+	
+	// ディレクトリ名取得
+	std::string directory;
+	std::string fname(fileName);
+	const size_t last_slash_idx = fname.rfind('/');
+	if (std::string::npos != last_slash_idx)
+	{
+		directory = fname.substr(0, last_slash_idx+1);
+	}
+	return loadData(&data, directory);
 }
 
 // データから読み込み
-Figure_ptr WFObjLoader::loadData(std::vector<char>* data, bool rightHanded) {
+Figure_ptr WFObjLoader::loadData(std::vector<char>* data, std::string &directory, bool rightHanded) {
 	
 	std::vector<float> vertices;		//!< 頂点
 	std::vector<float> normals;			//!< 法線
@@ -164,7 +173,7 @@ Figure_ptr WFObjLoader::loadData(std::vector<char>* data, bool rightHanded) {
 			fig->material = materialMap[line.substr(7).c_str()];
 		} else
 		if (strncmp(line.c_str(), "mtllib ", 7) == 0) {
-			materialMap = loadMaterial(line.substr(7).c_str());
+			materialMap = loadMaterial(line.substr(7).c_str(), directory);
 		}
 		
 	}
@@ -184,13 +193,15 @@ Figure_ptr WFObjLoader::loadData(std::vector<char>* data, bool rightHanded) {
 
 
 // マテリアルファイル読み込み
-std::map<std::string, Material_ptr> WFObjLoader::loadMaterial(const char *fileName) {
-	LOGD("%s", fileName);
+std::map<std::string, Material_ptr> WFObjLoader::loadMaterial(const char *fileName, std::string &directory) {
+	//LOGD("%s", fileName);
 	
 	// リソース読み込み
 	ApplicationController *ctr = ApplicationController::SharedInstance();
 	std::vector<char> data;
-	ctr->getResource(fileName, data);
+	std::string fname(directory);
+	fname.append(fileName);
+	ctr->getResource(fname.c_str(), data);
 	
 	std::map<std::string, Material_ptr> materialMap;
 	
@@ -237,10 +248,12 @@ std::map<std::string, Material_ptr> WFObjLoader::loadMaterial(const char *fileNa
 		}
 		// テクスチャ
 		if (strncmp(line.c_str(), "map_Kd ", 3) == 0) {
-			material->texture0 = Texture_ptr(new Texture(line.substr(7).c_str()));
+			std::string fname(directory);
+			fname.append(line.substr(7));
+			material->texture0 = Texture_ptr(new Texture(fname.c_str()));
 		}
 	}
-	
+
 	return materialMap;
 }
 

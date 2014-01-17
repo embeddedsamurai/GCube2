@@ -78,11 +78,13 @@ std::string GCGetLanguage() {
  * リソースを取得.
  */
 void GCGetResourceData(const char *fileName, std::vector<char>& outData){
+	LOGD("load:%s", fileName);
 	AAssetManager* mgr = AAssetManager_fromJava(jni.env, jni.assetManager);
 	AAsset* asset = AAssetManager_open(mgr, fileName, AASSET_MODE_BUFFER);
 	const char* assetData = (const char*)AAsset_getBuffer(asset);
 	const off_t assetLen = AAsset_getLength(asset);
 	outData.assign(assetData, assetData+assetLen);
+	AAsset_close(asset);
 }
 
 /**

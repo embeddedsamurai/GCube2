@@ -27,6 +27,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    scene/TextureData.cpp \
                    scene/Vbo.cpp \
                    scene/Window.cpp \
+                   shader/BaseShader.cpp \
                    shader/ColorShader.cpp \
                    shader/FlatShader.cpp \
                    shader/HitTestShader.cpp \
@@ -35,6 +36,7 @@ LOCAL_SRC_FILES := ../platforms/Android/jni/android/ndk-interface.cpp \
                    shader/TexShader.cpp \
                    sound/SoundData.cpp \
                    sound/SoundPlayer.cpp \
+                   util/loader/GCObjLoader.cpp \
                    util/loader/WFObjLoader.cpp
                    
 

@@ -45,7 +45,7 @@ private:
 	static void scanLine(const std::string &line, std::vector<float> &outupt, int max, bool rightHanded);
 	
 	
-	static std::map<std::string, Material_ptr> loadMaterial(const char *fileName);
+	static std::map<std::string, Material_ptr> loadMaterial(const char *fileName, std::string &directory);
 
 public:
 	/**
@@ -58,7 +58,7 @@ public:
 	 * データから読み込みます.
 	 * @param data データ
 	 */
-	static Figure_ptr loadData(std::vector<char>* data, bool rightHanded=true);
+	static Figure_ptr loadData(std::vector<char>* data, std::string &directory, bool rightHanded=true);
 	
 };
 
