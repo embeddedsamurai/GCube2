@@ -24,24 +24,14 @@
 #define __GCube__TexShader__
 
 #include "GCDefines.h"
-#include "Shader.h"
+#include "BaseShader.h"
 
 namespace GCube {
 
 /**
  * テクスチャ描画シェーダークラス.
  */
-class TexShader : public Shader {
-protected:
-	// uniform index
-	enum {
-		UNIFORM_MVP_MATRIX, //!< MVP変換行列
-		UNIFORM_TEXTURE,    //!< テクスチャ
-		UNIFORM_TEX_MATRIX, //!< テクスチャ変換行列
-		NUM_UNIFORMS        //!< ユニフォーム数
-	};
-	GLint uniforms[NUM_UNIFORMS];
-	
+class TexShader : public BaseShader {
 public:
 	/**
 	 * コンストラクタ.
@@ -57,36 +47,6 @@ public:
 	 * 再読み込みします.
 	 */
 	virtual void reload();
-	
-	/**
-	 * 各種情報を設定します.
-	 */
-	virtual void setInfo(Figure *figure, Camera *camera);
-	
-	/**
-	 * シェーダのAttributeへのバインド処理を行います.
-	 * <br><br>
-	 * ES2Rendererから継承した関数.
-	 * ES2Renderer内部から呼び出されるので、実装しないとエラーになります.
-	 * <br>
-	 * @param[in] program シェーダプログラム
-	 * @param[in] name シェーダファイルへの名前
-	 * @param[in] user ユーザ識別ID
-	 */
-	void bindAttribute(GLuint program, const char *name, int user);
-	
-	/**
-	 * シェーダのUniformを取得します.
-	 * <br><br>
-	 * ES2Rendererから継承した関数.
-	 * ES2Renderer内部から呼び出されるので、実装しないとエラーになります.
-	 * <br>
-	 * @param[in] program シェーダプログラム
-	 * @param[in] name シェーダファイルへの名前
-	 * @param[in] user ユーザ識別ID
-	 */
-	void getUniform(GLuint program, const char *name, int user);
-	
 };
 
 DEF_SHARED_PTR(TexShader);

@@ -57,6 +57,7 @@
 		6658275A183465C000F4123A /* GCObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66582757183465C000F4123A /* GCObjLoader.cpp */; };
 		6658275C1834682600F4123A /* sample.gcb in Resources */ = {isa = PBXBuildFile; fileRef = 6658275B1834682600F4123A /* sample.gcb */; };
 		665E155A1889135600F06DF7 /* gclue_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 665E15591889135600F06DF7 /* gclue_logo.png */; };
+		665E156318891A0F00F06DF7 /* BaseShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66CDBC941846F6EE00519439 /* BaseShader.cpp */; };
 		666C092B1798D59300BD7777 /* vectorUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 66C76AE41797F8920001A284 /* vectorUtil.c */; };
 		666C092C1798D59A00BD7777 /* Matrix3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66F585D21798D06F00AD1B6C /* Matrix3D.cpp */; };
 		666C16EC186D0DE300EAEAF4 /* sample.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 666C16EA186D0DE300EAEAF4 /* sample.mtl */; };
@@ -809,6 +810,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				665E156318891A0F00F06DF7 /* BaseShader.cpp in Sources */,
 				66FE247A178537C100969BA7 /* ApplicationController.cpp in Sources */,
 				66FE247C178537C100969BA7 /* SoundData.cpp in Sources */,
 				66FE247E178537C100969BA7 /* SoundPlayer.cpp in Sources */,

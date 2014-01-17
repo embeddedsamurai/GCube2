@@ -30,6 +30,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <cstdio>
 
 // Android
 #ifdef __GCube_Android__
@@ -67,6 +68,12 @@
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 #define CONST_STR(name, str) static const char name[]=#str
+
+// テクスチャ最大数
+#define kMaxTextureUnit 3
+// ライト最大数
+#define kMaxLightUnit 5
+
 
 namespace GCube {
 
@@ -157,6 +164,17 @@ typedef struct TouchEvent {
 	TouchEvent(TouchAction action, float x, float y, long id, long time) : action(action), pos(Pointf(x, y)), id(id), time(time) {};
 } TouchEvent;
 
+
+typedef enum {
+	AttribTypeVertex,
+	AttribTypeNormal,
+	AttribTypeColor,
+	AttribTypeFogCoord,
+	AttribTypeUV0,
+	AttribTypeUV1,
+	AttribTypeUV2,
+	NUM_ATTRIB_TYPE
+} AttribType;
 
 }
 

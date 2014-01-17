@@ -22,7 +22,9 @@ LOCAL_CFLAGS    := -Werror -D__GCube_Android__
 LOCAL_LDLIBS    := -llog -lGLESv2 -lz -landroid
 LOCAL_STATIC_LIBRARIES := gcube openal
 
-LOCAL_SRC_FILES := main/Main.cpp
+LOCAL_SRC_FILES := main/Main.cpp \
+                   main/FirstSceneController.cpp \
+                   main/SecondSceneController.cpp
                    
 LOCAL_C_INCLUDES:= $(MY_PATH)/android/ \
                    $(MY_PATH)/OpenAL/ \

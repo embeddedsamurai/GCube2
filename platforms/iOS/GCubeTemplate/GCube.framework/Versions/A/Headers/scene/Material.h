@@ -34,11 +34,15 @@ public:
 	virtual ~Material() {};
 	
 public:
+	Colorf emissionColor;
 	Colorf ambientColor;
 	Colorf diffuseColor;
 	Colorf specularColor;
+	float shininess;
 	
-	Texture_ptr texture;
+	Texture_ptr texture0;
+	Texture_ptr texture1;
+	Texture_ptr texture2;
 };
 
 DEF_SHARED_PTR(Material);

@@ -25,6 +25,7 @@
 
 #include "Node.h"
 #include "Window.h"
+#include "Scene.h"
 
 namespace GCube {
 
@@ -35,12 +36,23 @@ typedef enum {
 	NUM_DrawType
 } DrawType;
 
+class DrawContext {
+public:
+	Scene_ptr scene;
+	Window_ptr window;
+	DrawType type;
+	Colorf color;
+	
+	DrawContext() : type(DrawTypeNormal) {};
+	virtual ~DrawContext() {};
+};
+
 class DrawableNode : public Node {
 public:
 	DrawableNode(const char* name = NULL) : Node(name), isVisible(true) {};
 	virtual ~DrawableNode() {};
 	
-	virtual void draw(const Window &window, DrawType type=DrawTypeNormal) = 0;
+	virtual void draw(DrawContext &context) = 0;
 public:
 	bool isVisible;
 	

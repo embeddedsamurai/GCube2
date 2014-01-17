@@ -24,6 +24,7 @@
 #define __GCube__Vbo__
 
 #include "GCDefines.h"
+#include "Shader.h"
 
 namespace GCube {
 
@@ -34,27 +35,29 @@ enum {
 	NUM_VBO
 };
 
-
 class Vbo {
 public:
 	Vbo();
 	virtual ~Vbo();
 	
-	virtual void addElement(const std::vector<float> &data, int element);
+	virtual void setInterleaveData(const std::vector<float> &data, const std::vector<AttribType> &attribs);
+	virtual void addElement(const std::vector<float> &data, AttribType type);
 	virtual void setIndex(const std::vector<short> &index);
 	
 	virtual void build();
 	virtual void rebuild();
-	virtual void bind();
+	virtual void bind(const Shader_ptr &shader);
+	virtual bool hasAttribute(AttribType type);
 
 private:
+	int getAttribSize(AttribType type);
 	GLuint buildVBO(void *data, int size, GLenum buffer);
 	
 	int maxSize;
 	GLuint vboNames[NUM_VBO];                   //!< VBOの名前リスト.
 	std::vector< std::vector<float> > dataArray;  //!< データ.
 	std::vector<short> indexesArray;            //!< インデックスデータ.
-	std::vector<int> elementsArray;             //!< 要素数データ.
+	std::vector<AttribType> attribArray;        //!< 要素データ.
 	std::vector<float> interleaveArray;
 	
 };

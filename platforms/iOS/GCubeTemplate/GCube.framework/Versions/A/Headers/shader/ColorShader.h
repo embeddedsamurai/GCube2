@@ -24,22 +24,28 @@
 #define __GCube__ColorShader__
 
 #include "GCDefines.h"
-#include "Shader.h"
+#include "BaseShader.h"
 
 namespace GCube {
 
 /**
  * 単色塗りつぶしシェーダークラス.
  */
-class ColorShader : public Shader {
+class ColorShader : public BaseShader {
 protected:
-	// uniform index
-	enum {
-		UNIFORM_MVP_MATRIX,   //!< MVPマトリクス変数へのユニフォーム
-		UNIFORM_COLOR,        //!< 描画色へのユニフォーム
-		NUM_UNIFORMS          //!< ユニフォーム数
-	};
-	GLint uniforms[NUM_UNIFORMS];
+	GLint colorUniform;
+	
+	/**
+	 * シェーダーの準備を行います.
+	 * <br><br>
+	 * @param[in] program シェーダプログラムのID
+	 */
+	virtual void prepareExtraShader(GLuint program);
+
+	/**
+	 * 各種追加情報を設定します.
+	 */
+	virtual void setExtraInfo(DrawContext &context, Figure &figure);
 	
 public:
 	/**
@@ -57,35 +63,6 @@ public:
 	 */
 	virtual void reload();
 
-	/**
-	 * 各種情報を設定します.
-	 */
-	virtual void setInfo(Figure *figure, Camera *camera);
-	
-	/**
-	 * シェーダのAttributeへのバインド処理を行います.
-	 * <br><br>
-	 * ES2Rendererから継承した関数.
-	 * ES2Renderer内部から呼び出されるので、実装しないとエラーになります.
-	 * <br>
-	 * @param[in] program シェーダプログラム
-	 * @param[in] name シェーダファイルへの名前
-	 * @param[in] user ユーザ識別ID
-	 */
-	void bindAttribute(GLuint program, const char *name, int user);
-	
-	/**
-	 * シェーダのUniformを取得します.
-	 * <br><br>
-	 * ES2Rendererから継承した関数.
-	 * ES2Renderer内部から呼び出されるので、実装しないとエラーになります.
-	 * <br>
-	 * @param[in] program シェーダプログラム
-	 * @param[in] name シェーダファイルへの名前
-	 * @param[in] user ユーザ識別ID
-	 */
-	void getUniform(GLuint program, const char *name, int user);
-	
 };
 
 DEF_SHARED_PTR(ColorShader);

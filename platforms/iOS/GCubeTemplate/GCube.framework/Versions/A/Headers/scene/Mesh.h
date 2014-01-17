@@ -25,21 +25,18 @@
 
 #include "GCDefines.h"
 #include "Vbo.h"
+#include "Shader.h"
 
 namespace GCube {
 
-// attribute index
-enum {
-	ATTRIB_VERTEX,
-	ATTRIB_NORMAL,
-	ATTRIB_TEXCOORD,
-	ATTRIB_TEXCOORD_MLT,
-	ATTRIB_INDEX,
-	ATTRIB_JOINTS,
-	NUM_ATTRIBUTES
-};
-
 // data
+struct MeshInterleaveData {
+	std::vector<float> data;			//!< データ.
+	std::vector<AttribType> attribs;	//!< 要素Typeデータ.
+	std::vector<short> vertexIndexes;	//!< インデックスデータ.
+};
+DEF_SHARED_PTR(MeshInterleaveData);
+
 struct MeshData {
 	std::vector<float> vertices;		//!< 頂点データ.
 	std::vector<float> normals;			//!< 法線データ.
@@ -95,9 +92,11 @@ public:
 	virtual ~Mesh() {};
 	
 	virtual void build(const MeshData_ptr &data);
+	virtual void build(const MeshInterleaveData_ptr &data);
 	virtual void rebuild();
-	virtual void bind();
+	virtual void bind(const Shader_ptr &shader);
 	virtual int getIndexCount();
+	virtual bool hasAttribute(AttribType type);
 	
 
 private:

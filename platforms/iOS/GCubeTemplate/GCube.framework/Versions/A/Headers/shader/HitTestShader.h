@@ -36,6 +36,11 @@ class HitTestShader : public ColorShader {
 private:
 	int count;
 	
+	/**
+	 * 各種追加情報を設定します.
+	 */
+	virtual void setExtraInfo(DrawContext &context, Figure &figure);
+	
 public:
 	/**
 	 * コンストラクタ.
@@ -46,11 +51,6 @@ public:
 	 * デストラクタ.
 	 */
 	virtual ~HitTestShader() {};
-	
-	/**
-	 * 各種情報を設定します.
-	 */
-	virtual void setInfo(Figure *figure, Camera *camera);
 	
 	/**
 	 * リセットします.
