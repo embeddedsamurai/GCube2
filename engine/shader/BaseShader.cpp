@@ -93,8 +93,9 @@ void BaseShader::prepareShader(GLuint program) {
 	this->prepareExtraShader(program);
 }
 
-void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
-	if (!figure || !camera) return;
+void BaseShader::setInfo(DrawContext &context, Figure &figure) {
+	Camera *camera = context.window->camera.get();
+	if (!camera) return;
 	Matrix3D mvp(camera->projectionMatrix);
 	
 	// viewMatrix
@@ -102,10 +103,10 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 	mvp.multiply(&camera->viewMatrix);
 	
 	// modelMatrix
-	mvp.multiply(&figure->globalMatrix);
+	mvp.multiply(&figure.globalMatrix);
 	
 	if (uniforms[UNIFORM_MV_MATRIX]>=0) {
-		glUniformMatrix4fv(uniforms[UNIFORM_MV_MATRIX], 1, GL_FALSE, figure->globalMatrix.matrix);
+		glUniformMatrix4fv(uniforms[UNIFORM_MV_MATRIX], 1, GL_FALSE, figure.globalMatrix.matrix);
 	}
 	if (uniforms[UNIFORM_P_MATRIX]>=0) {
 		glUniformMatrix4fv(uniforms[UNIFORM_P_MATRIX], 1, GL_FALSE, camera->projectionMatrix.matrix);
@@ -117,12 +118,12 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 	// normal matrix
 	if (uniforms[UNIFORM_NORMAL_MATRIX]>=0) {
 		GLfloat normalMtx[9];
-		figure->globalMatrix.normalMatrix(normalMtx);
+		figure.globalMatrix.normalMatrix(normalMtx);
 		glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, GL_FALSE, normalMtx);
 	}
 	
 	// color
-	if (figure->mesh->hasAttribute(AttribTypeColor)) {
+	if (figure.mesh->hasAttribute(AttribTypeColor)) {
 		glUniform1i(uniforms[UNIFORM_USE_COLOR], 1);
 	} else {
 		glUniform1i(uniforms[UNIFORM_USE_COLOR], 0);
@@ -130,9 +131,9 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 	
 	// texture
 	glBindTexture(GL_TEXTURE_2D, 0);
-	if (figure->material) {
+	if (figure.material) {
 		// single
-		Texture_ptr tex[] = {figure->material->texture0, figure->material->texture1, figure->material->texture2};
+		Texture_ptr tex[] = {figure.material->texture0, figure.material->texture1, figure.material->texture2};
 		if (tex[0] && uniforms[UNIFORM_TEXTURE]>=0) {
 			tex[0]->bind();
 			glActiveTexture(GL_TEXTURE0);
@@ -166,30 +167,30 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 	}
 
 	// material
-	if (figure->material) {
+	if (figure.material) {
 		bool useflg = false;
 		if (uniforms[UNIFORM_F_MATERIAL_EMISSION]>=0) {
-			Colorf col = figure->material->emissionColor;
+			Colorf col = figure.material->emissionColor;
 			glUniform4f(uniforms[UNIFORM_F_MATERIAL_EMISSION], col.r, col.g, col.b, 1);
 			useflg = true;
 		}
 		if (uniforms[UNIFORM_F_MATERIAL_AMBIENT]>=0) {
-			Colorf col = figure->material->ambientColor;
+			Colorf col = figure.material->ambientColor;
 			glUniform4f(uniforms[UNIFORM_F_MATERIAL_AMBIENT], col.r, col.g, col.b, 1);
 			useflg = true;
 		}
 		if (uniforms[UNIFORM_F_MATERIAL_DIFFUSE]>=0) {
-			Colorf col = figure->material->diffuseColor;
+			Colorf col = figure.material->diffuseColor;
 			glUniform4f(uniforms[UNIFORM_F_MATERIAL_DIFFUSE], col.r, col.g, col.b, 1);
 			useflg = true;
 		}
 		if (uniforms[UNIFORM_F_MATERIAL_SPECULAR]>=0) {
-			Colorf col = figure->material->specularColor;
+			Colorf col = figure.material->specularColor;
 			glUniform4f(uniforms[UNIFORM_F_MATERIAL_SPECULAR], col.r, col.g, col.b, 1);
 			useflg = true;
 		}
 		if (uniforms[UNIFORM_F_MATERIAL_SHININESS]>=0) {
-			glUniform1f(uniforms[UNIFORM_F_MATERIAL_SHININESS], figure->material->shininess);
+			glUniform1f(uniforms[UNIFORM_F_MATERIAL_SHININESS], figure.material->shininess);
 			useflg = true;
 		}
 		if (useflg) {
@@ -202,7 +203,7 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 	}
 
 	// lights
-	std::vector<Node*> lights = scene->getLights();
+	std::vector<Node*> lights = context.scene->getLights();
 	int count = 0;
 	GLfloat lightParam[4];
 	for (int i=0; i<kMaxLightUnit; i++) {
@@ -238,7 +239,7 @@ void BaseShader::setInfo(Scene *scene, Figure *figure, Camera *camera) {
 	glUniform1i(uniforms[UNIFORM_MAX_LIGHT], count);
 
 	// extra
-	this->setExtraInfo(figure, camera);
+	this->setExtraInfo(context, figure);
 }
 
 

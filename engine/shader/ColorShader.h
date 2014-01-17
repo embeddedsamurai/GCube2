@@ -45,7 +45,7 @@ protected:
 	/**
 	 * 各種追加情報を設定します.
 	 */
-	virtual void setExtraInfo(Figure *figure, Camera *camera);
+	virtual void setExtraInfo(DrawContext &context, Figure &figure);
 	
 public:
 	/**

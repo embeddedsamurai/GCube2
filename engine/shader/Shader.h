@@ -30,6 +30,7 @@ namespace GCube {
 class Figure;
 class Camera;
 class Scene;
+class DrawContext;
 
 /**
  * OpenGLES2.0のシェーダを扱う為の基底クラス.
@@ -95,7 +96,7 @@ public:
 	/**
 	 * 各種情報を設定します.
 	 */
-	virtual void setInfo(Scene *scene, Figure *figure, Camera *camera) = 0;
+	virtual void setInfo(DrawContext &context, Figure &figure) = 0;
 	
 	/**
 	 * 指定された名前のシェーダを読み込み、Programを作成します.

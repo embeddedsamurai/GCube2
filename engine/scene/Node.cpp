@@ -56,25 +56,22 @@ void Node::updateProcess(float dt, const Matrix3D &matrix) {
 }
 
 // 描画
-void Node::drawProcess(Scene &scene, const Window &window, bool hitTest) {
+void Node::drawProcess(DrawContext &context) {
 	// 軸表示
 	drawAxis();
 	// 描画
 	DrawableNode *drawable = dynamic_cast<DrawableNode*>(this);
 	if (drawable && drawable->isVisible) {
-		if (hitTest) {
-			drawable->draw(scene, window, DrawTypeHitTest);
-		} else {
-			drawable->draw(scene, window);
-		}
+		drawable->draw(context);
 	}
 	// 子
 	if(!children.empty()) {
 		for(size_t i = 0; i < children.size(); ++i) {
 			if(NULL != children[i]) {
-				children[i]->drawProcess(scene, window, hitTest);
+				children[i]->drawProcess(context);
 			}
 		}
+		context.color = Colorf();
 	}
 }
 

@@ -68,9 +68,9 @@ void ColorShader::reload() {
 	gProgram = loadShader(gVertexShader, gFragmentShader);
 }
 
-void ColorShader::setExtraInfo(Figure *figure, Camera *camera) {
-	if (figure->material) {
-		Colorf color = figure->material->ambientColor;
+void ColorShader::setExtraInfo(DrawContext &context, Figure &figure) {
+	if (figure.material) {
+		Colorf color = figure.material->ambientColor;
 		glUniform4f(colorUniform, color.r, color.g, color.b, color.a);
 	}
 }

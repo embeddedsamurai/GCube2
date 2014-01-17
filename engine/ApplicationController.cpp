@@ -222,7 +222,10 @@ void ApplicationController::onDraw() {
 			if (v->camera) {
 				v->camera->aspect = v->frame.size.width / v->frame.size.height * aspect;
 				v->camera->updateProjectionMatrix();
-				activeScene->drawProcess(*activeScene.get(), *v.get());
+				DrawContext context;
+				context.scene = activeScene;
+				context.window = v;
+				activeScene->drawProcess(context);
 			}
 			it++;
 		}
@@ -253,7 +256,11 @@ void ApplicationController::onTouch(TouchAction action, float x, float y, long i
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		if (v->camera) {
 			v->camera->updateProjectionMatrix();
-			activeScene->drawProcess(*activeScene.get(), *v.get(), true);
+			DrawContext context;
+			context.scene = activeScene;
+			context.window = v;
+			context.type = DrawTypeHitTest;
+			activeScene->drawProcess(context);
 		}
 
 		// タッチ箇所の色取得

@@ -33,8 +33,8 @@ HitTestShader::HitTestShader() {
 	this->reset();
 }
 
-void HitTestShader::setExtraInfo(Figure *figure, Camera *camera) {
-	if (figure->isTouchable) {
+void HitTestShader::setExtraInfo(DrawContext &context, Figure &figure) {
+	if (figure.isTouchable) {
 		// 色作成
 		count++;
 		int r = count >> 16 & 0xff;
@@ -43,11 +43,13 @@ void HitTestShader::setExtraInfo(Figure *figure, Camera *camera) {
 		Colorf color(r/255.0, g/255.0, b/255.0, 1);
 		//LOGD("%d, %d, %d", r, g, b);
 		glUniform4f(colorUniform, color.r, color.g, color.b, color.a);
-		figure->testColor = color;
+		figure.testColor = color;
+		context.color = color;
 	} else {
-		Colorf color(0, 0, 0, 1);
+//		Colorf color(0, 0, 0, 1);
+		Colorf color = context.color;
 		glUniform4f(colorUniform, color.r, color.g, color.b, color.a);
-		figure->testColor = color;
+		figure.testColor = color;
 	}
 }
 

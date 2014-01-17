@@ -73,13 +73,13 @@ protected:
 	 * 各種情報を設定します.
 	 * 標準のUniformやAttributeのLocationの設定をします.
 	 */
-	virtual void setInfo(Scene *scene, Figure *figure, Camera *camera);
+	virtual void setInfo(DrawContext &context, Figure &figure);
 
 	/**
 	 * 各種追加情報を設定します.
 	 * 標準では準備されていないUniformやAttributeの設定をしてください.
 	 */
-	virtual void setExtraInfo(Figure *figure, Camera *camera) {};
+	virtual void setExtraInfo(DrawContext &context, Figure &figure) {};
 
 	/**
 	 * シェーダーの準備を行います.

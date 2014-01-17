@@ -155,7 +155,7 @@ Figure_ptr WFObjLoader::loadData(std::vector<char>* data, bool rightHanded) {
 				fig = Figure_ptr(new Figure("obj"));
 				// TODO:
 				fig->shader = ShaderManager::GetShader(ShaderTypeFlat);
-				fig->isTouchable = true;
+//				fig->isTouchable = true;
 				mdata = MeshData_ptr(new MeshData());
 				faceCount = 0;
 			}
